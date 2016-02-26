@@ -14,6 +14,6 @@ use App\Account;
 class GuestController extends Controller
 {
     public function index(){
-    	return view('home', ['pending_accounts' => Account::where('status', 'On Review')->get()]);
+    	return view('home', ['pending_accounts' => Account::where('status', 'On Review')->limit(3)->get()]);
     }
 }

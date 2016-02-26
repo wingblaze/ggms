@@ -25,5 +25,10 @@ class MembershipControlTableSeeder extends Seeder
             'account_id' => 3,
             'membership_slot_id' => 5
             ]);
+
+        DB::table('membership_controls')->insert([
+            'account_id' => 3,
+            'membership_slot_id' => NULL
+            ]);
     }
 }

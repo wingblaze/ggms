@@ -11,6 +11,8 @@ use App\Resource;
 use App\RentResource;
 use Carbon\Carbon;
 
+use App\User;
+
 class ResourceController extends Controller
 {
     
@@ -44,7 +46,7 @@ class ResourceController extends Controller
         $resource->name = $data['name'];
         $resource->description = $data['description'];
         $resource->type = $data['type'];
-        
+
         $resource->save();
         return $this->show($resource->id);
     }
@@ -57,6 +59,20 @@ class ResourceController extends Controller
     public function destroy($id)
     {
     	return view('resources.destroy', ['resource' => Resource::findOrFail($id)]);
+    }
+
+    public function store_rent(Request $request)
+    {
+        $rent_resource = new RentResource;
+        $data = $request->all();
+
+        $rent_resource->user_id = User::where('name', $data['client'])->first()->id;
+        $rent_resource->resource_id = Resource::where('name', $data['resource'])->first()->id;
+        $rent_resource->start_time = Carbon::parse($data['start']);
+        $rent_resource->end_time = Carbon::parse($data['end']);
+        $rent_resource->status = 'In use';
+        $rent_resource->save();
+        return $this->index();
     }
 
     public function rent(){

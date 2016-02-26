@@ -8,11 +8,11 @@ class MembershipControl extends Model
 {
     public function membership_slot()
     {
-    	$this->belongsTo('App\MembershipSlot');
+    	return $this->belongsTo('App\MembershipSlot');
     }
 
     public function account()
     {
-    	$this->belongsTo('App\Account');
+    	return $this->belongsTo('App\Account');
     }
 }

@@ -54,4 +54,9 @@ class User extends Authenticatable
     {
         return $this->hasMany('App\RentResource', 'rent_resources', 'id', 'id');
     }
+
+    public function is_owner(){
+        $account = $this->account;
+        return $account->owner()->id == $this->id;
+    }
 }

@@ -12,6 +12,11 @@ use App\Complaint;
 use Input;
 use Carbon\Carbon;
 
+use App\MembershipControl;
+use App\MembershipSlot;
+use Auth;
+use DB;
+
 class AccountController extends Controller
 {
     /**
@@ -113,5 +118,45 @@ class AccountController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function create_listing(){
+        $user = Auth::user();
+        $has_posted_listing = $user->account->has_posted_listing();
+        return view('accounts.post_listing', ['canPostListing' => !$has_posted_listing]);
+    }
+
+    public function post_listing(){
+        $user = Auth::user();
+        $has_posted_listing = $user->account->has_posted_listing();
+        if ($has_posted_listing){
+            // error
+        }else{
+            DB::table('membership_controls')->insert(['account_id' => $user->account->id, 'membership_slot_id' => NULL]);
+        }
+        return $this->listings();
+    }
+
+    public function remove_listing(){
+        $user = Auth::user();
+        $has_posted_listing = $user->account->has_posted_listing();
+        if ($has_posted_listing)
+        {
+            $has_posted_listing->delete();
+        }
+        return $this->listings();
+    }
+
+    public function listings(){
+        $user = Auth::user();
+        $has_posted_listing = $user->account->has_posted_listing();
+
+        $listings = MembershipControl::whereNull('membership_slot_id')->get();
+        foreach ($listings as $listing) {
+            $slot_id = MembershipControl::where('account_id', $listing->account_id)->whereNotNull('membership_slot_id')->first()->membership_slot_id;
+            $listing->slot = MembershipSlot::find($slot_id);
+        }
+
+        return view('accounts.listings', ['listings' => $listings, 'canPostListing' => !$has_posted_listing]);
     }
 }

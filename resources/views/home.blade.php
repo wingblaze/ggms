@@ -28,11 +28,17 @@
 		</div>
 	</div>
 
+	
 	<div class="col-md-4">
 		<div class="panel panel-default">
 			<div class="panel-body">
 				<h4>New member applications</h4>
-				<p>As concerned members of our beloved community, please review the following applicants:</p>
+				@if (Auth::user())
+				<p>As concerned members of our beloved community, please review 
+						<a href="{{ action('ComplaintController@index') }}">the new applicants</a>
+					 who wish to join our golf community.</p>
+					 @endif
+				<p>The list below shows a few of the new applicants:</p>
 				<UL>
 					@foreach ($pending_accounts as $pending_account)
 						<LI>{{ $pending_account->owner()->name }}</LI>
@@ -41,6 +47,7 @@
 			</div>
 		</div>
 	</div>
+	
 
 	<div class="col-md-4">
 		<div class="panel panel-default">

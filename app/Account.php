@@ -34,4 +34,9 @@ class Account extends Model
     	$used_accounts = DB::table('user_account_relations')->value('account_id');
     	return DB::table('accounts')->whereNotIn('id', $used_accounts)->get();
     }
+
+    public function has_posted_listing(){
+        $membership_control = MembershipControl::whereNull('membership_slot_id')->where('account_id', $this->id)->first();
+        return $membership_control;
+    }
 }

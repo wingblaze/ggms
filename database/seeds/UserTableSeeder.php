@@ -11,7 +11,7 @@ class UserTableSeeder extends Seeder
      */
     public function run()
     {
-
+        // mobile_number, birth_date (YYYY-MM-DD), birth_place, nationality, salutation, civil_status, created_at (2016-02-17 13:00:00.000000)
         DB::table('users')->insert([
                 'name' => 'System Administrator',
                 'email' => 'sysadmin@gmail.com',

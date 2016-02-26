@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
+use Zizaco\Entrust\Middleware\EntrustRole;
+
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
@@ -73,4 +75,9 @@ class ComplaintController extends Controller
         });
         return json_encode($collection);
     }
+
+    public function __construct(){
+        $this->middleware('role:user|employee');
+    }
+    
 }

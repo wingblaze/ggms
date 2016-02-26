@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Database\Seeder;
+use Carbon\Carbon;
 
 class RentResourceTableSeeder extends Seeder
 {
@@ -19,6 +20,11 @@ class RentResourceTableSeeder extends Seeder
 		'start_time' => $now,
 		'end_time' => $now
 		]);
+
+        // pick dates for start_time and end time like this
+        // 
+		// $date = new Carbon('first day of December 2008')
+		// $date = Carbon::parse('1975-05-21 22:23:00.123456');
 
 		DB::table('rent_resources')->insert([
 		'user_id' => 6,

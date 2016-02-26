@@ -12,15 +12,15 @@
 	<h1>Rent a facility</h1>
 </div>
 
-<form>
+{!! Form::open(array('action' => 'ResourceController@store_rent')) !!}
   <div class="form-group">
     <label for="resource_name">Name of facility</label>
-    <input type="text" class="form-control" id="resource_name" placeholder="Name of resource" data-provide="typeahead" autocomplete="off">
+    <input type="text" class="form-control" id="resource_name" name="resource" placeholder="Name of resource" data-provide="typeahead" autocomplete="off">
   </div>
 
   <div class="form-group">
     <label for="client_name">Name of client</label>
-    <input type="text" class="form-control" id="client_name" placeholder="Name of client" data-provide="typeahead" autocomplete="off">
+    <input type="text" class="form-control" id="client_name" name="client" placeholder="Name of client" data-provide="typeahead" autocomplete="off">
   </div>
 
   <div class="form-group">
@@ -29,7 +29,7 @@
       <div class='col-sm-6'>
         <div class="form-group">
           <div class='input-group date' id='datetimepicker1'>
-            <input type='text' class="form-control" />
+            <input type='text' class="form-control" name="start" />
             <span class="input-group-addon">
               <span class="glyphicon glyphicon-calendar"></span>
             </span>
@@ -50,7 +50,7 @@
       <div class='col-sm-6'>
         <div class="form-group">
           <div class='input-group date' id='datetimepicker2'>
-            <input type='text' class="form-control" />
+            <input type='text' class="form-control" name="end" />
             <span class="input-group-addon">
               <span class="glyphicon glyphicon-calendar"></span>
             </span>
@@ -78,7 +78,7 @@
   <p>Once the form is submitted, the renting of that facility will be posted and GGMS employees can view it.
     As Operations Manager, you can modify the status of this rental afterwards.</p>
   <button type="submit" class="btn btn-primary">Rent facility</button>
-</form>
+{!! Form::close() !!}
 
 <script type="text/javascript">
   $.get('/resources.json', function(data){

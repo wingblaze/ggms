@@ -16,8 +16,8 @@ class CreateMembershipControlsTable extends Migration
             $table->increments('id');
 
             $table->integer('account_id')->unsigned()->nullable();
-
             $table->integer('membership_slot_id')->unsigned()->nullable();
+            $table->unique( array('account_id','membership_slot_id') );
 
             $table->timestamps();
         });

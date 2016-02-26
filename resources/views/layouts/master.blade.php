@@ -39,7 +39,7 @@ $user = Auth::user();
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
           @if ($user)
           <ul class="nav navbar-nav">
-            @if ($user->hasRole('membership_manager') || $user->hasRole('marketing_manager') || $user->hasRole('system_administrator'))
+            @if ($user->hasRole('membership_manager') || $user->hasRole('marketing_manager'))
             <li class="dropdown">
               <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Membership <span class="caret"></span></a>
               
@@ -61,15 +61,21 @@ $user = Auth::user();
                   <li><a href="#">View reports</a></li>
                 @endif
 
-                @if ($user->hasRole('system_administrator'))
-                  <li><a href="{{action('ResourceController@index')}}">View facilities</a></li>
-                  <li><a href="{{action('ResourceController@create')}}">Add a new facility</a></li>
-                  <li><a href="{{action('ResourceController@rent')}}">Rent a facility</a></li>
-                @endif
+               
 
               </ul>
             </li>
             @endif
+
+             @if ($user->hasRole('system_administrator'))
+             <li class="dropdown">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">System Settings <span class="caret"></span></a>
+                <ul class="dropdown-menu">
+                  <li><a href="{{action('ResourceController@index')}}">View facilities</a></li>
+                  <li><a href="{{action('ResourceController@create')}}">Add a new facility</a></li>
+                </ul>
+              </li>
+                @endif
 
             @if ($user->hasRole('golf_ops_manager'))
             <li class="dropdown">
@@ -99,6 +105,17 @@ $user = Auth::user();
               </ul>
             </li>
             @endif
+            @if ($user->hasRole('employee'))
+            <li class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Employee <span class="caret"></span></a>
+              <ul class="dropdown-menu">
+                <li><a href="{{action('ResourceController@rent')}}">Rent a facility</a></li>
+              </ul>
+            </li>
+            @endif
+            <li class="dropdown">
+              <a href="{{ action('AccountController@listings') }}" role="button">Club Shares </a>
+            </li>
           </ul>
           @endif
           <ul class="nav navbar-nav navbar-right">
