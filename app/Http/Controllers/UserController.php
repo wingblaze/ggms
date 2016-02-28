@@ -25,7 +25,7 @@ class UserController extends Controller
     public function show($id)
     {
         $user = User::findOrFail($id);
-    	return view('users.show', ['user' => $user]);
+    	return view('users.show', ['target_user' => $user]);
     }
 
     public function create()
@@ -68,7 +68,7 @@ class UserController extends Controller
 
     public function edit($id)
     {
-    	return view('users.edit', ['user' => User::findOrFail($id)]);
+    	return view('users.edit', ['target_user' => User::findOrFail($id)]);
     }
 
     public function assign() 

@@ -23,6 +23,10 @@ class Account extends Model
         return $this->hasMany('App\MembershipControl');   
     }
 
+    public function group(){
+        return $this->belongsTo('App\Group');   
+    }
+
     public function membership_slot()
     {
         $slot_id = $this->membership_control()->orderBy('created_at', 'desc')->first();

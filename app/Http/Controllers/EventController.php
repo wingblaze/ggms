@@ -65,6 +65,13 @@ class EventController extends Controller
     	
     }
 
+    public function json(){
+        $collection = Event::all()->map(function ($resource){
+            return $resource->name;
+        });
+        return json_encode($collection);
+    }    
+
     public function __construct()
     {
         $this->middleware('role:employee');

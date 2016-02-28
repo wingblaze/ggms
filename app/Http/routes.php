@@ -17,10 +17,12 @@ Route::group(['middleware' => ['web']], function () {
 	Route::get('shares/post/create', 'AccountController@post_listing');
 	Route::get('shares/post', 'AccountController@create_listing');
 	Route::get('shares/remove', 'AccountController@remove_listing');
+	Route::get('shares/reports', 'AccountController@report_listings');
 
 	Route::post('accounts/assign_user', 'AccountController@assign_user');
 	Route::get('accounts/{id}/assign', 'AccountController@assign');
-	Route::get('users.json', 'UserController@json');
+	Route::get('accounts/inactives', 'AccountController@inactives');
+	Route::get('accounts/{id}/accept', 'AccountController@accept');
 	Route::resource('accounts', 'AccountController');
 
 	Route::get('groups.json', 'GroupController@json');
@@ -30,18 +32,43 @@ Route::group(['middleware' => ['web']], function () {
 
 	Route::get('review/{id}', 'ComplaintController@create');
 	Route::resource('complaints', 'ComplaintController');
-
+	
 	Route::get('users.json', 'UserController@json');
 	Route::resource('users', 'UserController');
 
+	Route::get('events.json', 'EventController@json');
 	Route::resource('events', 'EventController');
 
 	Route::post('/resources/renting', 'ResourceController@store_rent');
 	Route::get('/resources/rent', 'ResourceController@rent');
 
 	Route::get('resources.json', 'ResourceController@json');
+	Route::get('resource_types.json', 'ResourceController@type_json');
 	Route::resource('resources', 'ResourceController');
 
+	Route::get('graph_options.json', 'ReportController@graph_options');
+	Route::group(['prefix' => 'reports'], function () {
+    	Route::get('newusers', 'ReportController@newusers');
+    	Route::post('newusers', 'ReportController@newusers');
+    	Route::get('newusers.tsv/{start}/{end}/{graph_interval}', 'ReportController@newusers_data');
+
+    	Route::get('inactive_members', 'ReportController@inactive_members');
+
+    	Route::get('user_activity_of_group', 'ReportController@user_activity_of_group');
+    	Route::post('user_activity_of_group', 'ReportController@user_activity_of_group');
+    	Route::get('user_activity_of_group.tsv/{start}/{end}/{group_id}', 'ReportController@user_activity_of_group_data');
+
+    	Route::get('club_share_transfers', 'ReportController@club_share_transfers');
+
+    	Route::get('facility_usage', 'ReportController@facility_usage');
+    	Route::post('facility_usage', 'ReportController@facility_usage');
+    	Route::get('facility_usage.tsv/{start}/{end}/{facility_type}', 'ReportController@facility_usage_data');
+    	Route::get('facility_usage.tsv/{start}/{end}', 'ReportController@facility_usage_data');
+
+    	Route::get('user_activity_within_event', 'ReportController@user_activity_within_event');
+    	Route::post('user_activity_within_event', 'ReportController@user_activity_within_event');
+    	Route::get('user_activity_within_event.tsv/{start}/{end}/{graph_interval}/{facility_type}', 'ReportController@user_activity_within_event_data');
+	});
 
 	// Authentication routes...
 	Route::get('auth/login', 'Auth\AuthController@getLogin');

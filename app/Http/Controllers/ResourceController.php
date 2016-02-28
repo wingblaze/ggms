@@ -90,6 +90,13 @@ class ResourceController extends Controller
         return json_encode($collection);
     }
 
+    public function type_json(){
+        $collection = Resource::select('type')->groupBy('type')->get()->map(function ($item, $key){
+            return $item->type;
+        });
+        return json_encode($collection);
+    }
+
     public function __construct()
     {
         $this->middleware('role:employee');

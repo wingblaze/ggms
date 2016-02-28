@@ -4,12 +4,22 @@
 
 @section('content')
 <div class="page-header">
-	<h1>Membership Accounts</h1>
+	@if(isset($inactive) && $inactive)
+		<h1>Inactive Accounts</h1>
+	@else
+		<h1>Membership Accounts</h1>
+	@endif
 
 </div>
+@if($user->hasRole('membership_manager'))
 <div class="container">
 	<p>As a membership manager, you can <a href="{{ action('ComplaintController@index') }}">view the list of pending accounts</a> to accept or deny applications for membership.</p>
 </div>
+@elseif($user->hasRole('marketing_manager'))
+<div class="container">
+	<p>As a marketing manager, you can <a href="{{ action('AccountController@inactives') }}">view the list of inactive accounts</a> to follow up payment from account owners.</p>
+</div>
+@endif
 <div class="table-responsive">
 	<table class="table table-striped">
 		<tr>

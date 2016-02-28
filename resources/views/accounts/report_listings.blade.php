@@ -1,20 +1,11 @@
 @extends('layouts.master')
 
-@section('title', 'Club Shares Listing')
+@section('title', 'Club Shares Report')
 
 @section('content')
 <div class="page-header">
-  <h1>Club Shares Listing</h1>
+  <h1>Club Shares Reports</h1>
   <span id="helpBlock" class="help-block">Here is a list of club shares that account owners have posted to sell.</span>
-  
-  @if ($user && $user->is_owner() && $user->hasRole('user') && $user->hasRole('employee') == false)
-    <h3>Post a listing</h3>
-    Hello {{ $user->name }}. As account owner, you may 
-    <a href="{{ action('AccountController@post_listing') }}">
-      post a club share listing
-    </a> to sell your club shares.
-  @endif
-
   
 </div>
 
@@ -23,10 +14,19 @@
     <tr>
       <th class="col-md-2">Account owner</th>
       <th class="col-md-2">Golf membership type</th>
-      <th class="col-md-2">Date posted</th>
+      <th class="col-md-2">Date created / listed</th>
+      <th class="col-md-2">Date updated</th>
     </tr>
 
     @foreach($listings as $listing)
+    <?PHP
+      $isForSale = isset($listing->membership_slot['type']) == false; 
+      if ($isForSale)
+      {
+        $reference = App\MembershipControl::where('account_id', $listing->account_id)->whereNotNull('membership_slot_id')->first();
+      }
+
+    ?>
     <tr>
       <td class="col-md-2">
         @if ($listing->account())
@@ -38,10 +38,18 @@
         @endif
       </td>
       <td class="col-md-2">
-        {{ $listing->slot['type'] }}
+
+        {{ $listing->membership_slot['type'] or "Sale (" . $reference->membership_slot['type'] . ")" }}
       </td>
       <td class="col-md-2">
-        {{ $listing->slot['created_at'] or '-' }}
+        {{ $listing->created_at or '-' }}
+      </td>
+      <td class="col-md-2">
+        @if (isset($listing->membership_slot['type']) == false)
+          Not yet taken
+        @else
+          {{ $listing->udpated_at or '-' }}
+        @endif
       </td>
     </tr>
     @endforeach

@@ -164,6 +164,31 @@ class AccountController extends Controller
         return view('accounts.listings', ['listings' => $listings, 'canPostListing' => !$has_posted_listing]);
     }
 
+    public function report_listings(Request $request)
+    {
+
+        $data = $request->all();
+        
+        $listings = MembershipControl::all();
+
+        if (isset($data['start']) && isset($data['end'])){
+            $start = Carbon::parse($data['start']);
+            $end = Carbon::parse($data['end']);
+
+            $listings = $listings->where(function ($query)
+            {
+                $query->where('created_at', '>=', $start);
+                $query->where('created_at', '<', $end);
+            })->orWhere(function ($query)
+            {
+                $query->where('updated_at', '>=', $start);
+                $query->where('updated_at', '<', $end);
+            })->get();
+        }
+
+        return view('accounts.report_listings', ['listings' => $listings]);
+    }
+
 
     public function json() {
         $collection = Account::all()->map(function ($resource){
@@ -174,6 +199,18 @@ class AccountController extends Controller
 
     public function assign($id) {
         return view('accounts.assign', ['account_id' => $id]);
+    }
+
+    public function accept($id)
+    {
+        $account = Account::find($id);
+        if ($account->owner()) {
+            $account->status = 'Active';
+            $account->save();
+            return redirect()->action('AccountController@index');
+        }else{
+            return redirect()->action('ComplaintController@index');
+        }
     }
 
     /**
@@ -192,6 +229,11 @@ class AccountController extends Controller
         $user->save();
 
         return view('accounts.show', ['account' => Account::findOrFail($data['id']), 'complaints' => Complaint::where('account_id', '=', $data['id'])->get()]);
+    }
+
+    public function inactives()
+    {
+        return view('accounts', ['accounts' => Account::where('status', 'Inactive')->get(), 'inactive' => true]);
     }
 
     public function __construct()

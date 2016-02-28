@@ -53,9 +53,10 @@
                 @endif
 
                 @if ($user->hasRole('marketing_manager'))
+                <li><a href="{{action('AccountController@index')}}">View accounts</a></li>
+                <li class="divider"></li>
                 <li><a href="{{action('EventController@index')}}">View events</a></li>
                 <li><a href="{{action('EventController@create')}}">Create an event</a></li>                
-
                 @endif
 
 
@@ -65,7 +66,16 @@
             @endif
             @if ($user->hasRole('marketing_manager'))
             <li class="dropdown">
-              <li><a href="action('')">View reports</a></li>
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Reports <span class="caret"></span></a>
+              
+              <ul class="dropdown-menu">
+                <li><a href="{{action('ReportController@newusers')}}">New users</a></li>
+                <li><a href="{{action('ReportController@inactive_members')}}">Inactive members</a></li>
+                <li><a href="{{action('ReportController@user_activity_of_group')}}">User activity of a group</a></li>
+                <li><a href="{{action('ReportController@club_share_transfers')}}">Club share transfers</a></li>
+                <li><a href="{{action('ReportController@facility_usage')}}">Facility usage within an event</a></li>
+                <li><a href="{{action('ReportController@user_activity_within_event')}}">User activity during an event</a></li>
+              </ul>
             </li>
             @endif
 
