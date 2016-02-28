@@ -4,7 +4,9 @@
 
 @section('content')
 <div class="page-header">
-	<h1>Pending Accounts</h1>
+	<h1>Pending accounts</h1>
+	<p class="help-block">As existing members of this golf club, you are encouraged to participate in the review phase of the application process.
+    Please let us know if there are any complaints on new membership applications.</p>
 </div>
 <div class="table-responsive">
 	<table class="table table-striped">
@@ -37,11 +39,15 @@
 					@if ($account->owner())
 						<a class="btn btn-sm btn-default" href="{{action('UserController@show', ['id' => $account->owner()->id])}}"><span class="glyphicon glyphicon-user" aria-hidden="true"></span>&nbsp Owner</a>
 					@endif
-					
+					@if ($user->hasRole('user'))
+					<a class="btn btn-sm btn-default" href="{{url('review', ['id' => $account->id])}}"><span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>&nbsp Review</a>
+					@endif
 				
 				</div>
-				&nbsp
-				<a class="btn btn-sm btn-danger" href="{{action('AccountController@destroy', ['id' => $account->id])}}">Deny</a>
+				@if ($user && $user->hasRole('membership_manager'))
+					&nbsp
+					<a class="btn btn-sm btn-danger" href="{{action('AccountController@destroy', ['id' => $account->id])}}">Deny</a>
+				@endif
 			</td>
 		</tr>
 		@endforeach

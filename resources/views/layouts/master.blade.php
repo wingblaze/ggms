@@ -1,6 +1,3 @@
-<?PHP
-$user = Auth::user();
-?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -45,37 +42,42 @@ $user = Auth::user();
               
               <ul class="dropdown-menu">
                 @if ($user->hasRole('membership_manager'))
-                  <li><a href="{{action('AccountController@index')}}">View accounts</a></li>
-                  <li><a href="{{action('AccountController@create')}}">Register a new account</a></li>
-                  <li class="divider"></li>
-                  <li><a href="{{action('UserController@index')}}">View users</a></li>
-                  <li><a href="{{action('UserController@create')}}">Register a new user</a></li>
-                  <li class="divider"></li>
-                  <li><a href="{{action('GroupController@index')}}">View groups</a></li>
-                  <li><a href="{{action('GroupController@create')}}">Create a new group</a></li>
+                <li><a href="{{action('AccountController@index')}}">View accounts</a></li>
+                <li><a href="{{action('AccountController@create')}}">Register a new account</a></li>
+                <li class="divider"></li>
+                <li><a href="{{action('UserController@index')}}">View users</a></li>
+                <li><a href="{{action('UserController@create')}}">Register a new user</a></li>
+                <li class="divider"></li>
+                <li><a href="{{action('GroupController@index')}}">View groups</a></li>
+                <li><a href="{{action('GroupController@create')}}">Create a new group</a></li>
                 @endif
 
                 @if ($user->hasRole('marketing_manager'))
-                  <li><a href="{{action('EventController@index')}}">View events</a></li>
-                  <li><a href="{{action('EventController@create')}}">Create an event</a></li>                
-                  <li><a href="#">View reports</a></li>
+                <li><a href="{{action('EventController@index')}}">View events</a></li>
+                <li><a href="{{action('EventController@create')}}">Create an event</a></li>                
+
                 @endif
 
-               
+
 
               </ul>
             </li>
             @endif
+            @if ($user->hasRole('marketing_manager'))
+            <li class="dropdown">
+              <li><a href="action('')">View reports</a></li>
+            </li>
+            @endif
 
-             @if ($user->hasRole('system_administrator'))
-             <li class="dropdown">
-                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">System Settings <span class="caret"></span></a>
-                <ul class="dropdown-menu">
-                  <li><a href="{{action('ResourceController@index')}}">View facilities</a></li>
-                  <li><a href="{{action('ResourceController@create')}}">Add a new facility</a></li>
-                </ul>
-              </li>
-                @endif
+            @if ($user->hasRole('system_administrator'))
+            <li class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">System Settings <span class="caret"></span></a>
+              <ul class="dropdown-menu">
+                <li><a href="{{action('ResourceController@index')}}">View facilities</a></li>
+                <li><a href="{{action('ResourceController@create')}}">Add a new facility</a></li>
+              </ul>
+            </li>
+            @endif
 
             @if ($user->hasRole('golf_ops_manager'))
             <li class="dropdown">
@@ -113,37 +115,45 @@ $user = Auth::user();
               </ul>
             </li>
             @endif
+            @if ($user->hasRole('user') || $user->hasRole('membership_manager'))
+            <li class="dropdown">
+              <a href="{{ action('ComplaintController@index') }}" role="button">Pending Accounts </a>
+            </li>
+            @endif
             <li class="dropdown">
               <a href="{{ action('AccountController@listings') }}" role="button">Club Shares </a>
             </li>
           </ul>
           @endif
           <ul class="nav navbar-nav navbar-right">
+          <?php /*
             <form class="navbar-form navbar-left hidden-xs hidden-sm" role="search">
             <div class="form-group">
               <input type="text" class="form-control" placeholder="">
             </div>
             <button type="submit" class="btn btn-default">Search</button>
           </form>
+          */
+          ?>
 
-          @if (Auth::check())
-            <li><a href="{{action('Auth\AuthController@getLogout')}}">Log out</a></li>
+          @if ($user)
+          <li><a href="{{action('Auth\AuthController@getLogout')}}">Log out</a></li>
           @else
-            <li><a href="{{action('Auth\AuthController@getLogin')}}">Log in</a></li>
+          <li><a href="{{action('Auth\AuthController@getLogin')}}">Log in</a></li>
           @endif
 
-          </ul>
-        </div><!-- /.navbar-collapse -->
-      </div><!-- /.container-fluid -->
-    </div>
-  </nav>
-  @show
-
-  <div class="container">
-    @yield('content')
+        </ul>
+      </div><!-- /.navbar-collapse -->
+    </div><!-- /.container-fluid -->
   </div>
+</nav>
+@show
+
+<div class="container">
+  @yield('content')
+</div>
 
 
-    
+
 </body>
 </html>

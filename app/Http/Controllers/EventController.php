@@ -12,15 +12,6 @@ use Carbon\Carbon;
 
 class EventController extends Controller
 {
-    /**
-     * Instantiate a new EventController instance.
-     *
-     * @return void
-     */
-    public function __construct()
-    {
-        // $this->middleware('auth');
-	}
 
 	/**
      * Show the profile for the given event.
@@ -72,5 +63,14 @@ class EventController extends Controller
     public function destroy($id)
     {
     	
+    }
+
+    public function __construct()
+    {
+        $this->middleware('role:employee');
+
+        $this->middleware('role:membership_manager|golf_ops_manager', ['only' => [
+            'store', 'edit', 'destroy', 'create'
+            ]]);
     }
 }

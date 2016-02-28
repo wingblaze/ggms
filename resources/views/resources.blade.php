@@ -24,9 +24,13 @@
 				</td>
 				<td class="col-md-2">{{ $resource->created_at }}</td>
 				<td class="col-md-4">
+					@if ($user->hasRole('system_administrator'))
 					<a class="btn btn-sm btn-default" href="{{action('ResourceController@edit', ['id' => $resource->id])}}"><span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>&nbsp Edit</a>
 					&nbsp
 					<a class="btn btn-sm btn-danger" href="{{action('ResourceController@destroy', ['id' => $resource->id])}}"><span class="glyphicon glyphicon-trash" aria-hidden="true"></span>&nbsp Delete</a>
+					@else
+					None
+					@endif
 				</td>
 			</tr>
 			@endforeach
@@ -59,7 +63,11 @@
 				<td class="col-md-3">{{ $listing->end_time }}</td>
 				<td class="col-md-1">{{ $listing->status }}</td>
 				<td class="col-md-4">
+					@if ($user->hasRole('employee'))
 					<a class="btn btn-sm btn-default" href="{{action('ResourceController@edit', ['id' => $listing->id])}}"><span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>&nbsp Edit</a>
+					@else
+					  None
+					@endif
 				</td>
 			</tr>
 			@endforeach

@@ -72,4 +72,13 @@ class GroupController extends Controller
         });
         return json_encode($collection);
     }
+
+    public function __construct()
+    {
+        $this->middleware('role:employee');
+
+        $this->middleware('role:membership_manager', ['only' => [
+            'store', 'edit', 'destroy', 'create'
+            ]]);
+    }
 }

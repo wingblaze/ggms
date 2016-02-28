@@ -16,6 +16,12 @@
 <div class="page-header">
 	<h3>Members under this account</h3>
 	<span>A single account can have at most one owner, and have multiple dependents.</span>
+	@if ($user->hasRole('membership_manager'))
+	<p>As the membership manager of this golf course community, you may <a href="{{action('AccountController@assign', ['id' => $account->id])}}"><button class="btn btn-primary">assign an existing user</button></a> to this account as either a dependent or an owner.
+	@endif
+	<p>
+		
+	</p>
 </div>
 <div class="table-responsive">
 	<table class="table table-striped">
@@ -42,11 +48,14 @@
 	</table>
 </div>
 
-
-@if(count($complaints) > 0)
+{{ $account->status}}
+@if($account->status == 'On Review')
 <div class="page-header">
 	<h3>Application undergoing review</h3>
 	<span>This account is currently <span class="label label-warning">pending</span> and is undergoing the review process of the existing members.</span>
+	@if ($user->hasRole('user'))
+	<p>As a member of this golf course community, you may <a class="btn btn-default btn-sm" href="{{ url('review', ['id' => $account->id]) }}"><span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>&nbsp review this account</a> and share with us your thoughts or report any issues with this new application.</p>
+	@endif
 </div>
 <div class="table-responsive">
 	<table class="table table-striped">
@@ -77,16 +86,20 @@
 				<div class="btn-group" role="group" aria-label="Options">
 					
 					<a class="btn btn-sm btn-default" href="{{action('AccountController@show', ['id' => $complaint->id])}}">Account details</a>
+					@if ($user->hasRole('membership_manager'))
 					<a class="btn btn-sm btn-default" href="{{action('AccountController@edit', ['id' => $complaint->id])}}">Edit</a>
+					@endif
 					
 				</div>
+				@if ($user->hasRole('membership_manager'))
 				&nbsp
 				<a class="btn btn-sm btn-danger" href="{{action('AccountController@destroy', ['id' => $complaint->id])}}">Delete</a>
+				@endif
 			</td>
 		</tr>
 		@endforeach
 	</table>
 </div>
 @endif
-
+	
 @stop

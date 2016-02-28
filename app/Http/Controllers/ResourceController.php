@@ -90,4 +90,13 @@ class ResourceController extends Controller
         return json_encode($collection);
     }
 
+    public function __construct()
+    {
+        $this->middleware('role:employee');
+
+        $this->middleware('role:system_administrator', ['only' => [
+            'store', 'edit', 'destroy', 'create'
+            ]]);
+    }
+
 }

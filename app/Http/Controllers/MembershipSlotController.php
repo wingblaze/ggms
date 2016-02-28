@@ -9,5 +9,12 @@ use App\Http\Controllers\Controller;
 
 class MembershipSlotController extends Controller
 {
-    //
+	public function __construct()
+	{
+		$this->middleware('role:employee');
+		
+		$this->middleware('role:system_administrator', ['only' => [
+			'store', 'edit', 'destroy', 'create'
+			]]);
+	}
 }

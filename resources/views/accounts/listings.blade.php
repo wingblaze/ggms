@@ -1,7 +1,3 @@
-<?PHP
-$user = Auth::user();
-?>
-
 @extends('layouts.master')
 
 @section('title', 'Club Shares Listing')
@@ -11,7 +7,7 @@ $user = Auth::user();
   <h1>Club Shares Listing</h1>
   <span id="helpBlock" class="help-block">Here is a list of club shares that account owners have posted to sell.</span>
   
-  @if ($user && $user->is_owner())
+  @if ($user && $user->is_owner() && $user->hasRole('user') && $user->hasRole('employee') == false)
     <h3>Post a listing</h3>
     Hello {{ $user->name }}. As account owner, you may 
     <a href="{{ action('AccountController@post_listing') }}">

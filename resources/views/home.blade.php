@@ -7,8 +7,8 @@
 <div class="container">
 	<div class="jumbotron">
 		<h2>Generic Golf Management System</h2>
-		@if (Auth::check())
-			<p>Hi {{ Auth::user()->name }}, welcome back!</p>
+		@if ($user)
+			<p>Hi {{ $user->name }}, welcome back!</p>
 		@else
 			<p>Hello world!</p>
 		@endif
@@ -33,7 +33,7 @@
 		<div class="panel panel-default">
 			<div class="panel-body">
 				<h4>New member applications</h4>
-				@if (Auth::user())
+				@if ($user)
 				<p>As concerned members of our beloved community, please review 
 						<a href="{{ action('ComplaintController@index') }}">the new applicants</a>
 					 who wish to join our golf community.</p>

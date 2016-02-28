@@ -1,7 +1,3 @@
-<?PHP
-$user = Auth::user();
-?>
-
 @extends('layouts.master')
 
 @section('title', 'Post Club Share Listing')

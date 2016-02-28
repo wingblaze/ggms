@@ -45,8 +45,11 @@
 					@endif
 					
 				</div>
+				
+				@if ($user && $user->hasRole('membership_manager'))
 				&nbsp
 				<a class="btn btn-sm btn-danger" href="{{action('AccountController@destroy', ['id' => $account->id])}}"><span class="glyphicon glyphicon-trash" aria-hidden="true"></span>&nbsp Disable</a>
+				@endif
 			</td>
 		</tr>
 		@endforeach

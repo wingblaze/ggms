@@ -10,6 +10,7 @@
 @section('content')
 <div class="page-header">
 	<h1>Rent a facility</h1>
+  <p class="help-block">As an employee, you may allow a user to rent a facility such as a event area, dining room, or a basketball court.</p>
 </div>
 
 {!! Form::open(array('action' => 'ResourceController@store_rent')) !!}
@@ -76,7 +77,7 @@
 
   <hr>
   <p>Once the form is submitted, the renting of that facility will be posted and GGMS employees can view it.
-    As Operations Manager, you can modify the status of this rental afterwards.</p>
+    As an employee, you can modify the status of this rental afterwards.</p>
   <button type="submit" class="btn btn-primary">Rent facility</button>
 {!! Form::close() !!}
 

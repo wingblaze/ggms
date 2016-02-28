@@ -9,6 +9,8 @@ use App\Http\Controllers\Controller;
 
 use App\Account;
 use App\Complaint;
+use App\User;
+use App\Group;
 use Input;
 use Carbon\Carbon;
 
@@ -51,7 +53,9 @@ class AccountController extends Controller
 
         $data = $request->all();
 
-        $account->group_id = $data['group'];
+        $group_id = Group::where('name', $data['group'])->first()->id;
+
+        $account->group_id = $group_id;
 
         $account->expiration = Carbon::createFromFormat('Y-m-d', $data['expiration']);
         
@@ -158,5 +162,46 @@ class AccountController extends Controller
         }
 
         return view('accounts.listings', ['listings' => $listings, 'canPostListing' => !$has_posted_listing]);
+    }
+
+
+    public function json() {
+        $collection = Account::all()->map(function ($resource){
+            return $resource->name;
+        });
+        return json_encode($collection);
+    }
+
+    public function assign($id) {
+        return view('accounts.assign', ['account_id' => $id]);
+    }
+
+    /**
+     *  Assigns a user to an account
+     *
+     */
+    public function assign_user(Request $request) {      
+        $data = $request->all();        
+        $user = User::where('name', $data['user'])->first();
+        $user->account_id = $data['id'];
+        if (array_key_exists('owner', $data)) {
+            $user->account_type = 'owner';
+        } else {
+            $user->account_type = 'dependent';
+        }
+        $user->save();
+
+        return view('accounts.show', ['account' => Account::findOrFail($data['id']), 'complaints' => Complaint::where('account_id', '=', $data['id'])->get()]);
+    }
+
+    public function __construct()
+    {
+        $this->middleware('role:user', ['only' => [
+            'remove_listing', 'post_listing', 'create_listing'
+            ]]);
+
+        $this->middleware('role:membership_manager', ['only' => [
+            'store', 'edit', 'destroy', 'create'
+            ]]);
     }
 }

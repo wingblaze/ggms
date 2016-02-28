@@ -14,10 +14,13 @@ Route::group(['middleware' => ['web']], function () {
 	Route::get('/', 'GuestController@index');
 
 	Route::get('shares', 'AccountController@listings');
-	Route::get('shares/post/create', 'AccountController@post_listing')->middleware(['role:user']);
-	Route::get('shares/post', 'AccountController@create_listing')->middleware(['role:user']);
-	Route::get('shares/remove', 'AccountController@remove_listing')->middleware(['role:user']);
+	Route::get('shares/post/create', 'AccountController@post_listing');
+	Route::get('shares/post', 'AccountController@create_listing');
+	Route::get('shares/remove', 'AccountController@remove_listing');
 
+	Route::post('accounts/assign_user', 'AccountController@assign_user');
+	Route::get('accounts/{id}/assign', 'AccountController@assign');
+	Route::get('users.json', 'UserController@json');
 	Route::resource('accounts', 'AccountController');
 
 	Route::get('groups.json', 'GroupController@json');
@@ -25,18 +28,18 @@ Route::group(['middleware' => ['web']], function () {
 
 	Route::resource('memberships', 'MembershipSlotController');
 
-	Route::resource('review', 'ComplaintController@create');
+	Route::get('review/{id}', 'ComplaintController@create');
 	Route::resource('complaints', 'ComplaintController');
 
-	Route::get('users.json', 'UserController@json')->middleware(['role:employee']);
+	Route::get('users.json', 'UserController@json');
 	Route::resource('users', 'UserController');
 
 	Route::resource('events', 'EventController');
 
-	Route::post('/resources/renting', 'ResourceController@store_rent')->middleware(['role:employee']);
-	Route::get('/resources/rent', 'ResourceController@rent')->middleware(['role:employee']);
+	Route::post('/resources/renting', 'ResourceController@store_rent');
+	Route::get('/resources/rent', 'ResourceController@rent');
 
-	Route::get('resources.json', 'ResourceController@json')->middleware(['role:employee']);;
+	Route::get('resources.json', 'ResourceController@json');
 	Route::resource('resources', 'ResourceController');
 
 

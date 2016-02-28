@@ -11,16 +11,6 @@ use Carbon\Carbon;
 
 class UserController extends Controller
 {
-      /**
-     * Instantiate a new UserController instance.
-     *
-     * @return void
-     */
-    public function __construct()
-    {
-        // $this->middleware('auth');
-	}
-
 	/**
      * Show the profile for the given user.
      *
@@ -81,6 +71,11 @@ class UserController extends Controller
     	return view('users.edit', ['user' => User::findOrFail($id)]);
     }
 
+    public function assign() 
+    {
+      return view('users.assign');
+    }
+
     public function destroy($id)
     {
     	
@@ -91,5 +86,22 @@ class UserController extends Controller
             return $resource->name;
         });
         return json_encode($collection);
+    }    
+
+    /**
+     * Instantiate a new UserController instance.
+     *
+     * @return void
+     */
+
+    public function __construct()
+    {
+        $this->middleware('role:employee|user', ['except' => [
+            'index'
+            ]]);
+
+        $this->middleware('role:membership_manager', ['only' => [
+            'store', 'edit', 'destroy', 'create', 'assign_account'
+            ]]);
     }
 }

@@ -2,6 +2,11 @@
 
 @section('title', 'Create An Account')
 
+@section('header')
+@parent
+<script src="/js/bootstrap3-typeahead.min.js"></script>
+@endsection
+
 @section('content')
 <div class="page-header">
 	<h1>Create An Account</h1>
@@ -11,11 +16,11 @@
 {!! Form::open(array('action' => 'AccountController@store')) !!}
   <h3>Account details</h3>
   <div class="form-group">
-    <label for="group">Company </label>
+    <label for="group_name">Company </label>
     <span id="helpBlock" class="help-block">Please input the name of the company this application is involved with.
       <strong>If the company does not exist yet, please create the company first before creating the account.</strong></span>
-    <input type="text" class="form-control" id="group" name="group" placeholder="">
-  </div>
+    <input type="text" class="form-control" id="group_name" name="group" placeholder="Name of Group" data-provide="typeahead" autocomplete="off">
+  </div> 
   <div class="form-group">
     <label for="date">Membership Expiration date</label>
     <div class="row">
@@ -111,5 +116,11 @@
   <span id="helpBlock" class="help-block">The application process lasts for two (2) weeks as the members of the community review the requested application. The client will be contacted 
   	within this period to inform them of their application's status.</span>
   <button type="submit" class="btn btn-primary">Apply</button>
-</form>
+{!! Form::close() !!}
+
+<script type="text/javascript">
+  $.get('/groups.json', function(data){
+    $("#group_name").typeahead({ source:data });
+  },'json');
+</script>
 @stop
