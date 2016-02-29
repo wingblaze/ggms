@@ -3,6 +3,8 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use App\MembershipControl;
+use App\MembershipSlot;
 
 class Account extends Model
 {
@@ -27,10 +29,12 @@ class Account extends Model
         return $this->belongsTo('App\Group');   
     }
 
-    public function membership_slot()
+    public function current_membership_slot()
     {
-        $slot_id = $this->membership_control()->orderBy('created_at', 'desc')->first();
-        return MembershipSlot::find($slot_id['id']);
+        $latest = MembershipControl::where('current_account_id', $this->id)->orderBy('updated_at', 'desc')->first();
+        if ($latest)
+            return MembershipSlot::find($latest->membership_slot_id);
+        return false;
     }
 
     // Return newly created accounts, those that don't have any connections with user account relations yet.
@@ -40,7 +44,7 @@ class Account extends Model
     }
 
     public function has_posted_listing(){
-        $membership_control = MembershipControl::whereNull('membership_slot_id')->where('account_id', $this->id)->first();
+        $membership_control = MembershipControl::whereNull('membership_slot_id')->where('posted_by_account_id', $this->id)->first();
         return $membership_control;
     }
 }

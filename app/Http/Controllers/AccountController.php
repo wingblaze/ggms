@@ -138,7 +138,7 @@ class AccountController extends Controller
         if ($has_posted_listing){
             // error
         }else{
-            DB::table('membership_controls')->insert(['account_id' => $user->account->id, 'membership_slot_id' => NULL, 'created_at' => Carbon::now()]);
+            DB::table('membership_controls')->insert(['posted_by_account_id' => $user->account->id, 'membership_slot_id' => NULL, 'created_at' => Carbon::now()]);
         }
         return $this->listings();
     }
@@ -155,11 +155,13 @@ class AccountController extends Controller
 
     public function listings(){
         $user = Auth::user();
+
         $has_posted_listing = $user->account->has_posted_listing();
 
         $listings = MembershipControl::whereNull('membership_slot_id')->get();
+
         foreach ($listings as $listing) {
-            $slot_id = MembershipControl::where('account_id', $listing->account_id)->whereNotNull('membership_slot_id')->first()->membership_slot_id;
+            $slot_id = MembershipControl::where('posted_by_account_id', $listing->posted_by_account_id)->whereNotNull('membership_slot_id')->first()->membership_slot_id;
             $listing->slot = MembershipSlot::find($slot_id);
         }
 
@@ -171,7 +173,7 @@ class AccountController extends Controller
 
         $data = $request->all();
         
-        $listings = MembershipControl::all();
+        $listings = MembershipControl::orderBy('updated_at', 'asc')->get();
 
         if (isset($data['start']) && isset($data['end'])){
             $start = Carbon::parse($data['start']);

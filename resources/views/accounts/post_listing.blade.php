@@ -8,7 +8,7 @@
   <span id="helpBlock" class="help-block">This process allows an account owner to post his club share to a public listing, so that interested parties may purchase it.</span>
 </div>
   @if ($user && $user->is_owner())
-    @if($canPostListing)
+    @if(!$canPostListing)
     <p>Hello {{ $user->name }}. As account owner, you may 
     <a href="{{ action('AccountController@post_listing') }}" class="btn btn-primary">
       post a club share listing</a> if you wish to no longer be part of this golf course community.

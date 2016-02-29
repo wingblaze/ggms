@@ -35,7 +35,8 @@ class CreateForeignKeys extends Migration
         });
 
         Schema::table('membership_controls', function($table) {
-            $table->foreign('account_id')->references('id')->on('accounts');
+            $table->foreign('current_account_id')->references('id')->on('accounts');
+            $table->foreign('posted_by_account_id')->references('id')->on('accounts');
             $table->foreign('membership_slot_id')->references('id')->on('membership_slots');
         });
         DB::statement('SET FOREIGN_KEY_CHECKS = 1');

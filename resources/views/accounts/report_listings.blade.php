@@ -12,7 +12,8 @@
 <div class="table-responsive">
   <table class="table table-striped">
     <tr>
-      <th class="col-md-2">Account owner</th>
+      <th class="col-md-2">Posted by</th>
+      <th class="col-md-2">Current slot holder</th>
       <th class="col-md-2">Golf membership type</th>
       <th class="col-md-2">Date created / listed</th>
       <th class="col-md-2">Date updated</th>
@@ -23,32 +24,46 @@
       $isForSale = isset($listing->membership_slot['type']) == false; 
       if ($isForSale)
       {
-        $reference = App\MembershipControl::where('account_id', $listing->account_id)->whereNotNull('membership_slot_id')->first();
+        $reference = App\MembershipControl::where('current_account_id', $listing->posted_by_account_id)->whereNotNull('membership_slot_id')->first();
       }
-
     ?>
     <tr>
       <td class="col-md-2">
-        @if ($listing->account())
-          <a href="{{action('AccountController@show', ['id' => $listing->account()->first()->id])}}">
-            {{ $listing->account()->first()->owner()->name }}
+        @if ($listing->posted_by_account)
+          <a href="{{action('AccountController@show', ['id' => $listing->posted_by_account()->first()->id])}}">
+            {{ $listing->posted_by_account()->first()->owner()->name or '-' }}
+          </a>
+        @else
+          No poster
+        @endif
+      </td>
+      <td class="col-md-2">
+        @if ($listing->current_account)
+          <a href="{{action('AccountController@show', ['id' => $listing->current_account()->first()->id])}}">
+            {{ $listing->current_account()->first()->owner()->name or '-' }}
           </a>
         @else
           No owner
         @endif
       </td>
       <td class="col-md-2">
-
-        {{ $listing->membership_slot['type'] or "Sale (" . $reference->membership_slot['type'] . ")" }}
+        @if ($listing->membership_slot['type'])
+          <?PHP $slot_id = $listing->membership_slot['id']; ?>
+          (Slot {{ $slot_id or '-' }}) - {{ $listing->membership_slot['type'] or '-' }} 
+        @else
+          
+          (Slot {{ $slot_id or '-' }}) - {{ $reference->membership_slot['type'] or '-' }} <br />
+          <em>On sale</em>
+        @endif
       </td>
       <td class="col-md-2">
-        {{ $listing->created_at or '-' }}
+        {{ $listing->created_at or '-' }} 
       </td>
       <td class="col-md-2">
         @if (isset($listing->membership_slot['type']) == false)
           Not yet taken
         @else
-          {{ $listing->udpated_at or '-' }}
+          {{ $listing->updated_at or '-' }}
         @endif
       </td>
     </tr>

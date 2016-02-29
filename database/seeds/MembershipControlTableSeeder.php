@@ -3,6 +3,8 @@
 use Illuminate\Database\Seeder;
 use Carbon\Carbon;
 
+use App\User;
+
 class MembershipControlTableSeeder extends Seeder
 {
     /**
@@ -12,28 +14,42 @@ class MembershipControlTableSeeder extends Seeder
      */
     public function run()
     {
+        $membership_manager = User::where('email', 'membershipmgr@gmail.com')->first();
+
+        $date = Carbon::now()->addDays(rand(-6,0));
         DB::table('membership_controls')->insert([
-    		'account_id' => 1,
+    		'current_account_id' => 1,
     		'membership_slot_id' => 1,
-            'created_at' => Carbon::now()->addDays(rand(-6,0))
+            'posted_by_account_id' => $membership_manager->account->id,
+            'created_at' => $date,
+            'updated_at' => $date->addMinutes(15)
     		]);
 
+        $date = Carbon::now()->addDays(rand(-6,0));
         DB::table('membership_controls')->insert([
-            'account_id' => 2,
+            'current_account_id' => 2,
             'membership_slot_id' => 2,
-            'created_at' => Carbon::now()->addDays(rand(-6,0))
+            'posted_by_account_id' => $membership_manager->account->id,
+            'created_at' => $date,
+            'updated_at' => $date->addMinutes(15)
             ]);
 
+        $date = Carbon::now()->addDays(rand(-6,0));
         DB::table('membership_controls')->insert([
-            'account_id' => 3,
+            'current_account_id' => 3,
             'membership_slot_id' => 5,
-            'created_at' => Carbon::now()->addDays(rand(-6,0))
+            'posted_by_account_id' => $membership_manager->account->id,
+            'created_at' => $date,
+            'updated_at' => $date->addMinutes(15)
             ]);
 
+        $date = Carbon::now()->addDays(rand(-6,0));
         DB::table('membership_controls')->insert([
-            'account_id' => 3,
+            'current_account_id' => 3,
             'membership_slot_id' => NULL,
-            'created_at' => Carbon::now()->addDays(rand(-6,0))
+            'posted_by_account_id' => 3,
+            'created_at' => $date,
+            'updated_at' => $date->addMinutes(15)
             ]);
     }
 }

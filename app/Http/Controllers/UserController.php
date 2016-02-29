@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use App\User;
+use App\Role;
 use Carbon\Carbon;
 
 class UserController extends Controller
@@ -62,11 +63,15 @@ class UserController extends Controller
 
         $user->civil_status = $data['civil_status'];
         
-        $user->attachRole(Role::where('name', 'user'));
+        $user_type = ($data['user_type'] == 'employee') ? 'employee' : 'user';
 
+        $role = Role::where('name', $user_type)->first();
+        
         $user->save();
 
+        $user->attachRole($role);
 
+        $user->save();
 
         return $this->show($user->id);
     }

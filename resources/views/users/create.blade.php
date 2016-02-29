@@ -72,7 +72,6 @@
 			</label>
 		</div>
 	</div>
-
 </div>
 
 <hr />
@@ -97,6 +96,26 @@
 <div class="form-group">
 	<label for="passwordRepeat">Repeat password</label>
 	<input type="password" class="form-control" id="passwordRepeat" name="passwordRepeat" placeholder="Password">
+</div>
+<hr>
+<div class="form-group">
+	<label for="user_type">User type</label>
+	<span id="helpBlock" class="help-block">Is this a new user or an employee?</span>
+	<div class="container">
+		<div class="col-md-2">
+			<label>
+				User
+				<input type="radio" class="form-control" value="user" name="user_type" checked>
+			</label>
+		</div>
+		<div class="col-md-2">
+
+			<label>
+				Employee
+				<input type="radio" class="form-control" value="employee" name="user_type">
+			</label>
+		</div>
+	</div>
 </div>
 <hr>
 <p>The application process lasts for two (2) weeks as the members of the community review the requested application. The client will be contacted 

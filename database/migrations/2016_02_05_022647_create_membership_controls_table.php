@@ -15,9 +15,10 @@ class CreateMembershipControlsTable extends Migration
         Schema::create('membership_controls', function (Blueprint $table) {
             $table->increments('id');
 
-            $table->integer('account_id')->unsigned()->nullable();
+            $table->integer('posted_by_account_id')->unsigned()->nullable();
+            $table->integer('current_account_id')->unsigned()->nullable();
             $table->integer('membership_slot_id')->unsigned()->nullable();
-            $table->unique( array('account_id','membership_slot_id') );
+            $table->unique( array('current_account_id','membership_slot_id') );
 
             $table->timestamps();
         });
