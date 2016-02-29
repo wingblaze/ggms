@@ -136,7 +136,7 @@ class AccountController extends Controller
         if ($has_posted_listing){
             // error
         }else{
-            DB::table('membership_controls')->insert(['account_id' => $user->account->id, 'membership_slot_id' => NULL]);
+            DB::table('membership_controls')->insert(['account_id' => $user->account->id, 'membership_slot_id' => NULL, 'created_at' => Carbon::now()]);
         }
         return $this->listings();
     }

@@ -10,7 +10,7 @@
   @if ($user && $user->is_owner())
     @if($canPostListing)
     <p>Hello {{ $user->name }}. As account owner, you may 
-    <a href="{{ action('AccountController@create_listing') }}" class="btn btn-primary">
+    <a href="{{ action('AccountController@post_listing') }}" class="btn btn-primary">
       post a club share listing</a> if you wish to no longer be part of this golf course community.
     </p>
     @else

@@ -10,7 +10,7 @@
   @if ($user && $user->is_owner() && $user->hasRole('user') && $user->hasRole('employee') == false)
     <h3>Post a listing</h3>
     Hello {{ $user->name }}. As account owner, you may 
-    <a href="{{ action('AccountController@post_listing') }}">
+    <a href="{{ action('AccountController@create_listing') }}">
       post a club share listing
     </a> to sell your club shares.
   @endif
@@ -41,7 +41,7 @@
         {{ $listing->slot['type'] }}
       </td>
       <td class="col-md-2">
-        {{ $listing->slot['created_at'] or '-' }}
+        {{ $listing->created_at or '-' }}
       </td>
     </tr>
     @endforeach
