@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Database\Seeder;
+use Carbon\Carbon;
 
 class EventsTableSeeder extends Seeder
 {
@@ -21,10 +22,17 @@ class EventsTableSeeder extends Seeder
     			]);
 
         DB::table('events')->insert([
-    			'name' => "Victor's Birthday",
+                'name' => "Victor's Birthday",
                 'description' => "Lorem ipsum dolor iset; the quick brown fox jumps over the lazy dog.",
-    			'start_date' => $now,
+                'start_date' => $now,
                 'end_date' => date('Y-m-d H:i:s', strtotime('+4 hour'))
-    			]);
+                ]);
+
+        DB::table('events')->insert([
+                'name' => "Swimming-palooza",
+                'description' => "Have fun swimming! Earn more points!",
+                'start_date' => Carbon::now()->addDays(-5),
+                'end_date' => Carbon::now()->addDays(+12)
+                ]);
     }
 }

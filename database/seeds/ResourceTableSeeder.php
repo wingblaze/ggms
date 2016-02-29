@@ -12,19 +12,38 @@ class ResourceTableSeeder extends Seeder
     public function run()
     {
         DB::table('resources')->insert([
-    			'name' => "Dining Hall A"
+    			'name' => "Dining Hall A",
+                'type' => "events"
     			]);
 
         DB::table('resources')->insert([
-    			'name' => "Dining Hall B"
+    			'name' => "Dining Hall B",
+                'type' => "events"
     			]);
 
         DB::table('resources')->insert([
-    			'name' => "Swimming Pool"
-    			]);
+                'name' => "Swimming Pool",
+                'type' => "sports"
+                ]);
 
         DB::table('resources')->insert([
-    			'name' => "Event Area"
+                'name' => "Basketball Court",
+                'type' => "sports"
+                ]);
+
+        DB::table('resources')->insert([
+                'name' => "Badmintion Court",
+                'type' => "sports"
+                ]);
+
+        DB::table('resources')->insert([
+                'name' => "Tennis Court",
+                'type' => "sports"
+                ]);
+
+        DB::table('resources')->insert([
+    			'name' => "Event Area",
+                'type' => "golf"
     			]);
     }
 }
