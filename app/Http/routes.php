@@ -42,9 +42,20 @@ Route::group(['middleware' => ['web']], function () {
 	Route::post('/resources/renting', 'ResourceController@store_rent');
 	Route::get('/resources/rent', 'ResourceController@rent');
 
-	Route::get('resources.json', 'ResourceController@json');
+	
 	Route::get('resource_types.json', 'ResourceController@type_json');
-	Route::resource('resources', 'ResourceController');
+
+
+	Route::group(['prefix' => 'config'], function ()
+	{
+		Route::get('resources.json', 'ResourceController@json');
+		Route::resource('resources', 'ResourceController');
+
+		Route::get('slots.json', 'MembershipSlotController@json');
+		Route::resource('membership_slots', 'MembershipSlotController');
+	});
+
+	Route::resource('config', 'ResourceController');
 
 	Route::get('graph_options.json', 'ReportController@graph_options');
 	Route::group(['prefix' => 'reports'], function () {

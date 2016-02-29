@@ -41,7 +41,7 @@
 				{{ $account->status }}
 			</td>
 			<td class="col-md-2">
-				@if ($account->id)
+				@if (null !== $account->current_membership_slot())
 					<?php print_r($account->current_membership_slot()['type']); ?>
 					
 				@else

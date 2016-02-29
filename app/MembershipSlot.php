@@ -10,4 +10,13 @@ class MembershipSlot extends Model
     {
     	$this->hasMany('App\MembershipControl');
     }
+
+    public function owner(){
+    	if ($this->membership_control_id){
+    		$control = MembershipControl::find($this->membership_control_id);
+    		$account = $control->current_account()->first();
+    		return $account->owner();
+    	}
+    	return FALSE;
+    }
 }

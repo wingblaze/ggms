@@ -219,7 +219,7 @@ class ReportController extends Controller
 
         foreach ($facilities as $facility){
             $activity = RentResource::where('start_time', '>=', $start)
-                                    ->where('end_time', '<=', $end)
+                                    ->where('start_time', '<', $end)
                                     ->where('resource_id', $facility->id)
                                     ->get();
 
@@ -284,7 +284,8 @@ class ReportController extends Controller
             $endTime = $currentTime->copy();
             $this->advance($endTime, $graph_interval);
             $activity = RentResource::where('start_time', '>=', $currentTime)
-                                    ->where('end_time', '<', $endTime)
+                                    ->where('start_time', '<', $endTime)
+                                    ->where('user_id', $user->id)
                                     ->whereIn('resource_id', $validResources)
                                     ->get();
             print $this->label($currentTime, $graph_interval) . "\t" . count($activity) . "\r\n";

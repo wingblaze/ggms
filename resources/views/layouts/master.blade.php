@@ -90,6 +90,9 @@
               <ul class="dropdown-menu">
                 <li><a href="{{action('ResourceController@index')}}">View facilities</a></li>
                 <li><a href="{{action('ResourceController@create')}}">Add a new facility</a></li>
+                <li role="separator" class="divider"></li>
+                <li><a href="{{action('MembershipSlotController@index')}}">View membership slots</a></li>
+                <li><a href="{{action('MembershipSlotController@create')}}">Add a new membership slot</a></li>
               </ul>
             </li>
             @endif

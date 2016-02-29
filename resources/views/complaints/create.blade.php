@@ -33,5 +33,5 @@
   </div>
   <hr>
   <button type="submit" class="btn btn-primary">Send account review</button>
-</form>
+{{!! Form::close() !!}}
 @stop

@@ -20,27 +20,27 @@ class MembershipControlTableSeeder extends Seeder
         DB::table('membership_controls')->insert([
     		'current_account_id' => 1,
     		'membership_slot_id' => 1,
-            'posted_by_account_id' => $membership_manager->account->id,
+            'posted_by_account_id' => 1,
             'created_at' => $date,
-            'updated_at' => $date->addMinutes(15)
+            'updated_at' => $date->addMinutes(-15)
     		]);
 
         $date = Carbon::now()->addDays(rand(-6,0));
         DB::table('membership_controls')->insert([
             'current_account_id' => 2,
             'membership_slot_id' => 2,
-            'posted_by_account_id' => $membership_manager->account->id,
+            'posted_by_account_id' => 1,
             'created_at' => $date,
-            'updated_at' => $date->addMinutes(15)
+            'updated_at' => $date->addMinutes(-10)
             ]);
 
         $date = Carbon::now()->addDays(rand(-6,0));
         DB::table('membership_controls')->insert([
             'current_account_id' => 3,
             'membership_slot_id' => 5,
-            'posted_by_account_id' => $membership_manager->account->id,
+            'posted_by_account_id' => 1,
             'created_at' => $date,
-            'updated_at' => $date->addMinutes(15)
+            'updated_at' => $date->addMinutes(-7)
             ]);
 
         $date = Carbon::now()->addDays(rand(-6,0));
@@ -49,7 +49,7 @@ class MembershipControlTableSeeder extends Seeder
             'membership_slot_id' => 5,
             'posted_by_account_id' => 3,
             'created_at' => $date,
-            'updated_at' => $date->addMinutes(15)
+            'updated_at' => $date->addMinutes(-3)
             ]);
     }
 }

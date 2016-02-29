@@ -42,16 +42,21 @@ class RentResourceTableSeeder extends Seeder
 		$maxResources = DB::table('resources')->max('id');
 
 		foreach ($resources as $resource) {
-			$number = rand(4, 12);
-			$start_offset = rand(-3,12);
-			$now = Carbon::now();
-			$start = $now->copy();
-			$start->addDays($start_offset);
+			$number = rand(23, 40);
 			
-			$end = $now->copy();
-			$end->addDays(rand($start_offset,$start_offset + 5));
-
 			for ($i = 0; $i < $number; $i++){
+
+				$start_offset = rand(-3,12);
+				$now = Carbon::now();
+				$start = $now->copy();
+				$start->addDays(rand(-7,7));
+				$start->addMinutes(rand(12,40));
+				$start->addHours($start_offset);
+				
+				$end = $now->copy();
+				$end->addDays(rand($start_offset,$start_offset + 5));
+
+
 				DB::table('rent_resources')->insert([
 				'user_id' => rand(1, $maxUsers),
 				'resource_id' => rand(1, $maxResources),

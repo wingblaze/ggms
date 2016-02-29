@@ -32,8 +32,13 @@ class Account extends Model
     public function current_membership_slot()
     {
         $latest = MembershipControl::where('current_account_id', $this->id)->orderBy('updated_at', 'desc')->first();
-        if ($latest)
-            return MembershipSlot::find($latest->membership_slot_id);
+        if ($latest){
+            
+
+            $slot = MembershipSlot::find($latest->membership_slot_id);
+            if ($slot && $slot->membership_control_id == $latest->id)
+                return $slot;
+        }
         return false;
     }
 
