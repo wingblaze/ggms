@@ -11,7 +11,7 @@ class UserTableSeeder extends Seeder
      */
     public function run()
     {
-        // mobile_number, birth_date (YYYY-MM-DD), birth_place, nationality, salutation, civil_status, created_at (2016-02-17 13:00:00.000000)
+
         DB::table('users')->insert([
                 'name' => 'System Administrator',
                 'email' => 'sysadmin@gmail.com',
@@ -44,19 +44,228 @@ class UserTableSeeder extends Seeder
                 'account_type' => 'dependent'
                 ]);
 
-        $names = ["Juan Dela Cruz", "Mark Mindoro", "Rylee Alejandro", "Melvin Roxas", "Peyton Barcelona", "Nicolas Magsino", "Stefano Recio", "Bernardo Espejo", "Felix Salvador", "Basilio Casis"];
-        $email = ["juan.dela.cruz", "mark.mindoro", "rylee.alejandro", "melvin.roxas", "peyton.barcelona", "nicolas.magsino", "stefano.recio", "bernardo.espejo", "felix.salvador", "basilio.casis"];
+        DB::table('users')->insert([
+                'name' => 'Alberto Roque',
+                'email' => 'alberto.roque@gmail.com',
+                'mobile_number' => '09178869476',
+                'birth_date1' => '1950-12-04',
+                'birth_place' => 'Pasay City',
+                'nationality' => 'Filipino',
+                'gender' => 'male',
+                'salutation' => 'Mr.',
+                'civil_status' => 'Married',
+                'created_at' => '2015-09-09',
+                'password' => bcrypt('secret'),
+                'account_id' => 2,
+                'account_type' => 'owner'
+                ]);
 
-    	for ($i = 0; $i < 10; $i++) {
-            $first_entry = $i < 3;
+        DB::table('users')->insert([
+                'name' => 'Elena Roque',
+                'email' => 'elena.roque@gmail.com',
+                'mobile_number' => '09172346723',
+                'birth_date1' => '1954-08-04',
+                'birth_place' => 'Tacloban City',
+                'nationality' => 'Filipino',
+                'gender' => 'female',
+                'salutation' => 'Mrs.',
+                'civil_status' => 'Married',
+                'created_at' => '2015-09-09',
+                'password' => bcrypt('secret'),
+                'account_id' => 2,
+                'account_type' => 'dependent'
+                ]);
 
-    		DB::table('users')->insert([
-    			'name' => $names[$i],
-    			'email' => $email[$i].'@gmail.com',
-    			'password' => bcrypt('secret'),
-                'account_id' => $i % 3 + 2,
-                'account_type' => ($first_entry) ? 'owner' : 'dependent'
-    			]);
-    	}
+        DB::table('users')->insert([
+                'name' => 'Harold Roque',
+                'email' => 'harold.roque@gmail.com',
+                'mobile_number' => '09165543256',
+                'birth_date1' => '1980-11-16',
+                'birth_place' => 'Makati City',
+                'nationality' => 'Filipino',
+                'gender' => 'male',
+                'salutation' => 'Mr.',
+                'civil_status' => 'Single',
+                'created_at' => '2015-09-09',
+                'password' => bcrypt('secret'),
+                'account_id' => 2,
+                'account_type' => 'dependent'
+                ]);
+
+        DB::table('users')->insert([
+                'name' => 'Alyssa Roque',
+                'email' => 'alyssa.roque@gmail.com',
+                'mobile_number' => '09156689451',
+                'birth_date1' => '1982-12-04',
+                'birth_place' => 'Makati City',
+                'nationality' => 'Filipino',
+                'gender' => 'female',
+                'salutation' => 'Ms.',
+                'civil_status' => 'Single',
+                'created_at' => '2015-09-09',
+                'password' => bcrypt('secret'),
+                'account_id' => 2,
+                'account_type' => 'dependent'
+                ]);
+
+        DB::table('users')->insert([
+                'name' => 'Renato Dee',
+                'email' => 'renato.dee@gmail.com',
+                'mobile_number' => '09224456890',
+                'birth_date1' => '1956-01-04',
+                'birth_place' => 'Davao City',
+                'nationality' => 'Filipino',
+                'gender' => 'male',
+                'salutation' => 'Mr.',
+                'civil_status' => 'Married',
+                'created_at' => '2014-12-06',
+                'password' => bcrypt('secret'),
+                'account_id' => 3,
+                'account_type' => 'owner'
+                ]);
+
+        DB::table('users')->insert([
+                'name' => 'Marian Dee',
+                'email' => 'marian.dee@gmail.com',
+                'mobile_number' => '09229956732',
+                'birth_date1' => '1959-05-30',
+                'birth_place' => 'Davao City',
+                'nationality' => 'Filipino',
+                'gender' => 'female',
+                'salutation' => 'Mrs.',
+                'civil_status' => 'Married',
+                'created_at' => '2014-12-06',
+                'password' => bcrypt('secret'),
+                'account_id' => 3,
+                'account_type' => 'dependent'
+                ]);
+
+        DB::table('users')->insert([
+                'name' => 'Layla Dee',
+                'email' => 'layla.dee@gmail.com',
+                'mobile_number' => '09225439076',
+                'birth_date1' => '1989-11-14',
+                'birth_place' => 'Manila City',
+                'nationality' => 'Filipino',
+                'gender' => 'female',
+                'salutation' => 'Ms.',
+                'civil_status' => 'Single',
+                'created_at' => '2014-12-06',
+                'password' => bcrypt('secret'),
+                'account_id' => 3,
+                'account_type' => 'dependent'
+                ]);
+
+        DB::table('users')->insert([
+                'name' => 'Sarah Dee',
+                'email' => 'sarah.dee@gmail.com',
+                'mobile_number' => '09228832579',
+                'birth_date1' => '1990-03-27',
+                'birth_place' => 'Manila City',
+                'nationality' => 'Filipino',
+                'gender' => 'female',
+                'salutation' => 'Ms.',
+                'civil_status' => 'Single',
+                'created_at' => '2014-12-06',
+                'password' => bcrypt('secret'),
+                'account_id' => 3,
+                'account_type' => 'dependent'
+                ]);
+
+        DB::table('users')->insert([
+                'name' => 'Trevor Estrella',
+                'email' => 'trevor.estrella@gmail.com',
+                'mobile_number' => '09165456880',
+                'birth_date1' => '1952-06-02',
+                'birth_place' => 'General Santos City',
+                'nationality' => 'Filipino',
+                'gender' => 'male',
+                'salutation' => 'Mr.',
+                'civil_status' => 'Married',
+                'created_at' => '2015-02-16',
+                'password' => bcrypt('secret'),
+                'account_id' => 4,
+                'account_type' => 'owner'
+                ]);
+
+        DB::table('users')->insert([
+                'name' => 'Elizabeth Estrella',
+                'email' => 'elizabeth.estrella@gmail.com',
+                'mobile_number' => '09157758340',
+                'birth_date1' => '1952-06-02',
+                'birth_place' => 'Batangas City',
+                'nationality' => 'Filipino',
+                'gender' => 'female',
+                'salutation' => 'Mrs.',
+                'civil_status' => 'Married',
+                'created_at' => '2015-02-16',
+                'password' => bcrypt('secret'),
+                'account_id' => 4,
+                'account_type' => 'dependent'
+                ]);
+
+        DB::table('users')->insert([
+                'name' => 'Maxwell Estrella',
+                'email' => 'maxwell.estrella@gmail.com',
+                'mobile_number' => '09160218762',
+                'birth_date1' => '1983-10-06',
+                'birth_place' => 'Manila City',
+                'nationality' => 'Filipino',
+                'gender' => 'male',
+                'salutation' => 'Mr.',
+                'civil_status' => 'Single',
+                'created_at' => '2015-02-16',
+                'password' => bcrypt('secret'),
+                'account_id' => 4,
+                'account_type' => 'dependent'
+                ]);
+
+        DB::table('users')->insert([
+                'name' => 'Garret Cerezo',
+                'email' => 'garret.cerezo@gmail.com',
+                'mobile_number' => '09197786643',
+                'birth_date1' => '1965-06-02',
+                'birth_place' => 'Cebu City',
+                'nationality' => 'Filipino',
+                'gender' => 'male',
+                'salutation' => 'Mr.',
+                'civil_status' => 'Married',
+                'created_at' => '2016-01-18',
+                'password' => bcrypt('secret'),
+                'account_id' => 5,
+                'account_type' => 'owner'
+                ]);
+
+        DB::table('users')->insert([
+                'name' => 'Holly Cerezo',
+                'email' => 'holly.cerezo@gmail.com',
+                'mobile_number' => '09198869305',
+                'birth_date1' => '1968-12-12',
+                'birth_place' => 'New York City',
+                'nationality' => 'American',
+                'gender' => 'female',
+                'salutation' => 'Mrs.',
+                'civil_status' => 'Married',
+                'created_at' => '2016-01-18',
+                'password' => bcrypt('secret'),
+                'account_id' => 5,
+                'account_type' => 'dependent'
+                ]);
+
+        DB::table('users')->insert([
+                'name' => 'Alexander Cerezo',
+                'email' => 'garret.cerezo@gmail.com',
+                'mobile_number' => '09194536243',
+                'birth_date1' => '1993-12-24',
+                'birth_place' => 'Calfornia City',
+                'nationality' => 'Filipino',
+                'gender' => 'male',
+                'salutation' => 'Mr.',
+                'civil_status' => 'Single',
+                'created_at' => '2016-01-18',
+                'password' => bcrypt('secret'),
+                'account_id' => 5,
+                'account_type' => 'dependent'
+                ]);
     }
 }
