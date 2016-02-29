@@ -47,8 +47,6 @@
 		@endforeach
 	</table>
 </div>
-
-{{ $account->status}}
 @if($account->status == 'On Review')
 <div class="page-header">
 	<h3>Application undergoing review</h3>
@@ -85,9 +83,9 @@
 			<td class="col-md-3">
 				<div class="btn-group" role="group" aria-label="Options">
 					
-					<a class="btn btn-sm btn-default" href="{{action('AccountController@show', ['id' => $complaint->id])}}">Account details</a>
+					<a class="btn btn-sm btn-default" href="{{action('AccountController@show', ['id' => $complaint->owner->account->id])}}">Account details</a>
 					@if ($user->hasRole('membership_manager'))
-					<a class="btn btn-sm btn-default" href="{{action('AccountController@edit', ['id' => $complaint->id])}}">Edit</a>
+					<a class="btn btn-sm btn-default" href="{{action('AccountController@edit', ['id' => $complaint->owner->account->id])}}">Edit</a>
 					@endif
 					
 				</div>
