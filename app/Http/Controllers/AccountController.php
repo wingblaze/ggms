@@ -53,9 +53,11 @@ class AccountController extends Controller
 
         $data = $request->all();
 
-        $group_id = Group::where('name', $data['group'])->first()->id;
+        if (isset($data['group']) && $data['group']){
+            $group_id = Group::where('name', $data['group'])->first()->id;
 
-        $account->group_id = $group_id;
+            $account->group_id = $group_id;
+        }
 
         $account->expiration = Carbon::createFromFormat('Y-m-d', $data['expiration']);
         

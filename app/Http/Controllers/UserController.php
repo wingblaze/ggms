@@ -61,8 +61,13 @@ class UserController extends Controller
         $user->salutation = $data['salutation'];
 
         $user->civil_status = $data['civil_status'];
+        
+        $user->attachRole(Role::where('name', 'user'));
 
         $user->save();
+
+
+
         return $this->show($user->id);
     }
 
