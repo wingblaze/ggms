@@ -41,19 +41,24 @@
               <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Membership <span class="caret"></span></a>
               
               <ul class="dropdown-menu">
-                @if ($user->hasRole('membership_manager'))
                 <li><a href="{{action('AccountController@index')}}">View accounts</a></li>
+                @if ($user->hasRole('membership_manager'))
                 <li><a href="{{action('AccountController@create')}}">Register a new account</a></li>
+                @endif
+
                 <li class="divider"></li>
                 <li><a href="{{action('UserController@index')}}">View users</a></li>
+                @if ($user->hasRole('membership_manager'))
                 <li><a href="{{action('UserController@create')}}">Register a new user</a></li>
+                @endif
+
                 <li class="divider"></li>
                 <li><a href="{{action('GroupController@index')}}">View groups</a></li>
+                @if ($user->hasRole('membership_manager'))
                 <li><a href="{{action('GroupController@create')}}">Create a new group</a></li>
                 @endif
 
                 @if ($user->hasRole('marketing_manager'))
-                <li><a href="{{action('AccountController@index')}}">View accounts</a></li>
                 <li class="divider"></li>
                 <li><a href="{{action('EventController@index')}}">View events</a></li>
                 <li><a href="{{action('EventController@create')}}">Create an event</a></li>                

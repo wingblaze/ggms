@@ -45,8 +45,8 @@ class MembershipControlTableSeeder extends Seeder
 
         $date = Carbon::now()->addDays(rand(-6,0));
         DB::table('membership_controls')->insert([
-            'current_account_id' => 3,
-            'membership_slot_id' => NULL,
+            'current_account_id' => 4,
+            'membership_slot_id' => 5,
             'posted_by_account_id' => 3,
             'created_at' => $date,
             'updated_at' => $date->addMinutes(15)

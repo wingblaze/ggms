@@ -25,6 +25,7 @@ class AccountsTableSeeder extends Seeder
                 ]);
 
         DB::table('accounts')->insert([
+                'group_id' => 1,
     			'expiration' => date('Y-m-d', strtotime('+8 week')),
                 'business_address' => "1234 ABC Street, New York, U.S.A.",
                 'home_address' => "1234 ABC Home Avenue, New York, U.S.A.",
@@ -38,6 +39,7 @@ class AccountsTableSeeder extends Seeder
     			]);
 
         DB::table('accounts')->insert([
+                'group_id' => 1,
     			'expiration' => date('Y-m-d', strtotime('+8 week')),
                 'business_address' => "2957 JJJ Street, Chicago, U.S.A.",
                 'home_address' => "2957 JJJ Home Avenue, Chicago, U.S.A.",
@@ -51,6 +53,7 @@ class AccountsTableSeeder extends Seeder
     			]);
 
         DB::table('accounts')->insert([
+                'group_id' => 1,
                 'expiration' => date('Y-m-d', strtotime('+8 week')),
                 'business_address' => "9673 FFF Street, Illinois, U.S.A.",
                 'home_address' => "9673 FFF Home Avenue, Illinois, U.S.A.",
@@ -64,6 +67,7 @@ class AccountsTableSeeder extends Seeder
                 ]);
 
         DB::table('accounts')->insert([
+                'group_id' => 2,
                 'expiration' => date('Y-m-d', strtotime('+12 week')),
                 'business_address' => "7141 JHG Street, Brooklyn, U.S.A.",
                 'home_address' => "7141 JHG Street, Brooklyn, U.S.A.",

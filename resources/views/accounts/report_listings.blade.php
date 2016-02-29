@@ -13,8 +13,8 @@
   <table class="table table-striped">
     <tr>
       <th class="col-md-2">Posted by</th>
+      <th class="col-md-2">Membership slot</th>
       <th class="col-md-2">Current slot holder</th>
-      <th class="col-md-2">Golf membership type</th>
       <th class="col-md-2">Date created / listed</th>
       <th class="col-md-2">Date updated</th>
     </tr>
@@ -37,15 +37,7 @@
           No poster
         @endif
       </td>
-      <td class="col-md-2">
-        @if ($listing->current_account)
-          <a href="{{action('AccountController@show', ['id' => $listing->current_account()->first()->id])}}">
-            {{ $listing->current_account()->first()->owner()->name or '-' }}
-          </a>
-        @else
-          No owner
-        @endif
-      </td>
+      
       <td class="col-md-2">
         @if ($listing->membership_slot['type'])
           <?PHP $slot_id = $listing->membership_slot['id']; ?>
@@ -56,6 +48,17 @@
           <em>On sale</em>
         @endif
       </td>
+
+      <td class="col-md-2">
+        @if ($listing->current_account)
+          <a href="{{action('AccountController@show', ['id' => $listing->current_account()->first()->id])}}">
+            {{ $listing->current_account()->first()->owner()->name or '-' }}
+          </a>
+        @else
+          No owner
+        @endif
+      </td>
+      
       <td class="col-md-2">
         {{ $listing->created_at or '-' }} 
       </td>
