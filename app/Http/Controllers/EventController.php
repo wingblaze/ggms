@@ -76,7 +76,7 @@ class EventController extends Controller
     {
         $this->middleware('role:employee');
 
-        $this->middleware('role:membership_manager|golf_ops_manager', ['only' => [
+        $this->middleware('role:membership_manager|golf_ops_manager|marketing_manager', ['only' => [
             'store', 'edit', 'destroy', 'create'
             ]]);
     }
