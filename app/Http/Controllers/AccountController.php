@@ -18,6 +18,7 @@ use App\MembershipControl;
 use App\MembershipSlot;
 use Auth;
 use DB;
+use Validator;
 
 class AccountController extends Controller
 {
@@ -49,6 +50,28 @@ class AccountController extends Controller
      */
     public function store(Request $request)
     {
+        $rules = [
+            'group' => 'exists:groups,name',
+            'expiration' => 'required',
+            'home_address' => 'required',
+            'business_address' => 'required',
+            'phone' => 'required',
+            'fax' => 'required',
+            'email' => 'required',
+            'tin_number' => 'required',
+            'bank_account' => 'required',
+            'credit_card_number' => 'required',
+            'residence_certificate_id' => 'required',
+            'residence_certificate_place_issued' => 'required',
+            'residence_certificate_date_issued' => 'required'
+            ];
+
+        $messages = [
+            'expiration.required' => 'The member\'s account expiration date is required.',
+        ];
+
+        $this->validate($request, $rules, $messages);
+
         $account = new Account;
 
         $data = $request->all();

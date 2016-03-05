@@ -39,6 +39,18 @@ class ResourceController extends Controller
 
     public function store(Request $request)
     {
+        $rules = [
+            'name' => 'unique:groups,name',
+            'description' => 'required',
+            'type' => 'required'
+            ];
+
+        $messages = [
+            'description.required' => 'The member\'s account expiration date is required.',
+        ];
+
+        $this->validate($request, $rules, $messages);
+
         $resource = new Resource;
 
         $data = $request->all();

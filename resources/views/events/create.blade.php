@@ -5,6 +5,7 @@
 @section('content')
 <div class="page-header">
 	<h1>Create a new event</h1>
+	@include('partials.error', ['title' => 'Event creation failed'])
 </div>
 
 {!! Form::open(array('action' => 'EventController@store')) !!}

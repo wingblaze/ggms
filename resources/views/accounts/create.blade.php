@@ -11,6 +11,7 @@
 <div class="page-header">
 	<h1>Create An Account</h1>
   <span id="helpBlock" class="help-block">This process allows you to create a new membership account, which will be for review.</span>
+  @include('partials.error', ['title' => 'Account creation failed'])
 </div>
 
 {!! Form::open(array('action' => 'AccountController@store')) !!}

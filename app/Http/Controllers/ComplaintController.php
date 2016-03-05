@@ -42,6 +42,18 @@ class ComplaintController extends Controller
 
     public function store(Request $request)
     {
+         $rules = [
+            'user_id' => 'required|exists:users,id',
+            'content' => 'required',
+            'account_id' => 'required|exists:accounts,id'
+            ];
+
+        $messages = [
+            'expiration.required' => 'The member\'s account expiration date is required.',
+        ];
+
+        $this->validate($request, $rules, $messages);
+
         $complaint = new Complaint;
 
         $data = $request->all();

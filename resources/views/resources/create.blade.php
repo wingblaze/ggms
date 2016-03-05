@@ -5,6 +5,7 @@
 @section('content')
 <div class="page-header">
 	<h1>Add a new facility</h1>
+  @include('partials.error', ['title' => 'Facility creation failed'])
 </div>
 
 {!! Form::open(array('action' => 'ResourceController@store')) !!}

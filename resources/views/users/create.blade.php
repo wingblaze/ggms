@@ -6,6 +6,7 @@
 <div class="page-header">
 	<h1>Register a new user</h1>
 	<p>This process allows you to add a new user, whether a membership holder or a dependent, to a defined account.</p>
+	@include('partials.error', ['title' => 'User creation failed'])
 </div>
 
 {!! Form::open(array('action' => 'UserController@store')) !!}

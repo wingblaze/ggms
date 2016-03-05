@@ -17,14 +17,16 @@
       <h3>Post a listing</h3>
       Hello {{ $user->name }}. As account owner, you may 
       <a href="{{ action('AccountController@post_listing') }}" class="btn btn-primary">
-      post a club share listing</a> if you wish to no longer be part of this golf course community.
+      post a club share listing</a> if you wish to sell your membership slot.
     @endif
-
   @endif
-
-  
 </div>
 
+@if (count($listings) == 0)
+  <div>
+    <p>There are currently no club share listings.</p>
+  </div>
+@else
 <div class="table-responsive">
   <table class="table table-striped">
     <tr>
@@ -54,4 +56,5 @@
     @endforeach
   </table>
 </div>
+@endif
 @stop

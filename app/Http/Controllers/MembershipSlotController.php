@@ -44,6 +44,23 @@ class MembershipSlotController extends Controller
      */
     public function store(Request $request)
     {
+        $rules = [
+            'name' => 'required|unique:events,name',
+            'description' => 'required',
+            'type' => 'required',
+            'address' => 'required',
+            'phone' => 'required',
+            'fax' => 'required'
+            ];
+
+        $messages = [
+            'expiration.required' => 'The member\'s account expiration date is required.',
+        ];
+
+        $this->validate($request, $rules, $messages);
+
+        // This is not yet implemented
+
         $slot = new MembershipSlot;
 
         $data = $request->all();

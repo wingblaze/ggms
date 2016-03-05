@@ -10,6 +10,7 @@
   <p>
     You may also <a href="{{ action('ComplaintController@index') }}">view all pending accounts</a>.
   </p>
+  @include('partials.error', ['title' => 'Account review failed'])
 </div>
 
 {!! Form::open(array('action' => 'ComplaintController@store')) !!}

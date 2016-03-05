@@ -42,6 +42,26 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
+        $rules = [
+            'name' => 'required|',
+            'email' => 'required|unique:users,email',
+            'mobile_number' => 'required',
+            'password' => 'required',
+            'birth_date' => 'required',
+            'birth_place' => 'required',
+            'nationality' => 'required',
+            'gender' => 'required',
+            'salutation' => 'required',
+            'civil_status' => 'required',
+            'user_type' => 'required',
+            ];
+
+        $messages = [
+            'expiration.required' => 'The member\'s account expiration date is required.',
+        ];
+
+        $this->validate($request, $rules, $messages);
+
         $user = new User;
 
         $data = $request->all();

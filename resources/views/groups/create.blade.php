@@ -5,6 +5,7 @@
 @section('content')
 <div class="page-header">
 	<h1>Create A Group</h1>
+  @include('partials.error', ['title' => 'Group creation failed'])
 </div>
 
 {!! Form::open(array('action' => 'GroupController@store')) !!}

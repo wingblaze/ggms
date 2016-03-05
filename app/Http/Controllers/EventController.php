@@ -26,6 +26,21 @@ class EventController extends Controller
 
     public function store(Request $request)
     {
+        $rules = [
+            'name' => 'required|unique:events,name',
+            'description' => 'required',
+            'expected_attendees' => 'required',
+            'start_date' => 'required',
+            'end_date' => 'required',
+            'resource_id' => 'required|exists:resources,name',
+            ];
+
+        $messages = [
+            'expiration.required' => 'The member\'s account expiration date is required.',
+        ];
+
+        $this->validate($request, $rules, $messages);
+
         $event = new Event;
 
         $data = $request->all();

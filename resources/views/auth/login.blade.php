@@ -9,6 +9,16 @@
 		
 		<form method="POST" action="/auth/login">
 			{!! csrf_field() !!}
+			@if (count($errors) > 0)
+			<div class="alert alert-danger">
+				<h4>Log in failed</h4>
+				<ul>
+					@foreach ($errors->all() as $error)
+					<li>{{ $error }}</li>
+					@endforeach
+				</ul>
+			</div>
+			@endif
 
 			<div class="form-group">
 				<label for="email">Email</label>
@@ -23,8 +33,8 @@
 			<div class="form-group">
 				<div class="checkbox">
 					<label>
-					<input type="checkbox" name="remember">
-					Remember me
+						<input type="checkbox" name="remember">
+						Remember me
 					</label>
 				</div>
 			</div>
