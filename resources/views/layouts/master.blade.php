@@ -60,6 +60,7 @@
 
                 @if ($user->hasRole('marketing_manager'))
                 <li class="divider"></li>
+                <li><a href="{{action('ResourceController@index')}}">View facilities</a></li>
                 <li><a href="{{action('EventController@index')}}">View events</a></li>
                 <li><a href="{{action('EventController@create')}}">Create an event</a></li>                
                 @endif

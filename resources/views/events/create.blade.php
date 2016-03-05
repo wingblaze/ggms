@@ -6,6 +6,11 @@
 <div class="page-header">
 	<h1>Create a new event</h1>
 	@include('partials.error', ['title' => 'Event creation failed'])
+	@if ($user->hasRole('marketing_manager'))
+	<p class="help-block">As a marketing manager, you may create new events. You may also 
+    <a href="{{ action('ResourceController@index') }}">click here to view the list of facilities</a>.
+    @endif
+  </p>
 </div>
 
 {!! Form::open(array('action' => 'EventController@store')) !!}

@@ -258,11 +258,6 @@ class AccountController extends Controller
         return view('accounts.show', ['account' => Account::findOrFail($data['id']), 'complaints' => Complaint::where('account_id', '=', $data['id'])->get()]);
     }
 
-    public function inactives()
-    {
-        return view('accounts', ['accounts' => Account::where('status', 'Inactive')->get(), 'inactive' => true]);
-    }
-
     public function __construct()
     {
         $this->middleware('role:user', ['only' => [

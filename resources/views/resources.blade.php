@@ -8,12 +8,15 @@
 </div>
 <div class="content">
 	<h2>View facilities</h2>
+	<p class="help-block">These are the list of facilities that can be rented by members of the golf community.</p>
 	<div class="table-responsive">
 		<table class="table table-striped">
 			<tr>
 				<th class="col-md-8">Name of Facility</th>
 				<th class="col-md-2">Date created</th>
+				@if ($user->hasRole('system_administrator'))
 				<th class="col-md-4">Options</th>
+				@endif
 			</tr>
 			@foreach($resources as $resource)
 			<tr>
@@ -22,32 +25,37 @@
 						{{ $resource->name }}
 					</a>
 				</td>
-				<td class="col-md-2">{{ $resource->created_at }}</td>
+				<td class="col-md-2">{{ $resource->created_at or 'Unspecified' }}</td>
+				@if ($user->hasRole('system_administrator'))
 				<td class="col-md-4">
-					@if ($user->hasRole('system_administrator'))
+					
 					<a class="btn btn-sm btn-default" href="{{action('ResourceController@edit', ['id' => $resource->id])}}"><span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>&nbsp Edit</a>
 					&nbsp
 					<a class="btn btn-sm btn-danger" href="{{action('ResourceController@destroy', ['id' => $resource->id])}}"><span class="glyphicon glyphicon-trash" aria-hidden="true"></span>&nbsp Delete</a>
-					@else
-					None
-					@endif
 				</td>
+				@endif
 			</tr>
 			@endforeach
 		</table>
 	</div>
 </div>
+<hr>
 <div class="content">
-	<h2>Current facilities being rented</h2>
+	<h2>Rentals today</h2>
+	@if (count($listings) == 0)
+		<p>There are no facilities being rented today.</p>
+	@else
+	<p class="help-block">These are the facilities being rented today.</p>
 	<div class="table-responsive">
 		<table class="table table-striped">
 			<tr>
 				<th class="col-md-3">Name of Facility and Renter</th>
-				<th class="col-md-1">Rental start date and time</th>
-				<th class="col-md-1">Rental end date and time</th>
+				<th class="col-md-1">Rental start time</th>
+				<th class="col-md-1">Rental end time</th>
 				<th class="col-md-1">Status</th>
 				<th class="col-md-4">Options</th>
 			</tr>
+			
 			@foreach($listings as $listing)
 			<tr>
 				<td class="col-md-3">
@@ -59,8 +67,8 @@
 					 	{{ $listing->user->name }}
 					</a>
 				</td>
-				<td class="col-md-3">{{ $listing->start_time }}</td>
-				<td class="col-md-3">{{ $listing->end_time }}</td>
+				<td class="col-md-3">{{ date('g:m:s A', strtotime($listing->start_time)) }}</td>
+				<td class="col-md-3">{{ date('g:m:s A', strtotime($listing->end_time)) }}</td>
 				<td class="col-md-1">{{ $listing->status }}</td>
 				<td class="col-md-4">
 					@if ($user->hasRole('employee'))
@@ -73,5 +81,6 @@
 			@endforeach
 		</table>
 	</div>
+	@endif
 </div>
 @stop

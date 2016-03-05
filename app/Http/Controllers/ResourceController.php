@@ -24,7 +24,7 @@ class ResourceController extends Controller
      */
     public function index()
     {
-        return view('resources', ['resources' => Resource::all(), 'listings' => RentResource::all()]);
+        return view('resources', ['resources' => Resource::all(), 'listings' => RentResource::whereDate('start_time', '=', Carbon::today()->toDateString())->orderBy('start_time', 'asc')->get() ]);
     }
 
     public function show($id)

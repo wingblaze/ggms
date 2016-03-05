@@ -55,8 +55,6 @@ Route::group(['middleware' => ['web']], function () {
 		Route::resource('membership_slots', 'MembershipSlotController');
 	});
 
-	Route::resource('config', 'ResourceController');
-
 	Route::get('graph_options.json', 'ReportController@graph_options');
 	Route::group(['prefix' => 'reports'], function () {
     	Route::get('newusers', 'ReportController@newusers');

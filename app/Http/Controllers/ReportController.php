@@ -10,6 +10,7 @@ use View;
 use Route;
 
 use Carbon\Carbon;
+use App\Account;
 use App\User;
 use App\Event;
 use App\Resource;
@@ -97,7 +98,7 @@ class ReportController extends Controller
     public function inactive_members(Request $request)
     {
         // redirect to list of accounts that are inactive
-    	return redirect()->action('AccountController@inactives');
+    	return view('accounts.inactive', ['accounts' => Account::where('status', 'Inactive')->get(), 'inactive' => true]);
     }
 
 
