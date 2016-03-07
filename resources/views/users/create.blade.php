@@ -53,7 +53,35 @@
 
 <div class="form-group">
 	<label for="civil_status">Civil Status</label>
-	<input type="text" class="form-control" id="civil_status" name="civil_status" placeholder="e.g. Single, Married">
+	<div class="container">
+		<div class="col-md-2">
+			<label>
+				Single
+				<input type="radio" class="form-control" value="Single" name="civil_status">
+			</label>
+		</div>
+		<div class="col-md-2">
+
+			<label>
+				Married
+				<input type="radio" class="form-control" value="Married" name="civil_status">
+			</label>
+		</div>
+		<div class="col-md-2">
+
+			<label>
+				Separated
+				<input type="radio" class="form-control" value="Separated" name="civil_status">
+			</label>
+		</div>
+		<div class="col-md-2">
+
+			<label>
+				Widowed
+				<input type="radio" class="form-control" value="Widowed" name="civil_status">
+			</label>
+		</div>
+	</div>
 </div>
 
 <div class="form-group">
