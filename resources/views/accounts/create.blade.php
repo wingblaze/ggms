@@ -114,6 +114,18 @@
     <input type="text" class="form-control" id="credit_card_number" name="credit_card_number" placeholder="e.g. 5837 3947 1938 1923">
   </div>
   <hr>
+  <h3>Membership details</h3>
+  <span id="helpBlock" class="help-block">You can specify which membership slot this account will have.</span>
+  <div class="form-group">
+    <label for="membership_slot">Membership Slot</label>
+    <select class="form-control" name="membership_slot">
+      <option value="-1">No slot assigned</option>
+      @foreach ($slots as $slot)
+        <option value="{{ $slot->id }}">Slot {{$slot->id}} - {{ $slot->type}} </option>
+      @endforeach
+    </select>
+  </div>
+  <hr>
   <span id="helpBlock" class="help-block">The application process lasts for two (2) weeks as the members of the community review the requested application. The client will be contacted 
   	within this period to inform them of their application's status.</span>
   <button type="submit" class="btn btn-primary">Apply</button>

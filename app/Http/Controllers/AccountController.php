@@ -39,7 +39,9 @@ class AccountController extends Controller
      */
     public function create()
     {
-        return view('accounts.create');
+        $controls = MembershipControl::select('membership_slot_id')->distinct()->get();
+        $available_slots = MembershipSlot::whereNotIn('id', $controls)->orderBy('id')->get();
+        return view('accounts.create', ['slots' => $available_slots]);
     }
 
     /**
@@ -50,6 +52,9 @@ class AccountController extends Controller
      */
     public function store(Request $request)
     {
+
+        $data = $request->all();
+
         $rules = [
             'group' => 'exists:groups,name',
             'expiration' => 'required',
@@ -58,13 +63,16 @@ class AccountController extends Controller
             'phone' => 'required',
             'fax' => 'required',
             'email' => 'required',
-            'tin_number' => 'required',
+            'tin_number' => 'required|unique:accounts',
             'bank_account' => 'required',
             'credit_card_number' => 'required',
             'residence_certificate_id' => 'required',
             'residence_certificate_place_issued' => 'required',
-            'residence_certificate_date_issued' => 'required'
+            'residence_certificate_date_issued' => 'required',
             ];
+
+        if ($data['membership_slot'] != -1)
+            $rules['membership_slot'] = 'exists:membership_slots,id';
 
         $messages = [
             'expiration.required' => 'The member\'s account expiration date is required.',
@@ -74,7 +82,6 @@ class AccountController extends Controller
 
         $account = new Account;
 
-        $data = $request->all();
 
         if (isset($data['group']) && $data['group']){
             $group_id = Group::where('name', $data['group'])->first()->id;
@@ -82,7 +89,8 @@ class AccountController extends Controller
             $account->group_id = $group_id;
         }
 
-        $account->expiration = Carbon::createFromFormat('Y-m-d', $data['expiration']);
+        if ($data['expiration'])
+            $account->expiration = Carbon::createFromFormat('Y-m-d', $data['expiration']);
         
         $account->home_address = $data['home_address'];
         $account->business_address = $data['business_address'];
@@ -98,9 +106,20 @@ class AccountController extends Controller
 
         $account->residence_certificate_id = $data['residence_certificate_id'];
         $account->residence_certificate_place_issued = $data['residence_certificate_place_issued'];
-        $account->residence_certificate_date_issued = Carbon::createFromFormat('Y-m-d', $data['residence_certificate_date_issued']);
+        if ($data['residence_certificate_date_issued'])
+            $account->residence_certificate_date_issued = Carbon::createFromFormat('Y-m-d', $data['residence_certificate_date_issued']);
+
+        // assign account slot
+        $membership_slot_id = $data['membership_slot'];
 
         $account->save();
+
+        $control = new MembershipControl;
+        $control->posted_by_account_id = 1; // system administrator
+        $control->current_account_id = $account->id;
+        $control->membership_slot_id = $membership_slot_id;
+        $control->save();
+        
         return $this->index();
     }
 
@@ -247,8 +266,24 @@ class AccountController extends Controller
     public function assign_user(Request $request) {      
         $data = $request->all();        
         $user = User::where('name', $data['user'])->first();
-        $user->account_id = $data['id'];
+
+        if (!$user)
+            return redirect()->action('AccountController@index');
+
+        $user->account_id = $account_id = $data['id'];
+
+        
+
         if (array_key_exists('owner', $data)) {
+            // Remove previous owner if he/she already exists
+            $account = Account::find($account_id);
+
+            $owner = $account->owner();
+            if ($owner){
+                $owner->account_type = 'dependent';
+                $owner->save();
+            }
+
             $user->account_type = 'owner';
         } else {
             $user->account_type = 'dependent';
