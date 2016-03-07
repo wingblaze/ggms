@@ -39,9 +39,13 @@
     <tr>
       <td class="col-md-2">
         @if ($listing->posted_by_account)
-          <a href="{{action('AccountController@show', ['id' => $listing->posted_by_account()->first()->id])}}">
-            {{ $listing->posted_by_account->owner()->name }}
-          </a>
+          @if ($listing->posted_by_account->owner())
+            <a href="{{action('AccountController@show', ['id' => $listing->posted_by_account()->first()->id])}}">
+              {{ $listing->posted_by_account->owner()->name }}
+            </a>
+          @else
+            No owner
+          @endif
         @else
           No owner
         @endif
