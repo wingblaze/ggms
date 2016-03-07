@@ -4,8 +4,22 @@
 
 @section('content')
 <div class="page-header">
-	<h1>Hello</h1>
+	<h1>View facility <small>{{ $resource->name }}</small></h1>
 </div>
-
-<p>My name is {{ $resource->name }}</p>
+<p><label>Description</label><BR />
+	{{ $resource->description }}
+</p>
+<hr>
+<p><label>type</label><BR />
+	{{ $resource->type }}
+</p>
+<hr>
+<p><label>created_at</label><BR />
+	{{ $resource->created_at }}
+</p>
+<hr>
+<p><label>updated_at</label><BR />
+	{{ $resource->updated_at }}
+</p>
+<hr>
 @stop
