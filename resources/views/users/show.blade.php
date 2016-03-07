@@ -34,10 +34,12 @@
 	{{ $target_user->civil_status }}
 </p>
 <hr>
+@if ($target_user->account_type != NULL)
 <p><label>account_type</label><BR />
 	{{ $target_user->account_type }}
 </p>
 <hr>
+@endif
 <p><label>created_at</label><BR />
 	{{ $target_user->created_at }}
 </p>
