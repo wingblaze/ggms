@@ -40,6 +40,8 @@ class CreateAccountsTable extends Migration
             $table->date('date_approved')->nullable();
             $table->enum('status', array('On Review', 'Inactive', 'Active', 'Suspended', 'Terminated'))->default('On Review');
 
+            $table->text('remarks')->nullable();
+
             $table->rememberToken();
             
             $table->timestamps();

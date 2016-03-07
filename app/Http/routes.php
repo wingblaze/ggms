@@ -21,7 +21,7 @@ Route::group(['middleware' => ['web']], function () {
 
 	Route::post('accounts/assign_user', 'AccountController@assign_user');
 	Route::get('accounts/{id}/assign', 'AccountController@assign');
-	Route::get('accounts/inactives', 'AccountController@inactives');
+	Route::get('accounts/inactives', 'ReportController@inactives');
 	Route::get('accounts/{id}/accept', 'AccountController@accept');
 	Route::resource('accounts', 'AccountController');
 

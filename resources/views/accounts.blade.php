@@ -17,7 +17,7 @@
 </div>
 @elseif($user->hasRole('marketing_manager'))
 <div class="container">
-	<p>As a marketing manager, you can <a href="{{ action('AccountController@inactives') }}">view the list of inactive accounts</a> to follow up payment from account owners.</p>
+	<p>As a marketing manager, you can <a href="{{ action('ReportController@inactives') }}">view the list of inactive accounts</a> to follow up payment from account owners.</p>
 </div>
 @endif
 <div class="table-responsive">

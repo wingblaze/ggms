@@ -95,7 +95,7 @@ class ReportController extends Controller
         
     }
 
-    public function inactive_members(Request $request)
+    public function inactives(Request $request)
     {
         // redirect to list of accounts that are inactive
     	return view('accounts.inactive', ['accounts' => Account::where('status', 'Inactive')->get(), 'inactive' => true]);
