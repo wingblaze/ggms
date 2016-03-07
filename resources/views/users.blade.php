@@ -24,9 +24,13 @@
 				@if ($user->account == FALSE)
 					No access
 				@elseif ($user->account_type != 'owner')
-				<a href="{{ action('UserController@show', ['id' => $user->account->owner()->id]) }}">
-					<?PHP echo $user->account->owner()->name ?>
-				</a>
+					@if ($user->account->owner())
+					<a href="{{ action('UserController@show', ['id' => $user->account->owner()->id]) }}">
+						<?PHP echo $user->account->owner()->name ?>
+					</a>
+					@else
+						No owner
+					@endif
 				@else
 					Myself
 				@endif
