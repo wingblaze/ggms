@@ -31,15 +31,7 @@ class Account extends Model
 
     public function current_membership_slot()
     {
-        $latest = MembershipControl::where('current_account_id', $this->id)->orderBy('updated_at', 'desc')->first();
-        if ($latest){
-            
-
-            $slot = MembershipSlot::find($latest->membership_slot_id);
-            if ($slot && $slot->membership_control_id == $latest->id)
-                return $slot;
-        }
-        return false;
+        return MembershipControl::latest_slot_of_account($this->id);
     }
 
     // Return newly created accounts, those that don't have any connections with user account relations yet.

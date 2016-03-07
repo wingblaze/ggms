@@ -18,6 +18,12 @@ class CreateResourcesTable extends Migration
             $table->text('description')->nullable();
             $table->string('type');
 
+            $table->integer('minimum_capacity')->nullable();
+            $table->integer('maximum_capacity')->nullable();
+
+            $table->text('remarks')->nullable();
+            $table->text('equipment')->nullable();
+
             $table->timestamps();
             $table->softDeletes();
         });

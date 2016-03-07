@@ -25,7 +25,7 @@
 		<tr>
 			<th class="col-md-2">Membership holder</th>
 			<th class="col-md-2">Status</th>
-			<th class="col-md-2">Account type</th>
+			<th class="col-md-2">Membership type</th>
 			<th class="col-md-3">Options</th>
 		</tr>
 		@foreach($accounts as $account)
@@ -43,7 +43,6 @@
 			<td class="col-md-2">
 				@if (null !== $account->current_membership_slot())
 					<?php print_r($account->current_membership_slot()['type']); ?>
-					
 				@else
 					No membership yet
 				@endif
