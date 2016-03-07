@@ -13,13 +13,13 @@ class MembershipSlotTableSeeder extends Seeder
     {
         DB::table('membership_slots')->insert([
             'type' => 'Management',
-            'description' => "You are part of the management.",
-            'membership_control_id' => 1
+            'description' => "You are part of the management."
+            
             ]);
     	DB::table('membership_slots')->insert([
     		'type' => 'Co-owner',
-    		'description' => "You are part of the founders of this golf club.",
-            'membership_control_id' => 2
+    		'description' => "You are part of the founders of this golf club."
+            
     		]);
     	DB::table('membership_slots')->insert([
     		'type' => 'Co-owner',
@@ -31,8 +31,7 @@ class MembershipSlotTableSeeder extends Seeder
     		]);
     	DB::table('membership_slots')->insert([
     		'type' => 'Standard',
-    		'description' => "You were able to successfully apply for a membership slot.",
-            'membership_control_id' => 4
+    		'description' => "You were able to successfully apply for a membership slot."
     		]);
     	DB::table('membership_slots')->insert([
     		'type' => 'Standard',

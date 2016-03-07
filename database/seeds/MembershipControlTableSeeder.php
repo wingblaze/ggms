@@ -4,6 +4,8 @@ use Illuminate\Database\Seeder;
 use Carbon\Carbon;
 
 use App\User;
+use App\MembershipSlot;
+use App\MembershipControl;
 
 class MembershipControlTableSeeder extends Seeder
 {
@@ -51,5 +53,14 @@ class MembershipControlTableSeeder extends Seeder
             'created_at' => $date,
             'updated_at' => $date->addMinutes(-3)
             ]);
+
+        $admin = MembershipSlot::find(1);
+        $admin->membership_control_id = MembershipControl::find(1)->id;
+
+        $admin = MembershipSlot::find(2);
+        $admin->membership_control_id = MembershipControl::find(2)->id;
+
+        $admin = MembershipSlot::find(5);
+        $admin->membership_control_id = MembershipControl::find(4)->id;
     }
 }
