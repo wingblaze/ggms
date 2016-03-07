@@ -10,41 +10,41 @@
 	{{ $target_user->email }}
 </p>
 <hr>
-<p><label>mobile_number</label><BR />
+<p><label>Mobile Number</label><BR />
 	{{ $target_user->mobile_number }}
 </p>
 <hr>
-<p><label>birth_date</label><BR />
+<p><label>Birth Date</label><BR />
 	{{ $target_user->birth_date }}
 </p>
 <hr>
-<p><label>birth_place</label><BR />
+<p><label>Birth place</label><BR />
 	{{ $target_user->birth_place }}
 </p>
 <hr>
-<p><label>nationality</label><BR />
+<p><label>Nationality</label><BR />
 	{{ $target_user->nationality }}
 </p>
 <hr>
-<p><label>gender</label><BR />
+<p><label>Gender</label><BR />
 	{{ $target_user->gender }}
 </p>
 <hr>
-<p><label>civil_status</label><BR />
+<p><label>Civil status</label><BR />
 	{{ $target_user->civil_status }}
 </p>
 <hr>
 @if ($target_user->account_type != NULL)
-<p><label>account_type</label><BR />
+<p><label>Account Type</label><BR />
 	{{ $target_user->account_type }}
 </p>
 <hr>
 @endif
-<p><label>created_at</label><BR />
+<p><label>Created at</label><BR />
 	{{ $target_user->created_at }}
 </p>
 <hr>
-<p><label>updated_at</label><BR />
+<p><label>Updated at</label><BR />
 	{{ $target_user->updated_at }}
 </p>
 <hr>
