@@ -41,7 +41,9 @@
 				<p>The list below shows a few of the new applicants:</p>
 				<UL>
 					@foreach ($pending_accounts as $pending_account)
-						<LI>{{ $pending_account->owner()->name }}</LI>
+						@if ($pending_account->owner())
+							<LI>{{ $pending_account->owner()->name }}</LI>
+						@endif
 					@endforeach
 				</UL>
 			</div>
