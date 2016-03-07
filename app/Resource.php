@@ -32,4 +32,9 @@ class Resource extends Model
     {
         return $this->hasMany('App\RentResource', 'rent_resources', 'id', 'id');
     }
+
+    public function event()
+    {
+        return $this->hasMany('App\Event');
+    }
 }

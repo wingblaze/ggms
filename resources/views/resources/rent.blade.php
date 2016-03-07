@@ -84,7 +84,7 @@
 {!! Form::close() !!}
 
 <script type="text/javascript">
-  $.get('/resources.json', function(data){
+  $.get('/config/resources.json', function(data){
     $("#resource_name").typeahead({ source:data });
   },'json');
 

@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
+use App\Resource;
 use App\Event;
 use Carbon\Carbon;
 
@@ -32,7 +33,7 @@ class EventController extends Controller
             'expected_attendees' => 'required',
             'start_date' => 'required',
             'end_date' => 'required',
-            'resource_id' => 'required|exists:resources,name',
+            'facility' => 'exists:resources,name',
             ];
 
         $messages = [
@@ -53,8 +54,10 @@ class EventController extends Controller
         $event->start_date = Carbon::parse($data['start_date']);
         $event->end_date = Carbon::parse($data['end_date']);
 
-        if (array_key_exists('resource_id', $data))
-            $event->resource_id = $data['resource_id'];
+        
+        $facility = Resource::where('name', $data['facility'])->first();
+        if ($facility)
+            $event->resource_id = $facility->id;
 
         $event->save();
         return $this->show($event->id);

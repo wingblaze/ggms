@@ -26,6 +26,12 @@
 	{{ $event->actual_attendees }}
 </p>
 <hr>
+@if ($event->resource)
+<p><label>facility</label><BR />
+	<a href="{{ action('ResourceController@show', $event->resource->id) }}">{{ $event->resource->name }}</a>
+</p>
+<hr>
+@endif
 <p><label>created_at</label><BR />
 	{{ $event->created_at }}
 </p>

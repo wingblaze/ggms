@@ -2,6 +2,11 @@
 
 @section('title', 'Create Event')
 
+@section('header')
+@parent
+<script src="/js/bootstrap3-typeahead.min.js"></script>
+@endsection
+
 @section('content')
 <div class="page-header">
 	<h1>Create a new event</h1>
@@ -81,9 +86,19 @@
 		<label for="expected_attendees">Expected number of attendees</label>
 		<input type="number" class="form-control" id="expected_attendees" name="expected_attendees" placeholder="Amount">
 	</div>
+	<div class="form-group">
+		<label for="facility">Facility to be rented</label>
+		<input type="text" class="form-control" id="resource_name" name="facility" placeholder="Name of facility" data-provide="typeahead" autocomplete="off">
+	</div>
 
 	<hr>
-	<p>Note that the fields above can be edited afterwards. It is not permanent.</p>
+	<p>Note that the fields above can be edited afterwards after the event is created. It is not permanent.</p>
 	<button type="submit" class="btn btn-primary">Create event</button>
 </form>
+<script type="text/javascript">
+  $.get('/config/resources.json', function(data){
+    $("#resource_name").typeahead({ source:data });
+  },'json');
+
+</script>
 @stop
