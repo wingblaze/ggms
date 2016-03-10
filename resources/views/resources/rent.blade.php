@@ -10,6 +10,7 @@
 @section('content')
 <div class="page-header">
 	<h1>Rent a facility</h1>
+  @include('partials.error', ['title' => 'Event creation failed'])
   <p class="help-block">As an employee, you may allow a user to rent a facility such as a event area, dining room, or a basketball court. You can 
     <a href="{{ action('ResourceController@index') }}">click here to view the list of facilities</a>.
   </p>

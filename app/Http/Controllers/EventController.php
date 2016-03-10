@@ -27,24 +27,37 @@ class EventController extends Controller
 
     public function store(Request $request)
     {
-        $rules = [
-            'name' => 'required|unique:events,name',
-            'description' => 'required',
-            'expected_attendees' => 'required',
-            'start_date' => 'required',
-            'end_date' => 'required',
-            'facility' => 'exists:resources,name',
-            ];
-
-        $messages = [
-            'expiration.required' => 'The member\'s account expiration date is required.',
-        ];
-
-        $this->validate($request, $rules, $messages);
 
         $event = new Event;
 
         $data = $request->all();
+
+        $facility = Resource::where('name', $data['facility'])->first();
+
+        if ($facility)
+            $facilityID = $event->resource_id = $facility->id;
+        else
+            $facilityID = -1;
+
+        $rules = [
+            'name' => 'required|unique:events,name',
+            'description' => 'required',
+            'expected_attendees' => 'required',
+            'facility' => 'exists:resources,name',
+            'start_date' => 'required|no_conflict:' . $facilityID,
+            'end_date' => 'required',
+            
+            ];
+
+        $messages = [
+            'expiration.required' => 'The member\'s account expiration date is required.',
+            'start_date.no_conflict' => 'That facility is already in use during that time.'
+        ];
+
+        $this->validate($request, $rules, $messages);
+
+
+        
 
         $event->name = $data['name'];
 
@@ -55,9 +68,7 @@ class EventController extends Controller
         $event->end_date = Carbon::parse($data['end_date']);
 
         
-        $facility = Resource::where('name', $data['facility'])->first();
-        if ($facility)
-            $event->resource_id = $facility->id;
+        
 
         $event->save();
         return $this->show($event->id);

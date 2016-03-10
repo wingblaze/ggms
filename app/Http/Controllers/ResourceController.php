@@ -78,8 +78,26 @@ class ResourceController extends Controller
         $rent_resource = new RentResource;
         $data = $request->all();
 
+        $resource = Resource::where('name', $data['resource'])->first();
+        if ($resource)
+            $facilityID = $resource->id;
+
+        $rules = [
+            'name' => 'required|exists:users,name',
+            'resource' => 'required|exists:resources,name',
+            'start' => 'required|no_conflict:' . $facilityID,
+            'end' => 'required',
+            
+            ];
+
+        $messages = [
+            'start.no_conflict' => 'That facility is already in use during that time.'
+        ];
+
+        $this->validate($request, $rules, $messages);
+
         $rent_resource->user_id = User::where('name', $data['client'])->first()->id;
-        $rent_resource->resource_id = Resource::where('name', $data['resource'])->first()->id;
+        $rent_resource->resource_id = $resource->id;
         $rent_resource->start_time = Carbon::parse($data['start']);
         $rent_resource->end_time = Carbon::parse($data['end']);
         $rent_resource->status = 'In use';

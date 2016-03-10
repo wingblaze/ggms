@@ -5,6 +5,9 @@ namespace App\Providers;
 use Illuminate\Support\ServiceProvider;
 use Auth;
 
+use App\RentResource;
+use Carbon\Carbon;
+use Validator;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -15,7 +18,12 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        
+        Validator::extend('no_conflict', function($attribute, $value, $parameters, $validator) {
+            $res_id = $parameters[0];
+            $start_time = Carbon::parse($value);
+            $conflicts = RentResource::where('resource_id', $res_id)->where('start_time', '<=', $start_time)->where('end_time', '>', $start_time)->get();
+            return count($conflicts) == 0;
+        });
     }
 
     /**
