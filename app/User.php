@@ -46,7 +46,6 @@ class User extends Authenticatable
         return $this->hasMany('App\Complaint');
     }
 
-
     /**
      * Get the resources this user has rented.
      */
@@ -58,5 +57,17 @@ class User extends Authenticatable
     public function is_owner(){
         $account = $this->account;
         return $account->owner()->id == $this->id;
+    }
+
+    public function getDisplayNameAttribute($value)
+    {
+        $split = explode("(", $this->name);
+
+        if (count($split) > 1){
+            $value = $split[0];
+        }else{
+            $value = $this->name;
+        }
+        return $value;
     }
 }

@@ -31,7 +31,7 @@
       <td class="col-md-2">
         @if ($listing->posted_by_account)
           <a href="{{action('AccountController@show', ['id' => $listing->posted_by_account()->first()->id])}}">
-            {{ $listing->posted_by_account()->first()->owner()->name or '-' }}
+            {{ $listing->posted_by_account()->first()->owner()->display_name or '-' }}
           </a>
         @else
           No poster
@@ -52,7 +52,7 @@
       <td class="col-md-2">
         @if ($listing->current_account)
           <a href="{{action('AccountController@show', ['id' => $listing->current_account()->first()->id])}}">
-            {{ $listing->current_account()->first()->owner()->name or '-' }}
+            {{ $listing->current_account()->first()->owner()->display_name or '-' }}
           </a>
         @else
           No owner

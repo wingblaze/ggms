@@ -157,7 +157,7 @@
 
           @if ($user)
           <li class="dropdown">
-              <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><span class="glyphicon glyphicon-user" aria-hidden="true"></span> &nbsp {{ $user->name }} <span class="caret"></span></a>
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><span class="glyphicon glyphicon-user" aria-hidden="true"></span> &nbsp {{ $user->display_name }} <span class="caret"></span></a>
               <ul class="dropdown-menu">
                 <li><a href="{{action('UserController@show', $user->id)}}">My personal information</a></li>
                 <li><a href="{{action('AccountController@show', $user->account->id)}}">My account</a></li>

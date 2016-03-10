@@ -32,7 +32,7 @@
 		<tr>
 			<td class="col-md-2">
 				@if ($account->owner())
-					{{ $account->owner()->name }}
+					{{ $account->owner()->display_name }}
 				@else
 					No owner
 				@endif

@@ -8,7 +8,7 @@
 	<div class="jumbotron">
 		<h2>Generic Golf Management System</h2>
 		@if ($user)
-			<p>Hi {{ $user->name }}, welcome back!</p>
+			<p>Hi {{ $user->display_name }}, welcome back!</p>
 		@else
 			<p>Hello world!</p>
 		@endif
@@ -42,7 +42,7 @@
 				<UL>
 					@foreach ($pending_accounts as $pending_account)
 						@if ($pending_account->owner())
-							<LI>{{ $pending_account->owner()->name }}</LI>
+							<LI>{{ $pending_account->owner()->display_name }}</LI>
 						@endif
 					@endforeach
 				</UL>

@@ -30,7 +30,7 @@
 			</td>
 			<td class="col-md-2">
 				@if ($slot->owner())
-				    {{ $slot->owner()->name }}
+				    {{ $slot->owner()->display_name }}
 			    @else
 			      	-
 			    @endif

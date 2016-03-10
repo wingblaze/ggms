@@ -24,7 +24,7 @@
 			<td class="col-md-2">
 				@if ($account->owner())
 				<a href="{{action('AccountController@show', ['id' => $account->id])}}">
-					{{ $account->owner()->name }}
+					{{ $account->owner()->display_name }}
 				</a>
 				@else
 					No owner

@@ -267,5 +267,7 @@ class UserTableSeeder extends Seeder
                 'account_id' => 5,
                 'account_type' => 'dependent'
                 ]);
+
+        $affected_rows = DB::update("UPDATE `users` SET `name` = CONCAT(`name`, ' (', `id`, ')')");
     }
 }

@@ -30,7 +30,7 @@
 			<td class="col-md-6">
 				@if ($user)
 				<a href="{{action('UserController@show', ['id' => $user->id])}}">
-					{{ $user->name }}
+					{{ $user->display_name }}
 				</a>
 				@else
 					None

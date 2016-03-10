@@ -93,6 +93,10 @@ class UserController extends Controller
 
         $user->save();
 
+        $user->name = $user->name . " (" . $user->id . ")";
+        
+        $user->save();
+
         return $this->show($user->id);
     }
 

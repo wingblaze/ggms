@@ -29,7 +29,7 @@
     <label for="description">Slot owned by</label>
     <p class="help-block">Who currently holds this membership slot? If this field is left blank, then the slot will be unassigned.</p>
     @if ($slot->owner())
-	    <input type="text" class="form-control" id="user" name="user" placeholder="Name of user" data-provide="typeahead" autocomplete="off" value="{{ $slot->owner()->name }}">
+	    <input type="text" class="form-control" id="user" name="user" placeholder="Name of user" data-provide="typeahead" autocomplete="off" value="{{ $slot->owner()->display_name }}">
     @else
       <input type="text" class="form-control" id="user" name="user" placeholder="Name of user" data-provide="typeahead" autocomplete="off">
     @endif

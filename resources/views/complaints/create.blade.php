@@ -19,7 +19,7 @@
   <div class="form-group">
     <label for="group">Membership application requested by</label>
     @if ($account->owner())
-      <p>{{ $account->owner()->name or 'Name was not specified' }}</p>
+      <p>{{ $account->owner()->display_name or 'Name was not specified' }}</p>
     @else
       <p>Name was not specified</p>
     @endif
@@ -30,7 +30,7 @@
     <br>
     
     <textarea type="text" class="form-control" id="content" name="content" placeholder="" rows="4"></textarea>
-    <br><span><em>This account review is written by {{ $user->name }}</em></span>
+    <br><span><em>This account review is written by {{ $user->display_name }}</em></span>
   </div>
   <hr>
   <button type="submit" class="btn btn-primary">Send account review</button>

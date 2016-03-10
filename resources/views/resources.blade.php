@@ -64,11 +64,13 @@
 					</a>
 					 by
 					 <a href="{{action('UserController@show', ['id' => $listing->user->id])}}">
-					 	{{ $listing->user->name }}
+					 	{{ $listing->user->display_name }}
 					</a>
 				</td>
-				<td class="col-md-3">{{ date('g:m:s A', strtotime($listing->start_time)) }}</td>
-				<td class="col-md-3">{{ date('g:m:s A', strtotime($listing->end_time)) }}</td>
+				<td class="col-md-3">{{ Carbon\Carbon::parse($listing->start_time)->format('h:i:s A') }}</td>
+				<td class="col-md-3">{{ Carbon\Carbon::parse($listing->end_time)->diffForHumans() }}<BR />
+					{{ Carbon\Carbon::parse($listing->end_time)->format('F jS Y, h:i:s A') }}
+				</td>
 				<td class="col-md-1">{{ $listing->status }}</td>
 				<td class="col-md-4">
 					@if ($user->hasRole('employee'))

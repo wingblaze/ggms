@@ -21,7 +21,8 @@ class RentResourceTableSeeder extends Seeder
 		'user_id' => 5,
 		'resource_id' => 1,
 		'start_time' => $now,
-		'end_time' => $now
+		'end_time' => $now,
+		'status' => 'In use'
 		]);
 
         // pick dates for start_time and end time like this
@@ -33,7 +34,8 @@ class RentResourceTableSeeder extends Seeder
 		'user_id' => 6,
 		'resource_id' => 2,
 		'start_time' => $now,
-		'end_time' => $now
+		'end_time' => $now,
+		'status' => 'In use'
 		]);
 
 		$resources = Resource::all();
@@ -48,20 +50,22 @@ class RentResourceTableSeeder extends Seeder
 
 				$start_offset = rand(-3,12);
 				$now = Carbon::now();
+				
 				$start = $now->copy();
 				$start->addDays(rand(-7,7));
 				$start->addMinutes(rand(12,40));
 				$start->addHours($start_offset);
 				
-				$end = $now->copy();
-				$end->addDays(rand($start_offset,$start_offset + 5));
+				$end = $start->copy();
+				$end->addMinutes(rand(0,60));
 
 
 				DB::table('rent_resources')->insert([
 				'user_id' => rand(1, $maxUsers),
 				'resource_id' => rand(1, $maxResources),
 				'start_time' => $start,
-				'end_time' => $end
+				'end_time' => $end,
+				'status' => 'In use'
 				]);
 			}
 		}

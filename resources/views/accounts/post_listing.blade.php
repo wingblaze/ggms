@@ -9,7 +9,7 @@
 </div>
   @if ($user && $user->is_owner())
     @if(!$canPostListing)
-    <p>Hello {{ $user->name }}. As account owner, you may 
+    <p>Hello {{ $user->display_name }}. As account owner, you may 
     <a href="{{ action('AccountController@post_listing') }}" class="btn btn-primary">
       post a club share listing</a> if you wish to no longer be part of this golf course community.
     </p>
@@ -17,7 +17,7 @@
     <span id="helpBlock" class="help-block">
       <em>Note: that you may reverse this process afterwards if you wish to cancel it. The interested party will be given your contact details so that they can contact you.</em>
     </span>
-    <p>Hello {{ $user->name }}. As account owner, you may 
+    <p>Hello {{ $user->display_name }}. As account owner, you may 
     <a href="{{ action('AccountController@remove_listing') }}" class="btn btn-danger">
       remove your club share listing</a> if you changed your mind about selling your club shares.
     </p>

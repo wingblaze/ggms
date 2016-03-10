@@ -83,7 +83,7 @@ class ResourceController extends Controller
             $facilityID = $resource->id;
 
         $rules = [
-            'name' => 'required|exists:users,name',
+            'client' => 'required|exists:users,name',
             'resource' => 'required|exists:resources,name',
             'start' => 'required|no_conflict:' . $facilityID,
             'end' => 'required',

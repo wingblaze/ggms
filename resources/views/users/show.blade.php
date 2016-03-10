@@ -4,7 +4,7 @@
 
 @section('content')
 <div class="page-header">
-	<h1>View user <small>{{ $target_user->salutation or '' }} {{ $target_user->name }}</small></h1>
+	<h1>View user <small>{{ $target_user->salutation or '' }} {{ $target_user->display_name }}</small></h1>
 </div>
 <p><label>E-mail</label><BR />
 	{{ $target_user->email }}

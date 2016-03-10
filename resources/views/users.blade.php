@@ -17,7 +17,7 @@
 		<tr>
 			<td class="col-md-2">
 				<a href="{{ action('UserController@show', ['id' => $user->id]) }}">
-					{{ $user->name }}
+					{{ $user->display_name }}
 				</a>
 			</td>
 			<td class="col-md-2">
@@ -26,7 +26,7 @@
 				@elseif ($user->account_type != 'owner')
 					@if ($user->account->owner())
 					<a href="{{ action('UserController@show', ['id' => $user->account->owner()->id]) }}">
-						<?PHP echo $user->account->owner()->name ?>
+						<?PHP echo $user->account->owner()->display_name ?>
 					</a>
 					@else
 						No owner

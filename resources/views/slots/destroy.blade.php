@@ -7,5 +7,5 @@
 	<h1>Hello</h1>
 </div>
 
-<p>My name is {{ $user->name }}</p>
+<p>My name is {{ $user->display_name }}</p>
 @stop
