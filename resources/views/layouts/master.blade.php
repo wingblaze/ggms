@@ -121,7 +121,7 @@
               <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Finance <span class="caret"></span></a>
               <ul class="dropdown-menu">
                 <li><a href="{{action('AccountController@index')}}">View unpaid accounts</a></li>
-                <li><a href="{{action('ResourceController@index')}}">View unpaid rentals</a></li>
+                <li><a href="{{action('ResourceController@unpaid_listing')}}">View unpaid rentals</a></li>
               </ul>
             </li>
             @endif
