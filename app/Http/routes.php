@@ -41,19 +41,25 @@ Route::group(['middleware' => ['web']], function () {
 
 	Route::post('/resources/renting', 'ResourceController@store_rent');
 	Route::get('/resources/rent', 'ResourceController@rent');
+	Route::get('/resources/golf', 'ResourceController@golf');
+	Route::get('/resources/maintenance', 'ResourceController@maintenance');
 
 	
-	Route::get('resource_types.json', 'ResourceController@type_json');
+	
 
 
 	Route::group(['prefix' => 'config'], function ()
 	{
+		Route::get('resource_types.json', 'ResourceController@type_json');
+		Route::get('resources_golf.json', 'ResourceController@golf_json');
 		Route::get('resources.json', 'ResourceController@json');
 		Route::resource('resources', 'ResourceController');
 
 		Route::get('slots.json', 'MembershipSlotController@json');
 		Route::resource('membership_slots', 'MembershipSlotController');
 	});
+
+	// ---- REPORTS ---- 
 
 	Route::get('graph_options.json', 'ReportController@graph_options');
 	Route::group(['prefix' => 'reports'], function () {

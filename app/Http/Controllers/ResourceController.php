@@ -78,9 +78,10 @@ class ResourceController extends Controller
         $rent_resource = new RentResource;
         $data = $request->all();
 
+
+
         $resource = Resource::where('name', $data['resource'])->first();
-        if ($resource)
-            $facilityID = $resource->id;
+        $facilityID = ($resource) ? $resource->id : -1;
 
         $rules = [
             'client' => 'required|exists:users,name',
@@ -91,7 +92,9 @@ class ResourceController extends Controller
             ];
 
         $messages = [
-            'start.no_conflict' => 'That facility is already in use during that time.'
+            'start.no_conflict' => 'That flight is already in use during that time.',
+            'resource.required' => 'The flight field is required.',
+            'resource.exists' => 'The select flight is invalid.  Please select from the autocomplete suggestions.'
         ];
 
         $this->validate($request, $rules, $messages);
@@ -106,7 +109,15 @@ class ResourceController extends Controller
     }
 
     public function rent(){
-        return view('resources.rent', ['resources' => Resource::all()]);
+        return view('resources.rent', ['resources' => Resource::where('type', '!=', 'golf')->get()]);
+    }
+
+    public function golf(){
+        return view('resources.golf', ['resources' => Resource::where('type', 'golf')->get()]);
+    }
+
+    public function maintenance(){
+        return view('resources.maintenance', ['resources' => Resource::where('type', 'golf')->get()]);
     }
 
     public function listing(){
@@ -115,6 +126,13 @@ class ResourceController extends Controller
 
     public function json(){
         $collection = Resource::all()->map(function ($resource){
+            return $resource->name;
+        });
+        return json_encode($collection);
+    }
+
+    public function golf_json(){
+        $collection = Resource::where('type', 'golf')->get()->map(function ($resource){
             return $resource->name;
         });
         return json_encode($collection);

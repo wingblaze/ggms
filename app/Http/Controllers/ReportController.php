@@ -245,7 +245,7 @@ class ReportController extends Controller
         }
 
         $fields = [
-            'facilityType' => (object)['type' => 'text', 'description' => 'What types of facility do you wish to monitor (e.g. golf, sports)? Note that this field is optional. If you leave this blank, it will search for facilities with unspecified type only.', 'autocomplete' => 'resource_types.json'],
+            'facilityType' => (object)['type' => 'text', 'description' => 'What types of facility do you wish to monitor (e.g. golf, sports)? Note that this field is optional. If you leave this blank, it will search for facilities with unspecified type only.', 'autocomplete' => 'config/resource_types.json'],
             'startDate' => (object)['type' => 'date', 'description' => 'What date do you want to begin monitoring facility usage?'],
             'endDate' => (object)['type' => 'date', 'description' => 'What date do you want to end monitoring facility usage?']
         ];
@@ -317,7 +317,7 @@ class ReportController extends Controller
         $fields = [
             'user' => (object)['type' => 'text', 'autocomplete' => 'users.json', 'description' => 'This activity of the user specified in this field will be presented in the report.'],
             'event' => (object)['type' => 'text', 'autocomplete' => 'events.json', 'description' => 'This is name of the event you wish to see a correlation to.'],
-            'facilityType' => (object)['type' => 'text', 'autocomplete' => 'resource_types.json', 'description' => 'The activity is based on faciltiies. What types of facility do you wish to monitor (e.g. golf, sports)? Note that this field is optional. If you leave this blank, it will search for facilities with unspecified type only.'],
+            'facilityType' => (object)['type' => 'text', 'autocomplete' => 'config/resource_types.json', 'description' => 'The activity is based on faciltiies. What types of facility do you wish to monitor (e.g. golf, sports)? Note that this field is optional. If you leave this blank, it will search for facilities with unspecified type only.'],
             'graphInterval' => (object)['type' => 'graph', 'description' => 'Do you want to see the graph entries per day, week, or month?'],
         ];
 
