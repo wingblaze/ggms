@@ -28,17 +28,32 @@ class ReportController extends Controller
         $report->title = "New members";
         $report->description = "";
 
-        if (array_key_exists('startDate', $data) && array_key_exists('endDate', $data)){
-            $start = $data['startDate'];
-            $end = $data['endDate'];
-            $graphInterval = strtolower($data['graphInterval']);
+        if (count($data) > 0){
 
-            $report->data = [
-                'url' => url('reports/newusers.tsv', [Carbon::parse($start)->toDateString(), Carbon::parse($end)->toDateString(), $graphInterval]),
-                'x' => 'date',
-                'y' => 'members'
+            $rules = [
+                'startDate' => 'required',
+                'endDate' => 'required',
+                ];
+
+            $messages = [
+                'expiration.required' => 'The member\'s account expiration date is required.',
             ];
 
+            $this->validate($request, $rules, $messages);
+
+
+            if (array_key_exists('startDate', $data) && array_key_exists('endDate', $data)){
+                $start = $data['startDate'];
+                $end = $data['endDate'];
+                $graphInterval = strtolower($data['graphInterval']);
+
+                $report->data = [
+                    'url' => url('reports/newusers.tsv', [Carbon::parse($start)->toDateString(), Carbon::parse($end)->toDateString(), $graphInterval]),
+                    'x' => 'date',
+                    'y' => 'members'
+                ];
+
+            }
         }
 
         $fields = [
@@ -111,19 +126,35 @@ class ReportController extends Controller
         $report->title = "Activity of users in a group";
         $report->description = "";
 
-        if (array_key_exists('startDate', $data) && array_key_exists('endDate', $data) && array_key_exists('group', $data)){
-            $start = $data['startDate'];
-            $end = $data['endDate'];
 
-            $group = $data['group'];
-            $group_id = Group::where('name', $group)->first()->id;
+        if (count($data) > 0){
 
-            $report->data = [
-                'url' => url('reports/user_activity_of_group.tsv', [Carbon::parse($start)->toDateString(), Carbon::parse($end)->toDateString(), $group_id]),
-                'x' => 'user',
-                'y' => 'activity'
+            $rules = [
+                'group' => 'required|exists:groups,name',
+                'startDate' => 'required',
+                'endDate' => 'required',
+                ];
+
+            $messages = [
+                'expiration.required' => 'The member\'s account expiration date is required.',
             ];
 
+            $this->validate($request, $rules, $messages);
+
+            if (array_key_exists('startDate', $data) && array_key_exists('endDate', $data) && array_key_exists('group', $data)){
+                $start = $data['startDate'];
+                $end = $data['endDate'];
+
+                $group = $data['group'];
+                $group_id = Group::where('name', $group)->first()->id;
+
+                $report->data = [
+                    'url' => url('reports/user_activity_of_group.tsv', [Carbon::parse($start)->toDateString(), Carbon::parse($end)->toDateString(), $group_id]),
+                    'x' => 'user',
+                    'y' => 'activity'
+                ];
+
+            }
         }
 
         $fields = [
@@ -183,19 +214,34 @@ class ReportController extends Controller
         $report->title = "Frequency of facility usage by type";
         $report->description = "";
 
+        if (count($data) > 0){
 
-        if (array_key_exists('startDate', $data) && array_key_exists('endDate', $data) && array_key_exists('facilityType', $data)){
-            $start = $data['startDate'];
-            $end = $data['endDate'];
+                $rules = [
+                    'startDate' => 'required',
+                    'endDate' => 'required',
+                    'facilityType' => 'required|exists:resources,type'
+                    ];
 
-            $facilityType = $data['facilityType'];
+                $messages = [
+                    'expiration.required' => 'The member\'s account expiration date is required.',
+                ];
 
-            $report->data = [
-                'url' => url('reports/facility_usage.tsv', ['start' => Carbon::parse($start)->toDateString(), 'end' => Carbon::parse($end)->toDateString(), 'facilityType' => $facilityType]),
-                'x' => 'facility',
-                'y' => 'usage'
-            ];
+                $this->validate($request, $rules, $messages);
 
+
+            if (array_key_exists('startDate', $data) && array_key_exists('endDate', $data) && array_key_exists('facilityType', $data)){
+                $start = $data['startDate'];
+                $end = $data['endDate'];
+
+                $facilityType = $data['facilityType'];
+
+                $report->data = [
+                    'url' => url('reports/facility_usage.tsv', ['start' => Carbon::parse($start)->toDateString(), 'end' => Carbon::parse($end)->toDateString(), 'facilityType' => $facilityType]),
+                    'x' => 'facility',
+                    'y' => 'usage'
+                ];
+
+            }
         }
 
         $fields = [
