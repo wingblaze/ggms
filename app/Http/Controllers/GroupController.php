@@ -19,7 +19,12 @@ class GroupController extends Controller
      */
     public function index()
     {
-        return view('groups', ['groups' => Group::all()]);
+        $categories = Group::select('type')->distinct()->get();
+        foreach ($categories as $value) {
+            $category = $value['type'];
+            $value->groups = Group::where('type', $category)->orderBy('name', 'ASC')->get();
+        }
+        return view('groups', ['categories' => $categories]);
     }
 
     public function show($id)

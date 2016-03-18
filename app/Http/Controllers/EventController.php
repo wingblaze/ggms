@@ -54,7 +54,7 @@ class EventController extends Controller
             'start_date.no_conflict' => 'That facility is already in use during that time.'
         ];
 
-        $this->validate($request, $rules, $messages);
+        // $this->validate($request, $rules, $messages);
 
 
         
@@ -67,9 +67,29 @@ class EventController extends Controller
         $event->start_date = Carbon::parse($data['start_date']);
         $event->end_date = Carbon::parse($data['end_date']);
 
-        
-        
+        $notes = (object)[];
 
+
+        if (isset($data['contact_details']))
+            $notes->preparations['contact_details'] = $data['contact_details'];
+
+        if (isset($data['projector']))
+            $notes->preparations['projector'] = $data['projector'];
+
+        if (isset($data['chairs']))
+            $notes->preparations['chairs'] = $data['chairs'];
+
+        if (isset($data['tables']))
+            $notes->preparations['tables'] = $data['tables'];
+
+        if (isset($data['dining_setup']))
+            $notes->preparations['dining_setup'] = $data['dining_setup'];
+
+        if (isset($data['in_house_cleaning']))
+            $notes->preparations['in_house_cleaning'] = $data['in_house_cleaning'];
+        
+        $event->notes = json_encode($notes);
+        
         $event->save();
         return $this->show($event->id);
     }

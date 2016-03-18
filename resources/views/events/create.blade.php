@@ -19,6 +19,7 @@
 </div>
 
 {!! Form::open(array('action' => 'EventController@store')) !!}
+	<h3>Event details</h3>
 	<div class="form-group">
 		<label for="name">Name of event</label>
 		<input type="text" class="form-control" id="name" name="name" placeholder="Name">
@@ -90,9 +91,54 @@
 		<label for="facility">Facility to be rented</label>
 		<input type="text" class="form-control" id="resource_name" name="facility" placeholder="Name of facility" data-provide="typeahead" autocomplete="off">
 	</div>
-
 	<hr>
+	<h3>Preparation details</h3>
+	<div class="form-group">
+		<p class="help-block">If the person requesting the event is a non-member, you may optionally provide the person's contact details.</p>
+		<label for="contact_details">Contact number</label>
+		<input type="text" class="form-control" id="resource_name" name="contact_details" placeholder="e.g. 0917-812-3792" data-provide="typeahead" autocomplete="off">
+	</div>
+	<label>Checklist</label>
+	<div class="form-group">
+		<div class="checkbox">
+			<label>
+				<input type="checkbox" name="projector"> Projector
+			</label>
+		</div>
+	</div>
+	<div class="form-group">
+		<div class="checkbox">
+			<label>
+				<input type="checkbox" name="chairs"> Chairs
+			</label>
+		</div>
+	</div>
+	<div class="form-group">
+		<div class="checkbox">
+			<label>
+				<input type="checkbox" name="tables"> Tables
+			</label>
+		</div>
+	</div>
+	<div class="form-group">
+		<div class="checkbox">
+			<label>
+				<input type="checkbox" name="dining_setup"> Dining Setup
+			</label>
+		</div>
+	</div>
+	<div class="form-group">
+		<div class="checkbox">
+			<label>
+				<input type="checkbox" name="in_house_cleaning"> In-house Cleaning
+			</label>
+		</div>
+	</div>
+	
+	<hr>
+
 	<p>Note that the fields above can be edited afterwards after the event is created. It is not permanent.</p>
+
 	<button type="submit" class="btn btn-primary">Create event</button>
 </form>
 <script type="text/javascript">

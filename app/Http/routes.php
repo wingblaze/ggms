@@ -61,7 +61,7 @@ Route::group(['middleware' => ['web']], function () {
     	Route::post('newusers', 'ReportController@newusers');
     	Route::get('newusers.tsv/{start}/{end}/{graph_interval}', 'ReportController@newusers_data');
 
-    	Route::get('inactive_members', 'ReportController@inactive_members');
+    	Route::get('inactive_members', 'ReportController@inactives');
 
     	Route::get('user_activity_of_group', 'ReportController@user_activity_of_group');
     	Route::post('user_activity_of_group', 'ReportController@user_activity_of_group');

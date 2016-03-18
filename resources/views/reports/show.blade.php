@@ -70,6 +70,7 @@ body {
   @if (isset($report->description))
     <span id="helpBlock" class="help-block">{{ $report->description }}</span>
   @endif
+  @include('partials.error', ['title' => 'Report generation failed'])
 </div>
 
 <?PHP

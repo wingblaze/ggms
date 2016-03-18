@@ -232,27 +232,40 @@ class ReportController extends Controller
     public function user_activity_within_event(Request $request)
     {
         $report = (object) $this->report;
-
-        $data = $request->all();
-        
         $report->title = "User activity during an event";
         $report->description = "";
 
+        $data = $request->all();
 
-        if (array_key_exists('user', $data) && array_key_exists('event', $data) && array_key_exists('facilityType', $data)){
-            $user = User::where('name', $data['user'])->first()->id;
-            $event = Event::where('name', $data['event'])->first()->id;
+        if (count($data) > 0){
 
-            $facilityType = $data['facilityType'];
+            $rules = [
+                'user' => 'required|exists:users,name',
+                'event' => 'required|exists:events,name',
+                ];
 
-            $graphInterval = strtolower($data['graphInterval']);
-
-            $report->data = [
-                'url' => url('reports/user_activity_within_event.tsv', ['user' => $user, 'event' => $event, $graphInterval, 'facilityType' => $facilityType]),
-                'x' => 'day',
-                'y' => 'activity'
+            $messages = [
+                'expiration.required' => 'The member\'s account expiration date is required.',
             ];
 
+            $this->validate($request, $rules, $messages);
+
+
+            if (array_key_exists('user', $data) && array_key_exists('event', $data) && array_key_exists('facilityType', $data)){
+                $user = User::where('name', $data['user'])->first()->id;
+                $event = Event::where('name', $data['event'])->first()->id;
+
+                $facilityType = $data['facilityType'];
+
+                $graphInterval = strtolower($data['graphInterval']);
+
+                $report->data = [
+                    'url' => url('reports/user_activity_within_event.tsv', ['user' => $user, 'event' => $event, $graphInterval, 'facilityType' => $facilityType]),
+                    'x' => 'day',
+                    'y' => 'activity'
+                ];
+
+            }
         }
 
         $fields = [

@@ -76,7 +76,7 @@
               
               <ul class="dropdown-menu">
                 <li><a href="{{action('ReportController@newusers')}}">New users</a></li>
-                <li><a href="{{action('ReportController@inactive_members')}}">Inactive members</a></li>
+                <li><a href="{{action('ReportController@inactives')}}">Inactive members</a></li>
                 <li><a href="{{action('ReportController@user_activity_of_group')}}">User activity of a group</a></li>
                 <li><a href="{{action('ReportController@club_share_transfers')}}">Club share transfers</a></li>
                 <li><a href="{{action('ReportController@facility_usage')}}">Facility usage within an event</a></li>
