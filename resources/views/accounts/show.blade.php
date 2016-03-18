@@ -37,7 +37,7 @@
 				@endif
 			</td>
 			<td class="col-md-2">
-				{{ $user->account_type }}
+				{{ prettify_text($user->account_type) }}
 			</td>
 		</tr>
 		@endforeach
@@ -109,88 +109,84 @@
 </div>
 <div>
 	<p>
-		<label>id</label><BR />
-		{{ $account->id }}
+		<label>Account ID</label><BR />
+		{{ $account->id or 'N/A' }}
 	</p>
 	<p>
 		<label>tin_number</label><BR />
-		{{ $account->tin_number }}
+		{{ $account->tin_number or 'N/A' }}
 	</p>
 	<p>
 		<label>home_address</label><BR />
-		{{ $account->home_address }}
+		{{ $account->home_address or 'N/A' }}
 	</p>
 	<p>
 		<label>business_address</label><BR />
-		{{ $account->business_address }}
+		{{ $account->business_address or 'N/A' }}
 	</p>
 	<p>
 		<label>bank_account</label><BR />
-		{{ $account->bank_account }}
+		{{ $account->bank_account or 'N/A' }}
 	</p>
 	<p>
 		<label>credit_card_number</label><BR />
-		{{ $account->credit_card_number }}
+		{{ $account->credit_card_number or 'N/A' }}
 	</p>
 	<p>
 		<label>group_id</label><BR />
-		{{ $account->group_id }}
+		{{ $account->group_id or 'N/A' }}
 	</p>
 	<p>
 		<label>residence_certificate_id</label><BR />
-		{{ $account->residence_certificate_id }}
+		{{ $account->residence_certificate_id or 'N/A' }}
 	</p>
 	<p>
 		<label>residence_certificate_place_issued</label><BR />
-		{{ $account->residence_certificate_place_issued }}
+		{{ $account->residence_certificate_place_issued or 'N/A' }}
 	</p>
 	<p>
 		<label>residence_certificate_date_issued</label><BR />
-		{{ $account->residence_certificate_date_issued }}
+		{{ $account->residence_certificate_date_issued or 'N/A' }}
 	</p>
 	<p>
 		<label>expiration</label><BR />
-		{{ $account->expiration }}
+		{{ $account->expiration or 'N/A' }}
 	</p>
 	<p>
 		<label>address</label><BR />
-		{{ $account->address }}
+		{{ $account->address or 'N/A' }}
 	</p>
 	<p>
 		<label>phone</label><BR />
-		{{ $account->phone }}
+		{{ $account->phone or 'N/A' }}
 	</p>
 	<p>
 		<label>fax</label><BR />
-		{{ $account->fax }}
+		{{ $account->fax or 'N/A' }}
 	</p>
 	<p>
 		<label>email</label><BR />
-		{{ $account->email }}
+		{{ $account->email or 'N/A' }}
 	</p>
 	<p>
 		<label>date_approved</label><BR />
-		{{ $account->date_approved }}
+		{{ $account->date_approved or 'N/A' }}
 	</p>
 	<p>
 		<label>status</label><BR />
-		{{ $account->status }}
-	</p>
-	<p>
-		<label>remember_token</label><BR />
-		{{ $account->remember_token }}
+		{{ $account->status or 'N/A' }}
 	</p>
 	<p>
 		<label>created_at</label><BR />
-		{{ $account->created_at }}
+		{{ $account->created_at or 'N/A' }}
 	</p>
 	<p>
 		<label>updated_at</label><BR />
-		{{ $account->updated_at }}
+		{{ $account->updated_at or 'N/A' }}
 	</p>
 	<p>
 		<label>deleted_at</label><BR />
-		{{ $account->deleted_at }}
+		{{ $account->deleted_at or 'N/A' }}
 	</p>
 </div>
 	
