@@ -41,9 +41,12 @@ class ResourceTableSeeder extends Seeder
                 'type' => "sports"
                 ]);
 
-        DB::table('resources')->insert([
-    			'name' => "Event Area",
-                'type' => "golf"
-    			]);
+        for ($i = 1; $i < 6; $i++){
+            DB::table('resources')->insert([
+        			'name' => "Flight " . $i,
+                    'description' => 'The description for flight ' . $i,
+                    'type' => "golf"
+        			]);
+        }
     }
 }
