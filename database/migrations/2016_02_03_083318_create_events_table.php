@@ -25,6 +25,7 @@ class CreateEventsTable extends Migration
 
             // Has resource_id attribute, foreign key on resource
             $table->integer('resource_id')->unsigned()->nullable()->onDelete('cascade');
+            $table->text('notes')->nullable();
             
 
             $table->timestamps();

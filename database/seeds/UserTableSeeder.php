@@ -45,6 +45,22 @@ class UserTableSeeder extends Seeder
                 ]);
 
         DB::table('users')->insert([
+                'name' => 'Finance Manager',
+                'email' => 'finmgr@gmail.com',
+                'password' => bcrypt('secret'),
+                'account_id' => 1,
+                'account_type' => 'dependent'
+                ]);
+
+        DB::table('users')->insert([
+                'name' => 'Maintenance Manager',
+                'email' => 'maintenancemgr@gmail.com',
+                'password' => bcrypt('secret'),
+                'account_id' => 1,
+                'account_type' => 'dependent'
+                ]);
+
+        DB::table('users')->insert([
                 'name' => 'Alberto Roque',
                 'email' => 'alberto.roque@gmail.com',
                 'mobile_number' => '09178869476',

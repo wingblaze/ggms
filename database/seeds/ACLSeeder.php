@@ -45,6 +45,16 @@ class ACLSeeder extends Seeder
                 'description' => "Manager in charge of events and reports",
                 ],
                 [
+                'name' => 'finance_manager',
+                'display_name' => "Finance Manager",
+                'description' => "Manager in charge of accounting and finances",
+                ],
+                [
+                'name' => 'maintenance_manager',
+                'display_name' => "Maintenance Manager",
+                'description' => "Manager in charge of maintenance",
+                ],
+                [
                 'name' => 'employee',
                 'display_name' => "Employee",
                 'description' => "A generic employee",
@@ -271,6 +281,9 @@ class ACLSeeder extends Seeder
         $golf_ops_manager = Role::where('name', 'golf_ops_manager')->first();
         $marketing_manager = Role::where('name', 'marketing_manager')->first();
         $membership_manager = Role::where('name', 'membership_manager')->first();
+        $finance_manager = Role::where('name', 'finance_manager')->first();
+        $maintenance_manager = Role::where('name', 'maintenance_manager')->first();
+
         $employee = Role::where('name', 'employee')->first();
         $user = Role::where('name', 'user')->first();
 
@@ -286,8 +299,14 @@ class ACLSeeder extends Seeder
         User::findOrFail(4)->attachRole($membership_manager);
         User::findOrFail(4)->attachRole($employee);
 
+        User::findOrFail(5)->attachRole($finance_manager);
+        User::findOrFail(5)->attachRole($employee);
+
+        User::findOrFail(6)->attachRole($maintenance_manager);
+        User::findOrFail(6)->attachRole($employee);
+
         // The rest of the defaults are users
-        for ($i = 5; $i <= 14; $i++){
+        for ($i = 7; $i <= 20; $i++){
             User::findOrFail($i)->attachRole($user);
         }
 
