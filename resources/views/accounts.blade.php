@@ -61,6 +61,12 @@
 				</div>
 				
 				@if ($user && $user->hasRole('membership_manager'))
+
+				@if ($account->status == 'Paid')
+				&nbsp
+				<a class="btn btn-sm btn-default" href="{{action('AccountController@clear_account', ['id' => $account->id])}}"><span class="glyphicon glyphicon-ok" aria-hidden="true"></span>&nbsp Accept</a>
+
+				@endif
 				&nbsp
 				<a class="btn btn-sm btn-danger" href="{{action('AccountController@destroy', ['id' => $account->id])}}"><span class="glyphicon glyphicon-trash" aria-hidden="true"></span>&nbsp Disable</a>
 				@endif

@@ -38,7 +38,7 @@ class CreateAccountsTable extends Migration
             $table->string('email', 30)->nullable()->unique();
 
             $table->date('date_approved')->nullable();
-            $table->enum('status', array('On Review', 'Inactive', 'Active', 'Suspended', 'Terminated'))->default('On Review');
+            $table->enum('status', array('On Review', 'Inactive', 'Paid', 'Active', 'Suspended', 'Terminated'))->default('On Review');
 
             $table->text('remarks')->nullable();
 

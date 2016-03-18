@@ -247,6 +247,7 @@ class AccountController extends Controller
         return view('accounts.assign', ['account_id' => $id]);
     }
 
+    // accept after complaints
     public function accept($id)
     {
         $account = Account::find($id);
@@ -260,12 +261,26 @@ class AccountController extends Controller
         }
     }
 
+    // clear_account
+    public function clear_account($id)
+    {
+        $account = Account::find($id);
+        if ($account->owner()) {
+            $account->status = 'Active';
+            $account->remarks = NULL;
+            $account->save();
+            return redirect()->action('AccountController@show', $id);
+        }else{
+            return redirect()->action('ComplaintController@show', $id);
+        }
+    }
+
 
     public function clear_payment($id)
     {
         $account = Account::find($id);
         if ($account->owner()) {
-            $account->status = 'Active';
+            $account->status = 'Paid';
             $account->remarks = NULL;
             $account->save();
             return redirect()->action('AccountController@show', $id);

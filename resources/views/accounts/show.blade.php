@@ -25,19 +25,19 @@
 			<th class="col-md-6">Member</th>
 			<th class="col-md-2">Account type</th>
 		</tr>
-		@foreach($account->users as $user)
+		@foreach($account->users as $target_user)
 		<tr>
 			<td class="col-md-6">
-				@if ($user)
-				<a href="{{action('UserController@show', ['id' => $user->id])}}">
-					{{ $user->display_name }}
+				@if ($target_user)
+				<a href="{{action('UserController@show', ['id' => $target_user->id])}}">
+					{{ $target_user->display_name }}
 				</a>
 				@else
 					None
 				@endif
 			</td>
 			<td class="col-md-2">
-				{{ prettify_text($user->account_type) }}
+				{{ prettify_text($target_user->account_type) }}
 			</td>
 		</tr>
 		@endforeach
@@ -112,8 +112,10 @@
 	<p>
 		<label>Remarks</label><BR />
 		{{ $account->remarks or 'N/A' }}<BR />
-		<p class="help-block">As finance manager, you may mark this account as cleared once the user has finished payment.</p>
-		<a class="btn btn-sm btn-primary" href="{{ action('AccountController@clear_payment', $account->id) }}">Clear account</a> 
+		@if ($user->hasRole('finance_manager'))
+			<p class="help-block">As finance manager, you may mark this account as cleared once the user has finished payment.</p>
+			<a class="btn btn-sm btn-primary" href="{{ action('AccountController@clear_payment', $account->id) }}">Clear account</a> 
+		@endif
 	</p>
 @endif
 <div class="page-header">
