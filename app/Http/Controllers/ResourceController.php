@@ -103,7 +103,7 @@ class ResourceController extends Controller
         $rent_resource->resource_id = $resource->id;
         $rent_resource->start_time = Carbon::parse($data['start']);
         $rent_resource->end_time = Carbon::parse($data['end']);
-        $rent_resource->status = 'In use';
+        $rent_resource->status = 'Unpaid';
         $rent_resource->save();
         return $this->index();
     }
@@ -122,6 +122,19 @@ class ResourceController extends Controller
 
     public function listing(){
         return view('resources.listing', ['resources' => Resource::all(), 'listings' => RentResource::all()]);
+    }
+
+    public function unpaid_listing(){
+        return view('resources.unpaid_listing', ['resources' => Resource::all(), 'listings' => RentResource::where('status', '!=', 'In use')->get()]);
+    }
+
+    public function paid_listing($id)
+    {
+        $rentResource = RentResource::find($id);
+        $rentResource->status = 'In use';
+        $rentResource->save();
+
+        return $this->unpaid_listing();
     }
 
     public function json(){

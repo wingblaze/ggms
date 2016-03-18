@@ -42,6 +42,8 @@ Route::group(['middleware' => ['web']], function () {
 
 	Route::post('/resources/renting', 'ResourceController@store_rent');
 	Route::get('/resources/rent', 'ResourceController@rent');
+	Route::get('/resources/unpaid_rent', 'ResourceController@unpaid_listing');
+	Route::get('/resources/{id}/paid', 'ResourceController@paid_listing');
 	Route::get('/resources/golf', 'ResourceController@golf');
 	Route::get('/resources/maintenance', 'ResourceController@maintenance');
 
