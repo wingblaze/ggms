@@ -23,6 +23,7 @@ Route::group(['middleware' => ['web']], function () {
 	Route::get('accounts/{id}/assign', 'AccountController@assign');
 	Route::get('accounts/inactives', 'ReportController@inactives');
 	Route::get('accounts/{id}/accept', 'AccountController@accept');
+	Route::get('accounts/{id}/clear', 'AccountController@clear_payment');
 	Route::resource('accounts', 'AccountController');
 
 	Route::get('groups.json', 'GroupController@json');

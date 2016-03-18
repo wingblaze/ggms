@@ -39,6 +39,10 @@
 			</td>
 			<td class="col-md-2">
 				{{ $account->status }}
+				@if ($user && $user->hasRole('finance_manager') && $account->remarks != NULL && $account->status == 'Inactive')
+				<BR />
+				<span class="label label-warning">{{ str_limit($account->remarks, 25, '...') }}</span>
+				@endif
 			</td>
 			<td class="col-md-2">
 				@if (null !== $account->current_membership_slot())
@@ -60,6 +64,8 @@
 				&nbsp
 				<a class="btn btn-sm btn-danger" href="{{action('AccountController@destroy', ['id' => $account->id])}}"><span class="glyphicon glyphicon-trash" aria-hidden="true"></span>&nbsp Disable</a>
 				@endif
+
+				
 			</td>
 		</tr>
 		@endforeach

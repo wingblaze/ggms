@@ -1,6 +1,6 @@
 @extends('layouts.master')
 
-@section('title', 'Rent Resource')
+@section('title', 'Maintenance of Resources')
 
 @section('header')
 @parent
@@ -9,17 +9,17 @@
 
 @section('content')
 <div class="page-header">
-	<h1>Rent a facility</h1>
-  @include('partials.error', ['title' => 'Event creation failed'])
-  <p class="help-block">As an employee, you may allow a user to rent a facility such as a event area, dining room, or a basketball court. You can 
+	<h1>Maintenance of Golf Facilities</h1>
+  @include('partials.error', ['title' => 'Maintenance posting failed'])
+  <p class="help-block">As the maintenance manager, you may mark certain golf facilties to be under maintenance. You can 
     <a href="{{ action('ResourceController@index') }}">click here to view the list of facilities</a>.
   </p>
 </div>
 
 {!! Form::open(array('action' => 'ResourceController@store_rent')) !!}
   <div class="form-group">
-    <label for="resource_name">Name of facility</label>
-    <input type="text" class="form-control" id="resource_name" name="resource" placeholder="Name of resource" data-provide="typeahead" autocomplete="off">
+    <label for="resource_name">Name of Flight</label>
+    <input type="text" class="form-control" id="resource_name" name="resource" placeholder="e.g. Flight 3" data-provide="typeahead" autocomplete="off">
   </div>
 
   <div class="form-group">
@@ -79,13 +79,13 @@
 
 
   <hr>
-  <p>Once the form is submitted, the renting of that facility will be posted and GGMS employees can view it.
-    As an employee, you can modify the status of this rental afterwards.</p>
+  <p>Once the form is submitted, the facility will be marked as under maintenance.
+    As the maintenance manager, you can modify the status of this maintenance afterwards.</p>
   <button type="submit" class="btn btn-primary">Rent facility</button>
 {!! Form::close() !!}
 
 <script type="text/javascript">
-  $.get('/config/resources.json', function(data){
+  $.get('/config/resources_golf.json', function(data){
     $("#resource_name").typeahead({ source:data });
   },'json');
 

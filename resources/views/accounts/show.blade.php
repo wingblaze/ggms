@@ -103,7 +103,19 @@
 	@endif
 
 @endif
-
+@if ($account->remarks != NULL)
+<div class="page-header">
+	<h3>Financial information</h3>
+	
+</div>
+<div>
+	<p>
+		<label>Remarks</label><BR />
+		{{ $account->remarks or 'N/A' }}<BR />
+		<p class="help-block">As finance manager, you may mark this account as cleared once the user has finished payment.</p>
+		<a class="btn btn-sm btn-primary" href="{{ action('AccountController@clear_payment', $account->id) }}">Clear account</a> 
+	</p>
+@endif
 <div class="page-header">
 	<h3>Account information</h3>
 </div>
