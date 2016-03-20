@@ -6,6 +6,8 @@
 <div class="page-header">
   <h1>Club Shares Listing</h1>
   <span id="helpBlock" class="help-block">Here is a list of club shares that account owners have posted to sell.</span>
+  @include('partials.error', ['title' => 'Club Share Listing failed'])
+  
   @if ($user && $user->is_owner() && $user->hasRole('user') && $user->hasRole('employee') == false)
     
     @if (!$canPostListing)

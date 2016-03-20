@@ -71,6 +71,6 @@ class User extends Authenticatable
         }else{
             $value = $this->name;
         }
-        return $value;
+        return trim($value);
     }
 }

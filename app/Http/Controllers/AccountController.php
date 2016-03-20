@@ -180,15 +180,22 @@ class AccountController extends Controller
         $user = Auth::user();
         $has_posted_listing = $user->account->has_posted_listing();
 
-        if ($user->account){
-            $slot = MembershipControl::latest_slot_of_account($user->account);
-            
-            if ($slot){
-                if ($has_posted_listing == FALSE){
-                    DB::table('membership_controls')->insert(['posted_by_account_id' => $user->account->id, 'membership_slot_id' => NULL, 'created_at' => Carbon::now()]);
-                }
-            }
-        }
+        if ($user->account == FALSE) 
+            return redirect()->action('AccountController@listings')
+                             ->with('errors', collect(['The user currently does not have an account.']));
+        
+        $slot = MembershipControl::latest_slot_of_account($user->account);
+
+        if ($slot == FALSE)
+            return redirect()->action('AccountController@listings')
+                             ->with('errors', collect(['The user\'s account currently does not have a membership slot yet.']));
+
+        if ($has_posted_listing)
+            return redirect()->action('AccountController@listings')
+                             ->with('errors', collect(['The user has already posted a club share listing.']));
+
+        DB::table('membership_controls')->insert(['posted_by_account_id' => $user->account->id, 'membership_slot_id' => NULL, 'created_at' => Carbon::now()]);
+        
         return $this->listings();
     }
 
