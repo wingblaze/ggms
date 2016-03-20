@@ -179,10 +179,15 @@ class AccountController extends Controller
     public function post_listing(){
         $user = Auth::user();
         $has_posted_listing = $user->account->has_posted_listing();
-        if ($has_posted_listing){
-            // error
-        }else{
-            DB::table('membership_controls')->insert(['posted_by_account_id' => $user->account->id, 'membership_slot_id' => NULL, 'created_at' => Carbon::now()]);
+
+        if ($user->account){
+            $slot = MembershipControl::latest_slot_of_account($user->account);
+            
+            if ($slot){
+                if ($has_posted_listing == FALSE){
+                    DB::table('membership_controls')->insert(['posted_by_account_id' => $user->account->id, 'membership_slot_id' => NULL, 'created_at' => Carbon::now()]);
+                }
+            }
         }
         return $this->listings();
     }
@@ -208,8 +213,11 @@ class AccountController extends Controller
         $listings = MembershipControl::whereNull('membership_slot_id')->get();
 
         foreach ($listings as $listing) {
-            $slot_id = MembershipControl::where('posted_by_account_id', $listing->posted_by_account_id)->whereNotNull('membership_slot_id')->first()->membership_slot_id;
-            $listing->slot = MembershipSlot::find($slot_id);
+            $slot = MembershipControl::where('posted_by_account_id', $listing->posted_by_account_id)->whereNotNull('membership_slot_id')->first();
+            if ($slot){
+                $slot_id = $slot->membership_slot_id;
+                $listing->slot = MembershipSlot::find($slot_id);
+            }
         }
 
         return view('accounts.listings', ['listings' => $listings, 'canPostListing' => !$has_posted_listing]);
