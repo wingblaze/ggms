@@ -8,7 +8,7 @@
 	<div class="jumbotron">
 		<h2>Generic Golf Management System</h2>
 		@if ($user)
-			<p>Hi {{ $user->display_name }}, welcome back!</p>
+			<p>Hi {{ trim($user->display_name) }}, welcome back!</p>
 		@else
 			<p>Hello world!</p>
 		@endif

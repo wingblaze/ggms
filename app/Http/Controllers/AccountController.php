@@ -114,11 +114,13 @@ class AccountController extends Controller
 
         $account->save();
 
-        $control = new MembershipControl;
-        $control->posted_by_account_id = 1; // system administrator
-        $control->current_account_id = $account->id;
-        $control->membership_slot_id = $membership_slot_id;
-        $control->save();
+        if ($data['membership_slot'] != -1){
+            $control = new MembershipControl;
+            $control->posted_by_account_id = 1; // system administrator
+            $control->current_account_id = $account->id;
+            $control->membership_slot_id = $membership_slot_id;
+            $control->save();
+        }
         
         return $this->index();
     }
@@ -198,7 +200,10 @@ class AccountController extends Controller
     public function listings(){
         $user = Auth::user();
 
-        $has_posted_listing = $user->account->has_posted_listing();
+        if ($user->account)
+            $has_posted_listing = $user->account->has_posted_listing();
+        else
+            $has_posted_listing = FALSE;
 
         $listings = MembershipControl::whereNull('membership_slot_id')->get();
 

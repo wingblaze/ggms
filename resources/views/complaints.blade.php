@@ -42,7 +42,7 @@
 					@if ($account->owner())
 						<a class="btn btn-sm btn-default" href="{{action('UserController@show', ['id' => $account->owner()->id])}}"><span class="glyphicon glyphicon-user" aria-hidden="true"></span>&nbsp Owner</a>
 					@endif
-					@if ($user->hasRole('user'))
+					@if ($user->hasRole('user') && $user->is_owner())
 					<a class="btn btn-sm btn-default" href="{{url('review', ['id' => $account->id])}}"><span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>&nbsp Review</a>
 					@endif
 				

@@ -56,7 +56,10 @@ class User extends Authenticatable
 
     public function is_owner(){
         $account = $this->account;
-        return $account->owner()->id == $this->id;
+        if ($account)
+            return $account->owner()->id == $this->id;
+
+        return FALSE;
     }
 
     public function getDisplayNameAttribute($value)
