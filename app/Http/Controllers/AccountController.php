@@ -125,6 +125,32 @@ class AccountController extends Controller
         return $this->index();
     }
 
+    public function assign_slot(Request $request){
+        $data = $request->all();
+
+        if ($data['membership_slot'] != -1)
+            $rules['membership_slot'] = 'exists:membership_slots,id';
+
+        $messages = [
+            'membership_slot.exists' => 'The membership slot you wish to assign does not exist.',
+        ];
+
+        $this->validate($request, $rules, $messages);
+
+        $account_id = $data['account_id'];
+        $membership_slot_id = $data['membership_slot'];
+
+        if ($data['membership_slot'] != -1 && $account_id){
+            $control = new MembershipControl;
+            $control->posted_by_account_id = 1; // system administrator
+            $control->current_account_id = $account_id;
+            $control->membership_slot_id = $membership_slot_id;
+            $control->save();
+        }
+
+        return redirect()->action('AccountController@index');
+    }
+
     /**
      * Display the specified account.
      *
@@ -133,7 +159,7 @@ class AccountController extends Controller
      */
     public function show($id)
     {
-        return view('accounts.show', ['account' => Account::findOrFail($id), 'complaints' => Complaint::where('account_id', '=', $id)->get()]);
+        return view('accounts.show', ['account' => Account::findOrFail($id), 'slots' => MembershipSlot::whereNotIn('id', MembershipControl::select('membership_slot_id')->distinct()->get())->orderBy('id')->get(), 'complaints' => Complaint::where('account_id', '=', $id)->get()]);
     }
 
     /**

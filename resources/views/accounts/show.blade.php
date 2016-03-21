@@ -8,7 +8,6 @@
 </div>
 
 
-
 <div class="page-header">
 	<h3>Members under this account</h3>
 	<p class="help-block">A single account can have at most one owner, and have multiple dependents.</p>
@@ -45,6 +44,30 @@
 </div>
 @endif
 
+@if (App\MembershipControl::latest_slot_of_account($account->id) == FALSE)
+<div class="page-header">
+	<h3>No membership slot</h3>
+	<p class="help-block"><span class="label label-warning">Warning</span> This account currently does not have a membership slot. Without a membership slot, the user cannot access facilities or post their club share listing.</p>
+	@if ($user->hasRole('membership_manager'))
+		{!! Form::open(array('action' => 'AccountController@assign_slot')) !!}
+		{!! Form::hidden('account_id', $account->id) !!}
+			<span id="helpBlock" class="help-block">As membership manager, you may assign an unused membership slot to this account below:</span>
+			<div class="form-group">
+				<label for="membership_slot">Membership Slot</label>
+				<select class="form-control" name="membership_slot">
+					<option value="-1">No slot assigned</option>
+					@foreach ($slots as $slot)
+					<option value="{{ $slot->id }}">Slot {{$slot->id}} - {{ $slot->type}} </option>
+					@endforeach
+				</select>
+			</div>
+			<button type="submit" class="btn btn-primary">Assign</button>
+		{!! Form::close() !!}
+	@endif
+</div>
+@endif
+
+
 @if($account->status == 'On Review')
 	<div class="page-header">
 		<h3>Application undergoing review</h3>
@@ -52,7 +75,7 @@
 	@if ($user->hasRole('user'))
 		<p class="help-block">As a member of this golf course community, you may <a class="btn btn-default btn-sm" href="{{ url('review', ['id' => $account->id]) }}"><span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>&nbsp review this account</a> and share with us your thoughts or report any issues with this new application.</p>
 		@endif
-		<p class="help-block">This account is currently <span class="label label-warning">pending</span> and is undergoing the review process of the existing members.</p>
+		<p class="help-block"><span class="label label-warning">Pending</span> This account is currently pending and is undergoing the review process of the existing members.</p>
 	@if (count($complaints) == 0)
 
 		<p class="help-block">There are currently no complaints on this account.</p>

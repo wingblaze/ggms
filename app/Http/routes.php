@@ -20,6 +20,7 @@ Route::group(['middleware' => ['web']], function () {
 	Route::get('shares/reports', 'AccountController@report_listings');
 
 	Route::post('accounts/assign_user', 'AccountController@assign_user');
+	Route::post('accounts/assign_slot', 'AccountController@assign_slot');
 	Route::get('accounts/{id}/assign', 'AccountController@assign');
 	Route::get('accounts/inactives', 'ReportController@inactives');
 	Route::get('accounts/{id}/accept', 'AccountController@accept');

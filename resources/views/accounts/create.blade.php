@@ -115,7 +115,7 @@
   </div>
   <hr>
   <h3>Membership details</h3>
-  <span id="helpBlock" class="help-block">You can specify which membership slot this account will have.</span>
+  <span id="helpBlock" class="help-block">As membership manager, you may assign an unused membership slot to this account below:</span>
   <div class="form-group">
     <label for="membership_slot">Membership Slot</label>
     <select class="form-control" name="membership_slot">
