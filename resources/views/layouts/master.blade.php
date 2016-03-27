@@ -36,6 +36,28 @@
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
           @if ($user)
           <ul class="nav navbar-nav">
+            @if ($user->hasRole('user'))
+            <li class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Facilities and Rental <span class="caret"></span></a>
+              
+              <ul class="dropdown-menu">
+                <li><a href="{{action('ResourceController@index')}}">View facilities</a></li>
+                <li><a href="{{action('ResourceController@rent')}}">Rent facilities</a></li>
+                <li class="divider"></li>
+                <li><a href="{{ action('ResourceController@golf') }}">Reserve tee-time</a></li>
+                <li class="divider"></li>
+                <li><a href="{{action('EventController@create')}}">Create an event</a></li>                
+                @endif
+
+
+
+              </ul>
+            </li>
+          </ul>
+            @endif
+
+          @if ($user)
+          <ul class="nav navbar-nav">
             @if ($user->hasRole('membership_manager') || $user->hasRole('marketing_manager'))
             <li class="dropdown">
               <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Membership <span class="caret"></span></a>
@@ -135,7 +157,7 @@
             @endif
             @if ($user->hasRole('user') || $user->hasRole('membership_manager'))
             <li class="dropdown">
-              <a href="{{ action('ComplaintController@index') }}" role="button">Pending Accounts </a>
+              <a href="{{ action('ComplaintController@index') }}" role="button">Pending Accounts</a>
             </li>
             @endif
             <li class="dropdown">

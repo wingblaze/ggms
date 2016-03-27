@@ -10,6 +10,7 @@ use App\Http\Controllers\Controller;
 use App\Resource;
 use App\Event;
 use Carbon\Carbon;
+use Auth;
 
 class EventController extends Controller
 {
@@ -69,6 +70,14 @@ class EventController extends Controller
 
         $notes = (object)[];
 
+        $user = Auth::user();
+        if ($user->hasRole('user')){
+            $notes->requested_by = $user->id;
+        }
+
+        $notes->status = 'Unpaid';
+        
+
 
         if (isset($data['contact_details']))
             $notes->preparations['contact_details'] = $data['contact_details'];
@@ -91,7 +100,7 @@ class EventController extends Controller
         $event->notes = json_encode($notes);
         
         $event->save();
-        return $this->show($event->id);
+        return redirect()->action('EventController@show', [$event->id]);
     }
 
     public function show($id)
@@ -123,10 +132,10 @@ class EventController extends Controller
 
     public function __construct()
     {
-        $this->middleware('role:employee');
+        $this->middleware('role:employee|user');
 
         $this->middleware('role:membership_manager|golf_ops_manager|marketing_manager', ['only' => [
-            'store', 'edit', 'destroy', 'create'
+            'edit', 'destroy', 
             ]]);
     }
 }

@@ -4,8 +4,14 @@
 
 @section('content')
 <div class="page-header">
+
+	<?php $notes = json_decode($event->notes) ?>
 	<h1>View event <small>{{ $event->name }}</small></h1>
 	<p class="help-block"><label>Description:</label> {{ $event->description }}</p>
+	@if ($notes->requested_by)
+		<?php $user = App\User::find($notes->requested_by); ?>
+		<p class="help-block"><label>Requested by:</label> {{  $user->display_name }}</p>
+	@endif
 </div>
 <p><label>start_date</label><BR />
 	{{ $event->start_date }}
@@ -37,10 +43,11 @@
 	{{ $event->updated_at }}
 </p>
 <hr>
-@if ($user->hasRole('marketing_manager'))
+
+
 <h3>Preparation details</h3>
 <p class="help-block">As marketing manager, these are the information that will aid you in the successful preparation of the requested event.</p>
-<?php $notes = json_decode($event->notes) ?>
+
 @foreach ($notes->preparations as $key => $value)
 <p>
 	<label>
@@ -49,5 +56,5 @@
 	{{ ($value != 'on') ? $value : 'Requires preparation' }}
 </p>
 @endforeach
-@endif
+
 @stop

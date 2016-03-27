@@ -11,9 +11,15 @@
 <div class="page-header">
 	<h1>Reserve Golf Tee-time</h1>
   @include('partials.error', ['title' => 'Event creation failed'])
+  @if ($user->hasRole('golf_ops_manager'))
   <p class="help-block">As the golf operations manager, you may allow a user to use a flight. You can 
     <a href="{{ action('ResourceController@index') }}">click here to view the list of facilities</a>, including flights.
   </p>
+  @else
+  <p class="help-block">As a member, you may request to use a flight. You can 
+    <a href="{{ action('ResourceController@index') }}">click here to view the list of facilities</a>, including flights.
+  </p>
+  @endif
 </div>
 
 {!! Form::open(array('action' => 'ResourceController@store_rent')) !!}
@@ -22,10 +28,18 @@
     <input type="text" class="form-control" id="resource_name" name="resource" placeholder="e.g. Flight 3" data-provide="typeahead" autocomplete="off">
   </div>
 
+@if ($user->hasRole('user'))
+  <div class="form-group">
+    <label for="client_name">Name of client</label>
+    <p>{{ $user->display_name }}</p>
+    <input type="hidden" class="form-control" id="client_name" name="client" value="{{ $user->name }}" data-provide="typeahead" autocomplete="off">
+  </div>
+  @else
   <div class="form-group">
     <label for="client_name">Name of client</label>
     <input type="text" class="form-control" id="client_name" name="client" placeholder="Name of client" data-provide="typeahead" autocomplete="off">
   </div>
+  @endif
 
   <div class="form-group">
     <label for="date">Start time to rent</label>

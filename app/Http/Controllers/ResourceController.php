@@ -12,6 +12,7 @@ use App\RentResource;
 use Carbon\Carbon;
 
 use App\User;
+use Auth;
 
 class ResourceController extends Controller
 {
@@ -103,7 +104,14 @@ class ResourceController extends Controller
         $rent_resource->resource_id = $resource->id;
         $rent_resource->start_time = Carbon::parse($data['start']);
         $rent_resource->end_time = Carbon::parse($data['end']);
-        $rent_resource->status = 'Unpaid';
+
+        $user = Auth::user();
+        if ($user->hasRole('user')){
+            $rent_resource->status = 'Requested, unpaid';
+        }else{
+            $rent_resource->status = 'Unpaid';
+        }
+        
         $rent_resource->save();
         return $this->index();
     }
@@ -160,7 +168,7 @@ class ResourceController extends Controller
 
     public function __construct()
     {
-        $this->middleware('role:employee');
+        $this->middleware('role:employee|user');
 
         $this->middleware('role:system_administrator', ['only' => [
             'store', 'edit', 'destroy', 'create'
