@@ -132,6 +132,11 @@ class ResourceController extends Controller
         return view('resources.listing', ['resources' => Resource::all(), 'listings' => RentResource::all()]);
     }
 
+    public function my_listings(){
+        $user = Auth::user();
+        return view('resources.my_listings', ['listings' => RentResource::where('user_id', $user->id)->orderBy('start_time', 'asc')->get()]);
+    }
+
     public function unpaid_listing(){
         return view('resources.unpaid_listing', ['resources' => Resource::all(), 'listings' => RentResource::where('status', '!=', 'In use')->get()]);
     }
