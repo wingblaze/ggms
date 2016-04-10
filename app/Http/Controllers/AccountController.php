@@ -210,7 +210,7 @@ class AccountController extends Controller
             return redirect()->action('AccountController@listings')
                              ->with('errors', collect(['The user currently does not have an account.']));
         
-        $slot = MembershipControl::latest_slot_of_account($user->account);
+        $slot = MembershipControl::latest_slot_of_account($user->account->id);
 
         if ($slot == FALSE)
             return redirect()->action('AccountController@listings')
