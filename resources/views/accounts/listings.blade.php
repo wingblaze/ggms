@@ -53,7 +53,9 @@
         @endif
       </td>
       <td class="col-md-2">
-        {{ $listing->slot['type'] }}
+      @if ($listing && $listing->posted_by_account && $listing->posted_by_account->current_membership_slot())
+        {{ $listing->posted_by_account->current_membership_slot()['type'] }}
+      @endif
       </td>
       <td class="col-md-2">
         {{ $listing->created_at or '-' }}
