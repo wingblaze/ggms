@@ -56,7 +56,10 @@
       </div>
       <script type="text/javascript">
       $(function () {
-        $('#datetimepicker1').datetimepicker();
+        $('#datetimepicker1').datetimepicker({
+          minDate: moment(),
+          useCurrent: false
+        });
       });
       </script>
     </div>
@@ -78,7 +81,8 @@
       <script type="text/javascript">
       $(function () {
         $('#datetimepicker2').datetimepicker({
-          useCurrent: false
+          useCurrent: false,
+          minDate: moment()
         });
       });
       $("#datetimepicker1").on("dp.change", function (e) {
