@@ -23,7 +23,7 @@
 </div>
 
 {!! Form::open(array('action' => 'ResourceController@store_rent')) !!}
-<div class="row">
+  <div class="row">
   <div class="form-group form-height-sm col-md-6">
     <label for="resource_name">Name of facility</label>
     <input type="text" class="form-control" id="resource_name" name="resource" placeholder="Name of resource" data-provide="typeahead" autocomplete="off">

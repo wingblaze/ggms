@@ -17,29 +17,27 @@
 </div>
 
 {!! Form::open(array('action' => 'ResourceController@store_rent')) !!}
-  <div class="form-group">
+<div class="row">
+  <div class="form-group form-height-sm col-md-6">
     <label for="resource_name">Name of Flight</label>
     <input type="text" class="form-control" id="resource_name" name="resource" placeholder="e.g. Flight 3" data-provide="typeahead" autocomplete="off">
   </div>
 
-  <div class="form-group">
+  <div class="form-group form-height-sm col-md-6">
     <label for="client_name">Name of client</label>
     <input type="text" class="form-control" id="client_name" name="client" placeholder="Name of client" data-provide="typeahead" autocomplete="off">
   </div>
+</div>
 
-  <div class="form-group">
-    <label for="date">Start time to rent</label>
-    <div class="row">
-      <div class='col-sm-6'>
-        <div class="form-group">
+
+<div class="row">
+  <div class="form-group form-height-sm col-md-6">
+    <label for="date">Rent start time</label>
           <div class='input-group date' id='datetimepicker1'>
             <input type='text' class="form-control" name="start" />
             <span class="input-group-addon">
               <span class="glyphicon glyphicon-calendar"></span>
             </span>
-          </div>
-        </div>
-      </div>
       <script type="text/javascript">
       $(function () {
         $('#datetimepicker1').datetimepicker({
@@ -53,26 +51,21 @@
     </div>
   </div>
 
-  <div class="form-group">
-    <label for="date">End date and time of event</label>
-    <div class="row">
-      <div class='col-sm-6'>
-        <div class="form-group">
+  <div class="form-group form-height-sm col-md-6">
+    <label for="date">Rent end time</label>
           <div class='input-group date' id='datetimepicker2'>
             <input type='text' class="form-control" name="end" />
             <span class="input-group-addon">
               <span class="glyphicon glyphicon-calendar"></span>
             </span>
-          </div>
-        </div>
-      </div>
       <script type="text/javascript">
       $(function () {
         $('#datetimepicker2').datetimepicker({
-          minDate: moment().add(-1, 'hour'),
           useCurrent: false,
           sideBySide: true,
+          minDate: moment().add(-1, 'hour'),
           stepping: 5
+
         });
       });
       $("#datetimepicker1").on("dp.change", function (e) {
@@ -80,13 +73,14 @@
         $('#datetimepicker2').data("DateTimePicker").maxDate(moment(e.date).add(1, 'Day'));
       });
       $("#datetimepicker2").on("dp.change", function (e) {
-        $('#datetimepicker1').data("DateTimePicker").maxDate(e.date);
+        $('#datetimepicker1').data("DateTimePicker").minDate(moment(e.date));
         $('#datetimepicker1').data("DateTimePicker").maxDate(e.date);
       });
+      
       </script>
     </div>
   </div>
-
+</div>
 
   <hr>
   <p>Once the form is submitted, the facility will be marked as under maintenance.
