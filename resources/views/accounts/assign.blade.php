@@ -16,7 +16,11 @@
 <div class="row">
   <div class="form-group form-height-xs col-md-4">
     <label>Current account owner</label>
-    <p>{{ $account->owner()->display_name }}</p>
+    @if ($account->owner())
+      <p>{{ $account->owner()->display_name }}</p>
+    @else
+      <p>No account owner</p>
+    @endif
   </div>
   <div class="form-group form-height-xs col-md-8">
     <label>Account members</label>
