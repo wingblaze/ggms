@@ -10,19 +10,17 @@
 		@if ($user)
 			<p>Hi {{ trim($user->display_name) }}, welcome back!</p>
 		@else
-			<p>Hello world!</p>
+			<p>Welcome!</p>
 		@endif
-
 		<p><a class="btn btn-primary btn-lg" href="#" role="button">Learn more</a></p>
 	</div>
 
 	<div class="col-md-4">
 		<div class="panel panel-default">
 			<div class="panel-body">
-				<h4>News</h4>
-				<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
-				 labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris 
-				 nisi ut aliquip ex ea commodo consequat.
+				<h4>What makes GGMS different?</h4>
+				<p>
+					Produce some abstract, a short paragraph describing how GGMS is different from other golf course management systems.
 				</p>
 			</div>
 		</div>
@@ -55,10 +53,15 @@
 		<div class="panel panel-default">
 			<div class="panel-body">
 				<h4>On-going events</h4>
-				<UL>
-					<LI>Newbies Golf Tournament, Feb 23</LI>
-					<LI>Wedding at Cana, Feb 15</LI>
-				</UL>
+				@if (count($events) > 0)
+					<ul>
+						@foreach ($events as $event)
+							<li>{{ $event->name }}</li>
+						@endforeach
+					</ul>
+				@else
+					<p>No events today. <a href="{{ action('EventController@index') }}">Click here</a> to see more upcoming events.</p>
+				@endif
 			</div>
 		</div>
 	</div>
