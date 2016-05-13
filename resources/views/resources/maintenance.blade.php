@@ -43,8 +43,10 @@
       <script type="text/javascript">
       $(function () {
         $('#datetimepicker1').datetimepicker({
-          minDate: moment(),
-          useCurrent: false
+          minDate: moment().add(-1, 'hour'),
+          useCurrent: false,
+          sideBySide: true,
+          stepping: 5
         });
       });
       </script>
@@ -67,14 +69,18 @@
       <script type="text/javascript">
       $(function () {
         $('#datetimepicker2').datetimepicker({
-          minDate: moment(),
-          useCurrent: false
+          minDate: moment().add(-1, 'hour'),
+          useCurrent: false,
+          sideBySide: true,
+          stepping: 5
         });
       });
       $("#datetimepicker1").on("dp.change", function (e) {
         $('#datetimepicker2').data("DateTimePicker").minDate(e.date);
+        $('#datetimepicker2').data("DateTimePicker").maxDate(moment(e.date).add(1, 'Day'));
       });
       $("#datetimepicker2").on("dp.change", function (e) {
+        $('#datetimepicker1').data("DateTimePicker").maxDate(e.date);
         $('#datetimepicker1').data("DateTimePicker").maxDate(e.date);
       });
       </script>
