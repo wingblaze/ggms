@@ -4,9 +4,11 @@
 
 @section('content')
 <div class="page-header">
-	<h1>Account details</h1>
-</div>
+	<h1>
+	Account details
+	</h1>
 
+</div>
 
 <div class="page-header">
 	<h3>Members under this account</h3>

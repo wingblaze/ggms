@@ -290,7 +290,7 @@ class AccountController extends Controller
     }
 
     public function assign($id) {
-        return view('accounts.assign', ['account_id' => $id]);
+        return view('accounts.assign', ['account_id' => $id, 'account' => Account::findOrFail($id)]);
     }
 
     // accept after complaints

@@ -37,6 +37,7 @@ Route::group(['middleware' => ['web']], function () {
 	Route::resource('complaints', 'ComplaintController');
 	
 	Route::get('users.json', 'UserController@json');
+	Route::post('users/update', 'UserController@update_user');
 	Route::resource('users', 'UserController');
 
 	Route::get('events.json', 'EventController@json');
