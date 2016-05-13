@@ -4,23 +4,33 @@
 
 @section('content')
 <div class="page-header">
-	<h1>Members</h1>
+	<h1>
+		Members
+		@if ($user->hasRole('membership_manager'))
+			<div class="pull-right">
+				<a class="btn btn-primary" href="{{action('UserController@index')}}">
+					<span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+					&nbsp New
+				</a>
+			</div>
+		@endif
+	</h1>
 </div>
 <div class="table-responsive">
 	<table class="table table-striped">
 		<tr>
-			<th class="col-md-2">Name of member</th>
-			<th class="col-md-2">Membership holder</th>
-			<th class="col-md-3">Options</th>
+			<th class="col-md-4">Name of member</th>
+			<th class="col-md-4">Membership holder</th>
+			<th class="col-md-4">Options</th>
 		</tr>
 		@foreach($users as $user)
 		<tr>
-			<td class="col-md-2">
+			<td class="col-md-4">
 				<a href="{{ action('UserController@show', ['id' => $user->id]) }}">
 					{{ $user->display_name }}
 				</a>
 			</td>
-			<td class="col-md-2">
+			<td class="col-md-4">
 				@if ($user->account == FALSE)
 					No access
 				@elseif ($user->account_type != 'owner')
@@ -35,7 +45,7 @@
 					Myself
 				@endif
 				</td>
-				<td class="col-md-3">
+				<td class="col-md-4">
 					<a class="btn btn-sm btn-default" href="{{action('UserController@edit', ['id' => $user->id])}}"><span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>&nbsp Edit</a>
 					&nbsp
 					<a class="btn btn-sm btn-danger" href="{{action('UserController@destroy', ['id' => $user->id])}}"><span class="glyphicon glyphicon-trash" aria-hidden="true"></span>&nbsp Delete</a>

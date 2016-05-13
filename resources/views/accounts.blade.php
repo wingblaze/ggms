@@ -5,9 +5,29 @@
 @section('content')
 <div class="page-header">
 	@if(isset($inactive) && $inactive)
-		<h1>Inactive Accounts</h1>
+		<h1>
+			Inactive Accounts 
+			@if ($user->hasRole('membership_manager'))
+				<div class="pull-right">
+					<a class="btn btn-primary" href="{{action('AccountController@create')}}">
+						<span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+						&nbsp New
+					</a>
+				</div>
+			@endif
+		</h1>
 	@else
-		<h1>Membership Accounts</h1>
+		<h1>
+			Membership Accounts 
+			@if ($user->hasRole('membership_manager'))
+				<div class="pull-right">
+					<a class="btn btn-primary" href="{{action('AccountController@create')}}">
+						<span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+						&nbsp New
+					</a>
+				</div>
+			@endif
+		</h1>
 	@endif
 
 </div>

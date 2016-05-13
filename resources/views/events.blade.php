@@ -4,7 +4,17 @@
 
 @section('content')
 <div class="page-header">
-	<h1>Event list</h1>
+	<h1>
+		Event list
+		@if ($user->hasRole('marketing_manager'))
+			<div class="pull-right">
+				<a class="btn btn-primary" href="{{action('EventController@create')}}">
+					<span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+					&nbsp New
+				</a>
+			</div>
+		@endif
+	</h1>
 </div>
 <div class="table-responsive">
 	<table class="table table-striped">

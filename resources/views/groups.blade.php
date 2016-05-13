@@ -4,7 +4,18 @@
 
 @section('content')
 <div class="page-header">
-	<h1>Groups</h1>
+	<h1>
+		Groups
+		@if ($user->hasRole('membership_manager'))
+			<div class="pull-right">
+				<a class="btn btn-primary" href="{{action('GroupController@create')}}">
+					<span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+					&nbsp New
+				</a>
+			</div>
+		@endif
+		
+	</h1>
 </div>
 @foreach ($categories as $category)
 <div class="col-md-4">
