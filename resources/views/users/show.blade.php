@@ -4,7 +4,18 @@
 
 @section('content')
 <div class="page-header">
-	<h1>View user <small>{{ $target_user->salutation or '' }} {{ $target_user->display_name }}</small></h1>
+	<h1>View user <BR />
+	<small>{{ $target_user->salutation or '' }} {{ $target_user->display_name }}</small>
+
+		@if ($user->hasRole('membership_manager'))
+			<div class="pull-right">
+				<a class="btn btn-primary" href="{{action('UserController@edit', $target_user->id)}}">
+					<span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
+					&nbsp Edit
+				</a>
+			</div>
+		@endif
+	</h1>
 </div>
 <p><label>E-mail</label><BR />
 	{{ $target_user->email }}

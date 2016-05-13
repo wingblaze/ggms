@@ -100,6 +100,52 @@ class UserController extends Controller
         return $this->show($user->id);
     }
 
+    public function update_user(Request $request)
+    {
+        $rules = [
+            'name' => 'required|',
+            'mobile_number' => 'required',
+            'birth_date' => 'required',
+            'birth_place' => 'required',
+            'nationality' => 'required',
+            'gender' => 'required',
+            'salutation' => 'required',
+            'civil_status' => 'required',
+            ];
+
+        $messages = [
+            'expiration.required' => 'The member\'s account expiration date is required.',
+        ];
+
+        $this->validate($request, $rules, $messages);
+
+        $data = $request->all();
+
+        $user = User::find($data['user_id']);
+
+        $user->name = $data['name'];
+
+        $user->email = $data['email'];
+        $user->mobile_number = $data['mobile_number'];
+
+        $user->birth_date = Carbon::createFromFormat('Y-m-d', $data['birth_date']);
+        $user->birth_place = $data['birth_place'];
+        
+        $user->nationality = $data['nationality'];
+        $user->gender = $data['gender'];
+
+        $user->salutation = $data['salutation'];
+
+        $user->civil_status = $data['civil_status'];
+        
+
+        $user->name = $user->name . " (" . $user->id . ")";
+        
+        $user->save();
+
+        return redirect()->action('UserController@show', $user->id);
+    }
+
     public function edit($id)
     {
     	return view('users.edit', ['target_user' => User::findOrFail($id)]);
@@ -135,7 +181,7 @@ class UserController extends Controller
             ]]);
 
         $this->middleware('role:membership_manager', ['only' => [
-            'store', 'edit', 'destroy', 'create', 'assign_account'
+            'update_user', 'store', 'edit', 'destroy', 'create', 'assign_account'
             ]]);
     }
 }

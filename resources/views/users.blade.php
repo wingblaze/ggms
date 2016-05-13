@@ -8,7 +8,7 @@
 		Members
 		@if ($user->hasRole('membership_manager'))
 			<div class="pull-right">
-				<a class="btn btn-primary" href="{{action('UserController@index')}}">
+				<a class="btn btn-primary" href="{{action('UserController@create')}}">
 					<span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
 					&nbsp New
 				</a>

@@ -1,0 +1,28 @@
+div > div.form-group{
+    margin-top:4px;
+    padding: 10px;
+    outline: 1px solid #eee;
+    outline-offset: -4px;
+    -moz-outline-radius: 4px;
+    -webkit-outline-radius: 4px;
+}
+@media (min-width: 1024px) {
+	.form-height-xs {
+		height: 70px;
+	}
+	.form-height-sm {
+		height: 100px;
+	}
+	.form-height-md {
+		height: 130px;
+	}
+	.form-height-lg {
+		height: 170px;
+	}
+	.form-height-xl {
+		height: 210px;
+	}
+}
+.radio-inline {
+
+}
