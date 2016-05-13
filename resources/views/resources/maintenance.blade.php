@@ -85,7 +85,7 @@
   <hr>
   <p>Once the form is submitted, the facility will be marked as under maintenance.
     As the maintenance manager, you can modify the status of this maintenance afterwards.</p>
-  <button type="submit" class="btn btn-primary">Rent facility</button>
+  <button type="submit" class="btn btn-primary">Post maintenance notice</button>
 {!! Form::close() !!}
 
 <script type="text/javascript">

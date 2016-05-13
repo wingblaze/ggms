@@ -99,7 +99,7 @@
   <hr>
   <p>Once the form is submitted, the renting of that facility will be posted and GGMS employees can view it.
     As the golf operations manager, you can modify the status of this rental afterwards.</p>
-  <button type="submit" class="btn btn-primary">Rent facility</button>
+  <button type="submit" class="btn btn-primary">Set tee time</button>
 {!! Form::close() !!}
 
 <script type="text/javascript">
