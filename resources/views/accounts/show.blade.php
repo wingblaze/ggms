@@ -27,7 +27,7 @@
 	<p class="help-block">A single account can have at most one owner, and have multiple dependents.</p>
 </div>
 @if ($user->hasRole('membership_manager'))
-	<p class="help-block">As the membership manager of this golf course community, you may <a href="{{action('AccountController@assign', ['id' => $account->id])}}"><button class="btn btn-primary">assign an existing user</button></a> to this account as either a dependent or an owner.
+	<p class="help-block">As the membership manager of this golf course community, you may <a href="{{action('AccountController@assign', ['id' => $account->id])}}"><button class="btn btn-default">assign an existing user</button></a> to this account as either a dependent or an owner.
 	@endif
 @if (count($account->users) == 0)
 	<p class="help-block">There are currently no members assigned to this account.</p>

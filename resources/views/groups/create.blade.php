@@ -9,12 +9,15 @@
 </div>
 
 {!! Form::open(array('action' => 'GroupController@store')) !!}
-<div class="form-group">
+
+<div class="row">
+<h3>Group details</h3>
+<div class="form-group form-height-md col-md-6">
   <label for="group">Group name</label>
-  <span id="helpBlock" class="help-block">Please input the name of the company or group.</span>
   <input type="text" class="form-control" id="name" name="name" placeholder="">
+  <span id="helpBlock" class="help-block">Please input the name of the company or group.</span>
 </div>
-<div class="form-group">
+<div class="form-group form-height-md col-md-6">
   <label for="type">Industry or details</label>
   <select class="form-control" name="type">
     <option value="Agriculture, forestry and fishing">
@@ -82,21 +85,29 @@
     </option>
   </select>
 </div>
-<div class="form-group">
-  <label for="description">Description</label>
-  <textarea type="text" class="form-control" id="description" name="description" placeholder=""></textarea>
 </div>
-<div class="form-group">
-  <label for="address">Address</label>
-  <input type="text" class="form-control" id="address" name="address" placeholder="">
+<div class="row">
+  <div class="form-group">
+    <label for="description">Description</label>
+    <textarea type="text" class="form-control" id="description" name="description" placeholder=""></textarea>
+    <p class="help-block">Please give a short description of the group.</p>
+  </div>
 </div>
-<div class="form-group">
-  <label for="phone">Phone</label>
-  <input type="text" class="form-control" id="phone" name="phone" placeholder="">
-</div>
-<div class="form-group">
-  <label for="fax">Fax</label>
-  <input type="text" class="form-control" id="fax" name="fax" placeholder="">
+
+<div class="row">
+<h3>Contact details</h3>
+  <div class="form-group form-height-sm col-md-4">
+    <label for="address">Address</label>
+    <input type="text" class="form-control" id="address" name="address" placeholder="">
+  </div>
+  <div class="form-group form-height-sm col-md-4">
+    <label for="phone">Phone</label>
+    <input type="text" class="form-control" id="phone" name="phone" placeholder="">
+  </div>
+  <div class="form-group form-height-sm col-md-4">
+    <label for="fax">Fax</label>
+    <input type="text" class="form-control" id="fax" name="fax" placeholder="">
+  </div>
 </div>
 <hr>
 <button type="submit" class="btn btn-primary">Create a new group</button>
