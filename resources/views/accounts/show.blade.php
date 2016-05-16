@@ -5,7 +5,19 @@
 @section('content')
 <div class="page-header">
 	<h1>
-	Account details
+		Account details
+		@if ($user->hasRole('membership_manager'))
+			<div class="pull-right">
+				<a class="btn btn-default" href="{{action('AccountController@edit', $account->id)}}">
+					<span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
+					&nbsp Edit
+				</a>
+				<a class="btn btn-danger" href="{{action('AccountController@destroy', $account->id)}}">
+					<span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
+					&nbsp Disable
+				</a>
+			</div>
+		@endif
 	</h1>
 
 </div>
@@ -246,11 +258,11 @@
 		{{ $account->status or 'N/A' }}
 		</div>
 		<div class="col-md-4 form-group form-height-xs">
-		<label>Date last account update</label><BR />
+		<label>Date last updated (account information)</label><BR />
 		{!! display_precise_date($account->updated_at) !!}
 		</div>
 		<div class="col-md-4 form-group form-height-xs">
-		<label>Date of account deletion</label><BR />
+		<label>Date of deletion (account)</label><BR />
 		{!! display_precise_date($account->deleted_at) !!}
 		</div>
 	</div>

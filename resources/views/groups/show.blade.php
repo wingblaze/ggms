@@ -4,7 +4,22 @@
 
 @section('content')
 <div class="page-header">
-	<h1>View group <small>{{ $group->name }}</small></h1>
+	<h1>
+		View group <small>{{ $group->name }}</small>
+		@if ($user->hasRole('membership_manager'))
+			<div class="pull-right">
+				<a class="btn btn-default" href="{{action('GroupController@edit', $group->id)}}">
+					<span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
+					&nbsp Edit
+				</a>
+				<a class="btn btn-danger" href="{{action('GroupController@destroy', $group->id)}}">
+					<span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
+					&nbsp Disable
+				</a>
+			</div>
+		@endif
+
+	</h1>
 </div>
 	<div class="row">
 		<div class="col-md-4 form-group form-height-xs">
@@ -34,11 +49,11 @@
 	</div>
 	<div class="row">
 		<div class="col-md-4 form-group form-height-xs">
-			<label>Date of group creation</label><BR />
+			<label>Date of creation (group)</label><BR />
 			{!! display_precise_date($group->created_at) !!}
 		</div>
 		<div class="col-md-4 form-group form-height-xs">
-			<label>Date of last update of group information</label><BR />
+			<label>Date last updated (group information)</label><BR />
 			{!! display_precise_date($group->updated_at) !!}
 		</div>
 	</div>

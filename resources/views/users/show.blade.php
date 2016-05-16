@@ -10,9 +10,13 @@
 
 		@if ($user->hasRole('membership_manager'))
 			<div class="pull-right">
-				<a class="btn btn-primary" href="{{action('UserController@edit', $target_user->id)}}">
+				<a class="btn btn-default" href="{{action('UserController@edit', $target_user->id)}}">
 					<span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
 					&nbsp Edit
+				</a>
+				<a class="btn btn-danger" href="{{action('UserController@destroy', $target_user->id)}}">
+					<span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
+					&nbsp Disable
 				</a>
 			</div>
 		@endif
@@ -66,12 +70,12 @@
 @endif
 	
 	<div class="col-md-4 form-group form-height-xs">
-	<label>Date of user creation</label><BR />
+	<label>Date of creation (user)</label><BR />
 	{!! display_readable_date($target_user->created_at) !!}
 	</div>
 
 	<div class="col-md-4 form-group form-height-xs">
-		<label>Date last update of user information</label><BR />
+		<label>Date last updated (user information)</label><BR />
 		{!! display_readable_date($target_user->updated_at) !!}
 	</div>
 </div>

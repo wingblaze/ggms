@@ -21,7 +21,6 @@
 		<tr>
 			<th class="col-md-4">Name of member</th>
 			<th class="col-md-4">Membership holder</th>
-			<th class="col-md-4">Options</th>
 		</tr>
 		@foreach($users as $user)
 		<tr>
@@ -44,11 +43,6 @@
 				@else
 					Myself
 				@endif
-				</td>
-				<td class="col-md-4">
-					<a class="btn btn-sm btn-default" href="{{action('UserController@edit', ['id' => $user->id])}}"><span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>&nbsp Edit</a>
-					&nbsp
-					<a class="btn btn-sm btn-danger" href="{{action('UserController@destroy', ['id' => $user->id])}}"><span class="glyphicon glyphicon-trash" aria-hidden="true"></span>&nbsp Delete</a>
 				</td>
 			</tr>
 			@endforeach
