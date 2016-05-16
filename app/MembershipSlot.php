@@ -3,6 +3,8 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use App\MembershipControl;
+use App\Account;
 
 class MembershipSlot extends Model
 {
@@ -11,12 +13,8 @@ class MembershipSlot extends Model
     	$this->hasMany('App\MembershipControl');
     }
 
-    public function owner(){
-    	if ($this->membership_control_id){
-    		$control = MembershipControl::find($this->membership_control_id);
-    		$account = $control->current_account()->first();
-    		return $account->owner();
-    	}
-    	return FALSE;
+    public function account(){
+        $account = MembershipControl::get_current_account_of($this->id);
+        return $account;
     }
 }

@@ -4,7 +4,17 @@
 
 @section('content')
 <div class="page-header">
-	<h1>Facilities</h1>
+	<h1>
+		Facilities
+		@if ($user->hasRole('system_administrator'))
+			<div class="pull-right">
+				<a class="btn btn-primary" href="{{action('ResourceController@create')}}">
+					<span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+					&nbsp New
+				</a>
+			</div>
+		@endif
+	</h1>
 </div>
 <div class="content">
 	<h2>View facilities</h2>
@@ -12,28 +22,15 @@
 	<div class="table-responsive">
 		<table class="table table-striped">
 			<tr>
-				<th class="col-md-8">Name of Facility</th>
-				@if ($user->hasRole('system_administrator'))
-				<th class="col-md-2">Date created</th>
-				<th class="col-md-4">Options</th>
-				@endif
+				<th class="col-md-12">Name of Facility</th>
 			</tr>
 			@foreach($resources as $resource)
 			<tr>
-				<td class="col-md-8">
+				<td class="col-md-12">
 					<a href="{{action('ResourceController@show', ['id' => $resource->id])}}">
 						{{ $resource->name }}
 					</a>
 				</td>
-				@if ($user->hasRole('system_administrator'))
-				<td class="col-md-2">{{ $resource->created_at or 'Unspecified' }}</td>
-				<td class="col-md-4">
-					
-					<a class="btn btn-sm btn-default" href="{{action('ResourceController@edit', ['id' => $resource->id])}}"><span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>&nbsp Edit</a>
-					&nbsp
-					<a class="btn btn-sm btn-danger" href="{{action('ResourceController@destroy', ['id' => $resource->id])}}"><span class="glyphicon glyphicon-trash" aria-hidden="true"></span>&nbsp Delete</a>
-				</td>
-				@endif
 			</tr>
 			@endforeach
 		</table>

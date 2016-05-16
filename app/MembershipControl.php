@@ -47,8 +47,13 @@ class MembershipControl extends Model
 
         if (!$latest_control) return FALSE;
 
+        
+        
         if ($latest_control->current_account_id)
             return Account::find($latest_control->current_account->id);
+
+        echo 'e';
+        die(4);
 
         return Account::find($latest_control->$latest_control->posted_by_account_id);
     }
