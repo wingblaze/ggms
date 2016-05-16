@@ -190,7 +190,7 @@
 		</div>
 	</div>
 
-	@if ($user->hasRole('finance_manager'))
+	@if ($user->hasRole('finance_manager') || $user->account && $user->account->id == $account->id)
 		<h3>Financial information</h3>
 		<div class="row">
 			<div class="col-md-4 form-group form-height-xs">
@@ -212,7 +212,11 @@
 		</div>
 		<div class="col-md-4 form-group form-height-xs">
 		<label>Group or affiliation</label><BR />
-		{{ $account->group_id or 'N/A' }}
+		@if ($account->group_id)
+			{{ App\Group::find($account->group_id)->name }}
+		@else
+			N/A
+		@endif
 		</div>
 		@if ($user->hasRole('membership_manager'))
 			<div class="col-md-4 form-group form-height-xs">
