@@ -83,61 +83,70 @@
 
 
 @if($account->status == 'On Review')
-	<div class="page-header">
-		<h3>Application undergoing review</h3>
-	</div>
-	@if ($user->hasRole('user'))
-		<p class="help-block">As a member of this golf course community, you may <a class="btn btn-default btn-sm" href="{{ url('review', ['id' => $account->id]) }}"><span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>&nbsp review this account</a> and share with us your thoughts or report any issues with this new application.</p>
-		@endif
-		<p class="help-block"><span class="label label-warning">Pending</span> This account is currently pending and is undergoing the review process of the existing members.</p>
-	@if (count($complaints) == 0)
+<!-- Trigger the modal with a button -->
+<button type="button" class="btn btn-warning" data-toggle="modal" data-target="#myModal">Account review details</button>
 
-		<p class="help-block">There are currently no complaints on this account.</p>
-	@else
-	<div class="table-responsive">
-		<table class="table table-striped">
-			<tr>
-				<th class="col-md-4">Complaint by</th>
-				<th class="col-md-2">Content</th>
-				<th class="col-md-2">Date posted</th>
-				<th class="col-md-3">Options</th>
-			</tr>
-			@foreach($complaints as $complaint)
-			<tr>
-				<td class="col-md-4">
-					@if ($complaint->owner)
-					<a href="{{action('UserController@show', ['id' => $complaint->owner->id])}}">
-						{{ $complaint->owner->name }}
-					</a>
-					@else
-						No owner
-					@endif
-				</td>
-				<td class="col-md-2">
-					{{ $complaint->content or 'No reason indicated' }}
-				</td>
-				<td class="col-md-2">
-					{{ $complaint->created_at or 'Now' }}
-				</td>
-				<td class="col-md-3">
-					<div class="btn-group" role="group" aria-label="Options">
-						
-						<a class="btn btn-sm btn-default" href="{{action('AccountController@show', ['id' => $complaint->owner->account->id])}}">Account details</a>
-						@if ($user->hasRole('membership_manager'))
-						<a class="btn btn-sm btn-default" href="{{action('AccountController@edit', ['id' => $complaint->owner->account->id])}}">Edit</a>
-						@endif
-						
-					</div>
-					@if ($user->hasRole('membership_manager'))
-					&nbsp
-					<a class="btn btn-sm btn-danger" href="{{action('ComplaintController@destroy', ['id' => $complaint->id])}}">Delete</a>
-					@endif
-				</td>
-			</tr>
-			@endforeach
-		</table>
+<!-- Modal -->
+<div id="myModal" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+
+    <!-- Modal content-->
+    <div class="modal-content">
+	<div class="modal-header">
+	<h3 class="modal-title">Application undergoing review</h3>
 	</div>
-	@endif
+		<div class="modal-body">
+		
+			This account is currently pending and is undergoing the review process of the existing members.</p>
+		@if (count($complaints) == 0)
+
+			<p class="help-block">There are currently no complaints on this account.</p>
+		@else
+		<div class="table-responsive">
+			<table class="table table-striped">
+				<tr>
+					<th class="col-md-4">Complaint by</th>
+					<th class="col-md-6">Content</th>
+					<th class="col-md-2 hidden-xs">Date posted</th>
+				</tr>
+				@foreach($complaints as $complaint)
+				<tr>
+					<td class="col-md-4">
+						@if ($complaint->owner)
+						<a href="{{action('UserController@show', ['id' => $complaint->owner->id])}}">
+							{{ $complaint->owner->display_name }}
+						</a>
+						@else
+							No owner
+						@endif
+					</td>
+					<td class="col-md-6">
+						{{ $complaint->content or 'No reason indicated' }}
+					</td>
+					<td class="col-md-2 hidden-xs">
+						{!! display_readable_date($complaint->created_at) !!}
+					</td>
+				</tr>
+				@endforeach
+			</table>
+		</div>
+		@endif
+		</div>
+		<div class="modal-footer">
+		@if ($user->hasRole('user'))
+			<p class="help-block">As a member of this golf course community, you may review this account and share with us your thoughts or report any issues with this new application.
+		</p>
+		
+		<a class="btn btn-primary" href="{{ url('review', ['id' => $account->id]) }}"><span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>&nbsp Review this account</a>
+		@endif
+		<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+	</div>
+
+  </div>
+</div>
+
+
 
 @endif
 @if ($account->remarks != NULL)

@@ -30,9 +30,9 @@
     <br>
     
     <textarea type="text" class="form-control" id="content" name="content" placeholder="" rows="4"></textarea>
-    <br><span><em>This account review is written by {{ $user->display_name }}</em></span>
+    <br><span><em>Please note that once you submit this review, it will be recorded as a review by {{ $user->display_name }}.</em></span>
   </div>
   <hr>
   <button type="submit" class="btn btn-primary">Send account review</button>
-{{!! Form::close() !!}}
+{!! Form::close() !!}
 @stop

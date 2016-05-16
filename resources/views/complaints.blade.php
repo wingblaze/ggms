@@ -14,14 +14,13 @@
 <div class="table-responsive">
 	<table class="table table-striped">
 		<tr>
-			<th class="col-md-2">Membership holder</th>
-			<th class="col-md-2">Status</th>
-			<th class="col-md-2">Number of complaints</th>
+			<th class="col-md-6">Membership holder</th>
+			<th class="col-md-2 hidden-xs">Complaints</th>
 			<th class="col-md-4">Options</th>
 		</tr>
 		@foreach($accounts as $account)
 		<tr>
-			<td class="col-md-2">
+			<td class="col-md-6">
 				@if ($account->owner())
 				<a href="{{action('AccountController@show', ['id' => $account->id])}}">
 					{{ $account->owner()->display_name }}
@@ -30,10 +29,7 @@
 					No owner
 				@endif
 			</td>
-			<td class="col-md-2">
-				{{ $account->status }}
-			</td>
-			<td class="col-md-2">
+			<td class="col-md-2 hidden-xs">
 				{{ App\Complaint::where('account_id', '=', $account->id)->count() }}
 			</td>
 			<td class="col-md-4">
