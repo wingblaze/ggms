@@ -58,7 +58,7 @@
       @endif
       </td>
       <td class="col-md-2">
-        {{ $listing->created_at or '-' }}
+        {!! display_readable_date($listing->created_at) !!}
       </td>
     </tr>
     @endforeach

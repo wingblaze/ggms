@@ -143,90 +143,117 @@
 		@endif
 	</p>
 @endif
-<div class="page-header">
-	<h3>Account information</h3>
-</div>
+
+
 <div>
-	<p>
-		<label>Account ID</label><BR />
-		{{ $account->id or 'N/A' }}
-	</p>
-	<p>
-		<label>tin_number</label><BR />
-		{{ $account->tin_number or 'N/A' }}
-	</p>
-	<p>
-		<label>home_address</label><BR />
+	<h3>Contact details</h3>
+	
+	<div class="row">
+		<div class="col-md-4 form-group form-height-xs">
+		<label>Home address</label><BR />
 		{{ $account->home_address or 'N/A' }}
-	</p>
-	<p>
-		<label>business_address</label><BR />
+		</div>
+		<div class="col-md-4 form-group form-height-xs">
+		<label>Business address</label><BR />
 		{{ $account->business_address or 'N/A' }}
-	</p>
-	<p>
-		<label>bank_account</label><BR />
-		{{ $account->bank_account or 'N/A' }}
-	</p>
-	<p>
-		<label>credit_card_number</label><BR />
-		{{ $account->credit_card_number or 'N/A' }}
-	</p>
-	<p>
-		<label>group_id</label><BR />
-		{{ $account->group_id or 'N/A' }}
-	</p>
-	<p>
-		<label>residence_certificate_id</label><BR />
-		{{ $account->residence_certificate_id or 'N/A' }}
-	</p>
-	<p>
-		<label>residence_certificate_place_issued</label><BR />
-		{{ $account->residence_certificate_place_issued or 'N/A' }}
-	</p>
-	<p>
-		<label>residence_certificate_date_issued</label><BR />
-		{{ $account->residence_certificate_date_issued or 'N/A' }}
-	</p>
-	<p>
-		<label>expiration</label><BR />
-		{{ $account->expiration or 'N/A' }}
-	</p>
-	<p>
-		<label>address</label><BR />
+		</div>
+		<div class="col-md-4 form-group form-height-xs">
+		<label>Address</label><BR />
 		{{ $account->address or 'N/A' }}
-	</p>
-	<p>
-		<label>phone</label><BR />
+		</div>
+	</div>
+
+	<div class="row">
+		<div class="col-md-4 form-group form-height-xs">
+		<label>Phone</label><BR />
 		{{ $account->phone or 'N/A' }}
-	</p>
-	<p>
-		<label>fax</label><BR />
+		</div>
+		<div class="col-md-4 form-group form-height-xs">
+		<label>Fax</label><BR />
 		{{ $account->fax or 'N/A' }}
-	</p>
-	<p>
-		<label>email</label><BR />
+		</div>
+		<div class="col-md-4 form-group form-height-xs">
+		<label>Email</label><BR />
 		{{ $account->email or 'N/A' }}
-	</p>
-	<p>
-		<label>date_approved</label><BR />
-		{{ $account->date_approved or 'N/A' }}
-	</p>
-	<p>
-		<label>status</label><BR />
+		</div>
+	</div>
+
+	<h3>Financial information</h3>
+
+	<div class="row">
+		<div class="col-md-4 form-group form-height-xs">
+		<label>Bank account number</label><BR />
+		{{ $account->bank_account or 'N/A' }}
+		</div>
+		<div class="col-md-4 form-group form-height-xs">
+		<label>Credit card number</label><BR />
+		{{ $account->credit_card_number or 'N/A' }}
+		</div>
+	</div>
+
+	<div class="row">
+		
+	</div>
+
+	<div class="row">
+		<div class="col-md-4 form-group form-height-xs">
+		<label>Residence certificate ID</label><BR />
+		{{ $account->residence_certificate_id or 'N/A' }}
+		</div>
+		<div class="col-md-4 form-group form-height-xs">
+		<label>Place issued (residence certificate)</label><BR />
+		{{ $account->residence_certificate_place_issued or 'N/A' }}
+		</div>
+		<div class="col-md-4 form-group form-height-xs">
+		<label>Date issued (residence certificate)</label><BR />
+		{!! display_precise_date($account->residence_certificate_date_issued) !!}
+		</div>
+	</div>
+
+	<h3>Account information</h3>
+	<div class="row">
+		<div class="col-md-4 form-group form-height-xs">
+			<label>Account ID</label><BR />
+			{{ $account->id or 'N/A' }}	
+		</div>
+		<div class="col-md-4 form-group form-height-xs">
+		<label>Group or affiliation</label><BR />
+		{{ $account->group_id or 'N/A' }}
+		</div>
+		<div class="col-md-4 form-group form-height-xs">
+		<label>TIN number</label><BR />
+		{{ $account->tin_number or 'N/A' }}
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-md-4 form-group form-height-xs">
+		<label>Date application was filled</label><BR />
+		{!! display_precise_date($account->created_at) !!}
+		</div>
+		<div class="col-md-4 form-group form-height-xs">
+		<label>Date of application approval</label><BR />
+		{!! display_precise_date($account->date_approved) !!}
+		</div>
+		<div class="col-md-4 form-group form-height-xs">
+		<label>Account expiration</label><BR />
+		{!! display_precise_date($account->expiration) !!}
+		</div>
+	</div>
+
+	<div class="row">
+		<div class="col-md-4 form-group form-height-xs">
+		<label>Account status</label><BR />
 		{{ $account->status or 'N/A' }}
-	</p>
-	<p>
-		<label>created_at</label><BR />
-		{{ $account->created_at or 'N/A' }}
-	</p>
-	<p>
-		<label>updated_at</label><BR />
-		{{ $account->updated_at or 'N/A' }}
-	</p>
-	<p>
-		<label>deleted_at</label><BR />
-		{{ $account->deleted_at or 'N/A' }}
-	</p>
+		</div>
+		<div class="col-md-4 form-group form-height-xs">
+		<label>Date last account update</label><BR />
+		{!! display_precise_date($account->updated_at) !!}
+		</div>
+		<div class="col-md-4 form-group form-height-xs">
+		<label>Date of account deletion</label><BR />
+		{!! display_precise_date($account->deleted_at) !!}
+		</div>
+	</div>
 </div>
 	
 @stop

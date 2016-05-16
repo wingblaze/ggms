@@ -33,3 +33,30 @@ if ( ! function_exists('smart_enumerate')){
 		}
 	}
 }
+
+if ( ! function_exists('display_readable_date')){
+	function display_readable_date($date){
+		return display_date($date, FALSE);
+	}
+}
+
+if ( ! function_exists('display_precise_date')){
+	function display_precise_date($date){
+		return display_date($date, TRUE);
+	}
+}
+
+if ( ! function_exists('display_date')){
+	function display_date($date, $format){
+		if ($date == NULL){
+			return 'N/A';
+		}
+		$readable_time = Carbon\Carbon::parse($date)->diffForHumans();
+		$precise_time = $date;
+
+		if ($format == FALSE)
+			return '<div data-toggle="tooltip" title="' . $readable_time . '">' . $precise_time .'</div>';
+		else
+			return '<div data-toggle="tooltip" title="' . $precise_time . '">' . $readable_time .'</div>';
+	}
+}

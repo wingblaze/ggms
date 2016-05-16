@@ -3,6 +3,7 @@
 @section('title', 'User Profile')
 
 @section('content')
+
 <div class="page-header">
 	<h1>View user <BR />
 	<small>{{ $target_user->salutation or '' }} {{ $target_user->display_name }}</small>
@@ -17,46 +18,61 @@
 		@endif
 	</h1>
 </div>
-<p><label>E-mail</label><BR />
-	{{ $target_user->email }}
-</p>
-<hr>
-<p><label>Mobile Number</label><BR />
-	{{ $target_user->mobile_number }}
-</p>
-<hr>
-<p><label>Birth Date</label><BR />
-	{{ $target_user->birth_date }}
-</p>
-<hr>
-<p><label>Birth place</label><BR />
-	{{ $target_user->birth_place }}
-</p>
-<hr>
-<p><label>Nationality</label><BR />
-	{{ $target_user->nationality }}
-</p>
-<hr>
-<p><label>Gender</label><BR />
-	{{ $target_user->gender }}
-</p>
-<hr>
-<p><label>Civil status</label><BR />
-	{{ $target_user->civil_status }}
-</p>
-<hr>
+
+	<div class="row">
+		<div class="col-md-4 form-group form-height-xs">
+			<label>E-mail</label><BR />
+			{{ $target_user->email }}
+		</div>
+		<div class="col-md-4 form-group form-height-xs">
+			<label>Mobile Number</label><BR />
+			{{ $target_user->mobile_number }}
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-md-4 form-group form-height-xs">
+			<label>Birth Date</label><BR />
+			{{ $target_user->birth_date }}
+		</div>
+		<div class="col-md-8 form-group form-height-xs">
+			<label>Birth place</label><BR />
+			{{ $target_user->birth_place }}
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-md-4 form-group form-height-xs">
+			<label>Nationality</label><BR />
+			{{ $target_user->nationality }}
+		</div>
+		<div class="col-md-4 form-group form-height-xs">
+			<label>Gender</label><BR />
+			{{ $target_user->gender }}
+		</div>
+		<div class="col-md-4 form-group form-height-xs">
+			<label>Civil status</label><BR />
+			{{ $target_user->civil_status }}
+		</p></div>
+	</div>
+
+<div class="row">
 @if ($target_user->account_type != NULL)
-<p><label>Account Type</label><BR />
-	{{ $target_user->account_type }}
-</p>
-<hr>
+
+	<div class="col-md-4 form-group form-height-xs">
+		<label>Membership type</label><BR />
+			{{ $target_user->account_type }}
+	</div>
+
+
 @endif
-<p><label>Created at</label><BR />
-	{{ $target_user->created_at }}
-</p>
-<hr>
-<p><label>Updated at</label><BR />
-	{{ $target_user->updated_at }}
-</p>
-<hr>
+	
+	<div class="col-md-4 form-group form-height-xs">
+	<label>Date of user creation</label><BR />
+	{!! display_readable_date($target_user->created_at) !!}
+	</div>
+
+	<div class="col-md-4 form-group form-height-xs">
+		<label>Date last update of user information</label><BR />
+		{!! display_readable_date($target_user->updated_at) !!}
+	</div>
+</div>
 @stop
