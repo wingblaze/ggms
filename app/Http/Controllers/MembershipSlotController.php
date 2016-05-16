@@ -28,7 +28,15 @@ class MembershipSlotController extends Controller
     public function show($id)
     {
         $slot = MembershipSlot::findOrFail($id);
-    	return view('slots.show', ['slot' => $slot]);
+
+
+        $listings = MembershipControl::where('membership_slot_id', $id)->orderBy('created_at', 'asc')->get();
+
+        foreach ($listings as $listing) {
+            $listing->slot = $id;
+        }
+
+    	return view('slots.show', ['slot' => $slot, 'listings' => $listings]);
     }
 
     public function create()

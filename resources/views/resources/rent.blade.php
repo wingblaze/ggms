@@ -24,19 +24,19 @@
 
 {!! Form::open(array('action' => 'ResourceController@store_rent')) !!}
   <div class="row">
-  <div class="form-group form-height-sm col-md-6">
+  <div class="form-group form-height-sm col-md-4">
     <label for="resource_name">Name of facility</label>
     <input type="text" class="form-control" id="resource_name" name="resource" placeholder="Name of resource" data-provide="typeahead" autocomplete="off">
   </div>
 
 @if ($user->hasRole('user'))
-  <div class="form-group form-height-sm col-md-6">
+  <div class="form-group form-height-sm col-md-8">
     <label for="client_name">Name of client</label>
     <p>{{ $user->display_name }}</p>
     <input type="hidden" class="form-control" id="client_name" name="client" value="{{ $user->name }}" data-provide="typeahead" autocomplete="off">
   </div>
   @else
-  <div class="form-group form-height-sm col-md-6">
+  <div class="form-group form-height-sm col-md-8">
     <label for="client_name">Name of client</label>
     <input type="text" class="form-control" id="client_name" name="client" placeholder="Name of client" data-provide="typeahead" autocomplete="off">
   </div>
@@ -44,7 +44,7 @@
 </div>
 
 <div class="row">
-  <div class="form-group form-height-sm col-md-6">
+  <div class="form-group form-height-sm col-md-4">
     <label for="date">Rent start time</label>
           <div class='input-group date' id='datetimepicker1'>
             <input type='text' class="form-control" name="start" />
@@ -64,7 +64,7 @@
     </div>
   </div>
 
-  <div class="form-group form-height-sm col-md-6">
+  <div class="form-group form-height-sm col-md-4">
     <label for="date">Rent end time</label>
           <div class='input-group date' id='datetimepicker2'>
             <input type='text' class="form-control" name="end" />
