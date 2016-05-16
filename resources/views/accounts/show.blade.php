@@ -130,7 +130,7 @@
 					</div>
 					@if ($user->hasRole('membership_manager'))
 					&nbsp
-					<a class="btn btn-sm btn-danger" href="{{action('AccountController@destroy', ['id' => $complaint->id])}}">Delete</a>
+					<a class="btn btn-sm btn-danger" href="{{action('ComplaintController@destroy', ['id' => $complaint->id])}}">Delete</a>
 					@endif
 				</td>
 			</tr>
@@ -190,23 +190,38 @@
 		</div>
 	</div>
 
-	<h3>Financial information</h3>
+	@if ($user->hasRole('finance_manager'))
+		<h3>Financial information</h3>
+		<div class="row">
+			<div class="col-md-4 form-group form-height-xs">
+			<label>Bank account number</label><BR />
+			{{ $account->bank_account or 'N/A' }}
+			</div>
+			<div class="col-md-4 form-group form-height-xs">
+			<label>Credit card number</label><BR />
+			{{ $account->credit_card_number or 'N/A' }}
+			</div>
+		</div>
+	@endif
 
+	<h3>Account information</h3>
 	<div class="row">
 		<div class="col-md-4 form-group form-height-xs">
-		<label>Bank account number</label><BR />
-		{{ $account->bank_account or 'N/A' }}
+			<label>Account ID</label><BR />
+			{{ $account->id or 'N/A' }}	
 		</div>
 		<div class="col-md-4 form-group form-height-xs">
-		<label>Credit card number</label><BR />
-		{{ $account->credit_card_number or 'N/A' }}
+		<label>Group or affiliation</label><BR />
+		{{ $account->group_id or 'N/A' }}
 		</div>
+		@if ($user->hasRole('membership_manager'))
+			<div class="col-md-4 form-group form-height-xs">
+			<label>TIN number</label><BR />
+			{{ $account->tin_number or 'N/A' }}
+			</div>
+		@endif
 	</div>
-
-	<div class="row">
-		
-	</div>
-
+	@if ($user->hasRole('membership_manager'))
 	<div class="row">
 		<div class="col-md-4 form-group form-height-xs">
 		<label>Residence certificate ID</label><BR />
@@ -221,22 +236,7 @@
 		{!! display_precise_date($account->residence_certificate_date_issued) !!}
 		</div>
 	</div>
-
-	<h3>Account information</h3>
-	<div class="row">
-		<div class="col-md-4 form-group form-height-xs">
-			<label>Account ID</label><BR />
-			{{ $account->id or 'N/A' }}	
-		</div>
-		<div class="col-md-4 form-group form-height-xs">
-		<label>Group or affiliation</label><BR />
-		{{ $account->group_id or 'N/A' }}
-		</div>
-		<div class="col-md-4 form-group form-height-xs">
-		<label>TIN number</label><BR />
-		{{ $account->tin_number or 'N/A' }}
-		</div>
-	</div>
+	@endif
 	<div class="row">
 		<div class="col-md-4 form-group form-height-xs">
 		<label>Date application was filled</label><BR />

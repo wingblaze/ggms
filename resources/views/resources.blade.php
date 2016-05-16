@@ -14,6 +14,12 @@
 				</a>
 			</div>
 		@endif
+		<div class="pull-right">
+			<a class="btn btn-default" href="{{action('ResourceController@rent')}}">
+				<span class="glyphicon glyphicon-paste" aria-hidden="true"></span>
+				&nbsp Rent a facility
+			</a>
+		</div>
 	</h1>
 </div>
 <div class="content">

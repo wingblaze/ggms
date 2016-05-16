@@ -42,13 +42,12 @@
               <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Facilities and Rental <span class="caret"></span></a>
               
               <ul class="dropdown-menu">
-                <li><a href="{{action('ResourceController@index')}}">View facilities</a></li>
-                <li><a href="{{action('ResourceController@rent')}}">Rent a facility</a></li>
-                <li><a href="{{action('ResourceController@my_listings')}}">My rented facilities</a></li>
+                <li><a href="{{action('ResourceController@index')}}">Facilities</a></li>
+                <li><a href="{{action('ResourceController@my_listings')}}">My rentals</a></li>
                 <li class="divider"></li>
-                <li><a href="{{ action('ResourceController@golf') }}">Reserve tee-time</a></li>
+                <li><a href="{{ action('ResourceController@golf') }}">Reserve golf tee-time</a></li>
                 <li class="divider"></li>
-                <li><a href="{{action('EventController@create')}}">Create an event</a></li>                
+                <li><a href="{{action('EventController@create')}}">Event reservation</a></li>                
                 @endif
 
 
@@ -185,7 +184,9 @@
 
 <div class="container">
   @yield('content')
+  <hr>
 </div>
+
 
 <script>
 $(document).ready(function(){
