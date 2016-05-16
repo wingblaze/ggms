@@ -5,10 +5,10 @@
   <title>Golf MS - @yield('title')</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <!-- Latest compiled and minified CSS -->
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+  <link rel="stylesheet" href="/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
   <link rel="stylesheet" href="/css/bootstrap-datetimepicker.min.css" />
   <link rel="stylesheet" href="/css/style.css" />
-  <script src="//code.jquery.com/jquery-1.12.0.min.js"></script>
+  <script src="/js/jquery-1.12.0.min.js"></script>
 
   <!-- Include all compiled plugins (below), or include individual files as needed -->
   <script src="/js/moment.min.js"></script>
