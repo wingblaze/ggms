@@ -6,55 +6,85 @@
 <div class="page-header">
 
 	<?php $notes = json_decode($event->notes) ?>
-	<h1>View event <small>{{ $event->name }}</small></h1>
-	<p class="help-block"><label>Description:</label> {{ $event->description }}</p>
-	@if ($notes->requested_by)
+	<h1>
+		View event <BR />
+		<small>{{ $event->name }}</small>
+		@if ($user->hasRole('marketing_manager'))
+		<div class="pull-right">
+			<a class="btn btn-default" href="{{action('EventController@edit', $event->id)}}">
+				<span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
+				&nbsp Edit
+			</a>
+			<a class="btn btn-danger" href="{{action('EventController@destroy', $event->id)}}">
+				<span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
+				&nbsp Disable
+			</a>
+		</div>
+	@endif
+	</h1>
+	<p class="help-block">{{ $event->description }}</p>
+	@if ($notes && $notes->requested_by)
 		<?php $user = App\User::find($notes->requested_by); ?>
 		<p class="help-block"><label>Requested by:</label> {{  $user->display_name }}</p>
 	@endif
+	
 </div>
-<p><label>start_date</label><BR />
-	{{ $event->start_date }}
-</p>
-<hr>
-<p><label>end_date</label><BR />
-	{{ $event->end_date }}
-</p>
-<hr>
-<p><label>expected_attendees</label><BR />
-	{{ $event->expected_attendees }}
-</p>
-<hr>
-<p><label>actual_attendees</label><BR />
-	{{ $event->actual_attendees }}
-</p>
-<hr>
+	<div class="row">
+		<div class="col-md-4 form-group form-height-xs">
+
+			<label>Start date</label><BR />
+			{{ $event->start_date }}
+		</div>
+		<div class="col-md-4 form-group form-height-xs">
+			<label>End date</label><BR />
+			{{ $event->end_date }}
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-md-4 form-group form-height-xs">
+			<label>Expected attendees</label><BR />
+			{{ $event->expected_attendees }}
+		</div>
+		<div class="col-md-4 form-group form-height-xs">
+			<label>Actual attendees</label><BR />
+			{{ $event->actual_attendees }}
+		</div>
+	</div>
+
 @if ($event->resource)
-<p><label>facility</label><BR />
-	<a href="{{ action('ResourceController@show', $event->resource->id) }}">{{ $event->resource->name }}</a>
-</p>
-<hr>
+	<div class="row">
+		<div class="col-md-4 form-group form-height-xs">
+			<label>facility</label><BR />
+			<a href="{{ action('ResourceController@show', $event->resource->id) }}">{{ $event->resource->name }}</a>
+		</div>
+	</div>
 @endif
-<p><label>created_at</label><BR />
-	{{ $event->created_at }}
-</p>
-<hr>
-<p><label>updated_at</label><BR />
-	{{ $event->updated_at }}
-</p>
-<hr>
+	<div class="row">
+		<div class="col-md-4 form-group form-height-xs">
+			<label>Date created (events)</label><BR />
+			{{ $event->created_at }}
+		</div>
+		<div class="col-md-4 form-group form-height-xs">
+			<label>Date last updated (event information)</label><BR />
+			{{ $event->updated_at }}
+		</div>
+	</div>
 
-
+@if ($notes)
 <h3>Preparation details</h3>
 <p class="help-block">As marketing manager, these are the information that will aid you in the successful preparation of the requested event.</p>
 
 @foreach ($notes->preparations as $key => $value)
-<p>
+<div class="row">
+	<div class="col-md-4 form-group form-height-xs">
+
 	<label>
 		{{ prettify_text($key) }}
 	</label> <BR />
 	{{ ($value != 'on') ? $value : 'Requires preparation' }}
-</p>
+	</div>
+</div>
 @endforeach
+@endif
 
 @stop

@@ -32,14 +32,14 @@
 <div class="table-responsive">
   <table class="table table-striped">
     <tr>
-      <th class="col-md-2">Club share listing posted by</th>
-      <th class="col-md-2">Golf membership type</th>
-      <th class="col-md-2">Date posted</th>
+      <th class="col-md-6">Club share listing posted by</th>
+      <th class="col-md-3">Golf membership type</th>
+      <th class="col-md-3">Date posted</th>
     </tr>
 
     @foreach($listings as $listing)
     <tr>
-      <td class="col-md-2">
+      <td class="col-md-6">
         @if ($listing->posted_by_account)
           @if ($listing->posted_by_account->owner())
             <a href="{{action('AccountController@show', ['id' => $listing->posted_by_account()->first()->id])}}">
@@ -52,12 +52,12 @@
           No owner
         @endif
       </td>
-      <td class="col-md-2">
+      <td class="col-md-3">
       @if ($listing && $listing->posted_by_account && $listing->posted_by_account->current_membership_slot())
         {{ $listing->posted_by_account->current_membership_slot()['type'] }}
       @endif
       </td>
-      <td class="col-md-2">
+      <td class="col-md-3">
         {!! display_readable_date($listing->created_at) !!}
       </td>
     </tr>
