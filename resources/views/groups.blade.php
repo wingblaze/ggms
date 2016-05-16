@@ -17,7 +17,11 @@
 		
 	</h1>
 </div>
+<?php $i = 0; ?>
 @foreach ($categories as $category)
+<?php $i = $i %= 3; if ($i == 0): ?>
+<div class="row">
+<?php endif; ?>
 <div class="col-md-4">
 	<div class="panel panel-default">
 		<div class="panel-heading">{{ ucwords($category->type) }}</div>
@@ -40,5 +44,9 @@
 		</div>
 	</div>
 </div>
+<?php if ($i == 0): ?>
+</div>
+<?php endif; $i++; ?>
 @endforeach
+
 @stop
