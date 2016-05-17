@@ -12,6 +12,7 @@
 */
 Route::group(['middleware' => ['web']], function () {
 	Route::get('/', 'GuestController@index');
+	Route::get('/about', 'GuestController@about');
 
 	Route::get('shares', 'AccountController@listings');
 	Route::get('shares/post/create', 'AccountController@post_listing');

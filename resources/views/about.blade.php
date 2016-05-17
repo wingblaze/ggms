@@ -1,18 +1,13 @@
 @extends('layouts.master')
 
-@section('title', 'Home page')
+@section('title', 'About Us')
 
 @section('content')
 
 <div class="container">
 	<div class="jumbotron">
-		<h2>Generic Golf Management System</h2>
-		@if ($user)
-			<p>Hi {{ trim($user->display_name) }}, welcome back!</p>
-		@else
-			<p>Welcome!</p>
-		@endif
-		<p><a class="btn btn-primary btn-lg" href="{{ action('GuestController@about') }}" role="button">Learn more</a></p>
+		<h2>An integrated solution</h2>
+		<p>The thing about GGMS is that be lorem the ipsum quite effectively in comparison to other foxes and dogs.</p>
 	</div>
 
 	<div class="col-md-4">
@@ -37,13 +32,7 @@
 					 who wish to join our golf community.</p>
 					 @endif
 				<p>The list below shows a few of the new applicants:</p>
-				<UL>
-					@foreach ($pending_accounts as $pending_account)
-						@if ($pending_account->owner())
-							<LI>{{ $pending_account->owner()->display_name }}</LI>
-						@endif
-					@endforeach
-				</UL>
+				
 			</div>
 		</div>
 	</div>
@@ -53,15 +42,7 @@
 		<div class="panel panel-default">
 			<div class="panel-body">
 				<h4>On-going events</h4>
-				@if (count($events) > 0)
-					<ul>
-						@foreach ($events as $event)
-							<li>{{ $event->name }}</li>
-						@endforeach
-					</ul>
-				@else
-					<p>No events today. <a href="{{ action('EventController@index') }}">Click here</a> to see more upcoming events.</p>
-				@endif
+				
 			</div>
 		</div>
 	</div>

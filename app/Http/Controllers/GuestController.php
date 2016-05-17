@@ -21,4 +21,9 @@ class GuestController extends Controller
     	$events = Event::whereDate('start_date', '=', Carbon::today()->toDateString())->get();
     	return view('home', ['pending_accounts' => $pending_accounts, 'events' => $events]);
     }
+
+    public function about()
+    {
+    	return view ('about');
+    }
 }
