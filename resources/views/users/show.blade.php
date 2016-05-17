@@ -10,6 +10,10 @@
 
 		@if ($user->hasRole('membership_manager'))
 			<div class="pull-right">
+				<a class="btn btn-default" href="{{action('AccountController@show', ['id' => $target_user->account->id])}}">
+					<span class="glyphicon glyphicon-lock" aria-hidden="true"></span>
+					&nbsp Account
+				</a>
 				<a class="btn btn-default" href="{{action('UserController@edit', $target_user->id)}}">
 					<span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
 					&nbsp Edit
