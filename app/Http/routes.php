@@ -63,6 +63,7 @@ Route::group(['middleware' => ['web']], function () {
 		Route::resource('resources', 'ResourceController');
 
 		Route::get('slots.json', 'MembershipSlotController@json');
+		Route::post('slots/update', 'MembershipSlotController@update_slot');
 		Route::resource('membership_slots', 'MembershipSlotController');
 	});
 

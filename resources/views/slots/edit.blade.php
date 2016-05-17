@@ -10,8 +10,9 @@
 @section('content')
 <div class="page-header">
 	<h1>{{ $slot->type}} <small>Membership Slot {{ $slot->id}} </small></h1>
+  @include('partials.error', ['title' => 'Membership slot update failed'])
 </div>
-{!! Form::open(array('action' => 'MembershipSlotController@store')) !!}
+{!! Form::open(array('action' => 'MembershipSlotController@update_slot')) !!}
   {!! Form::hidden('slot_id', $slot->id) !!}
   <div class="form-group">
     <label for="type">Slot type</label>
@@ -28,8 +29,8 @@
   <div class="form-group">
     <label for="description">Slot owned by</label>
     <p class="help-block">Who currently holds this membership slot? If this field is left blank, then the slot will be unassigned.</p>
-    @if ($slot->owner())
-	    <input type="text" class="form-control" id="user" name="user" placeholder="Name of user" data-provide="typeahead" autocomplete="off" value="{{ $slot->owner()->display_name }}">
+    @if ($control->owner())
+	    <input type="text" class="form-control" id="user" name="user" placeholder="Name of user" data-provide="typeahead" autocomplete="off" value="{{ $control->owner()->name }}">
     @else
       <input type="text" class="form-control" id="user" name="user" placeholder="Name of user" data-provide="typeahead" autocomplete="off">
     @endif

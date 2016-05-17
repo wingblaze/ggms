@@ -28,8 +28,6 @@ class MembershipSlotController extends Controller
     public function show($id)
     {
         $slot = MembershipSlot::findOrFail($id);
-
-
         $listings = MembershipControl::where('membership_slot_id', $id)->orderBy('created_at', 'asc')->get();
 
         foreach ($listings as $listing) {
@@ -106,7 +104,38 @@ class MembershipSlotController extends Controller
     public function edit($id)
     {
         $slot = MembershipSlot::findOrFail($id);
-    	return view('slots.edit', ['slot' => $slot]);
+        $control = MembershipControl::get_current_account_of($id);
+    	return view('slots.edit', ['slot' => $slot, 'control' => $control]);
+    }
+
+    public function update_slot(Request $request)
+    {
+        $rules = [
+            'type' => 'required',
+            'description' => 'required',
+            ];
+
+        $messages = [
+            'expiration.required' => 'The member\'s account expiration date is required.',
+        ];
+
+        $this->validate($request, $rules, $messages);
+
+        // This is not yet implemented
+
+        $data = $request->all();
+
+        $slot = MembershipSlot::findOrFail($data['slot_id']);
+
+        $slot->type = $data['type'];
+
+        $slot->description = $data['description'];
+
+        $slot->save();
+
+        // update account assignment
+
+        return redirect()->action("MembershipSlotController@show", [$slot->id]);
     }
 
     public function assign() 

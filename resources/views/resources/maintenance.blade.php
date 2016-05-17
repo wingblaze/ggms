@@ -9,7 +9,7 @@
 
 @section('content')
 <div class="page-header">
-	<h1>Maintenance of Golf Facilities</h1>
+	<h1>Maintenance of Facilities</h1>
   @include('partials.error', ['title' => 'Maintenance posting failed'])
   <p class="help-block">As the maintenance manager, you may mark certain golf facilties to be under maintenance. You can 
     <a href="{{ action('ResourceController@index') }}">click here to view the list of facilities</a>.
@@ -68,7 +68,7 @@
           stepping: 5
         });
 
-        
+
       $('#30m').on("click", function (e) {
             e.preventDefault();
             var text = $('#datetimepicker1').data("DateTimePicker").date();
