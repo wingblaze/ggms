@@ -42,10 +42,9 @@
       <script type="text/javascript">
       $(function () {
         $('#datetimepicker1').datetimepicker({
-          minDate: moment().add(-1, 'hour'),
+          minDate: moment(),
           useCurrent: false,
           sideBySide: true,
-          stepping: 5
         });
       });
       </script>
@@ -64,8 +63,7 @@
         $('#datetimepicker2').datetimepicker({
           useCurrent: false,
           sideBySide: true,
-          minDate: moment().add(-1, 'hour'),
-          stepping: 5
+          minDate: moment(),
         });
 
 
@@ -96,6 +94,9 @@
             var time = moment(text).add(3, 'h');
             $('#datetimepicker2').data("DateTimePicker").date(time);
           });
+
+        $('#datetimepicker1').data("DateTimePicker").date(moment());
+        
       });
       $("#datetimepicker1").on("dp.change", function (e) {
         $('#datetimepicker2').data("DateTimePicker").minDate(e.date);

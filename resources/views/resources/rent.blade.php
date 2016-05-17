@@ -54,10 +54,9 @@
       <script type="text/javascript">
       $(function () {
         $('#datetimepicker1').datetimepicker({
-          minDate: moment().add(-1, 'hour'),
+          minDate: moment(),
           useCurrent: false,
           sideBySide: true,
-          stepping: 5
         });
       });
       </script>
@@ -76,11 +75,11 @@
         $('#datetimepicker2').datetimepicker({
           useCurrent: false,
           sideBySide: true,
-          minDate: moment().add(-1, 'hour'),
-          stepping: 5
-
+          minDate: moment(),
         });
 
+
+      $('#datetimepicker1').data("DateTimePicker").date(moment());
 
       $('#30m').on("click", function (e) {
             e.preventDefault();
