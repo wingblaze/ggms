@@ -25,39 +25,39 @@
 
 	<div class="row">
 		<div class="col-md-4 form-group form-height-xs">
+			<label>Birth date</label><BR />
+			{{ $target_user->birth_date or '-' }}
+		</div>
+		<div class="col-md-4 form-group form-height-xs">
+			<label>Birth place</label><BR />
+			{{ $target_user->birth_place or '-' }}
+		</div>
+	
+		<div class="col-md-4 form-group form-height-xs">
+			<label>Nationality</label><BR />
+			{{ $target_user->nationality or '-' }}
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-md-4 form-group form-height-xs">
+			<label>Civil status</label><BR />
+			{{ $target_user->civil_status or '-' }}
+		</div>
+		<div class="col-md-4 form-group form-height-xs">
+			<label>Gender</label><BR />
+			{{ $target_user->gender or '-' }}
+		</div>		
+	</div>
+	<div class="row">
+		<div class="col-md-4 form-group form-height-xs">
 			<label>E-mail</label><BR />
 			{{ $target_user->email }}
 		</div>
 		<div class="col-md-4 form-group form-height-xs">
-			<label>Mobile Number</label><BR />
-			{{ $target_user->mobile_number }}
+			<label>Mobile number</label><BR />
+			{{ $target_user->mobile_number or '-' }}
 		</div>
 	</div>
-	<div class="row">
-		<div class="col-md-4 form-group form-height-xs">
-			<label>Birth Date</label><BR />
-			{{ $target_user->birth_date }}
-		</div>
-		<div class="col-md-8 form-group form-height-xs">
-			<label>Birth place</label><BR />
-			{{ $target_user->birth_place }}
-		</div>
-	</div>
-	<div class="row">
-		<div class="col-md-4 form-group form-height-xs">
-			<label>Nationality</label><BR />
-			{{ $target_user->nationality }}
-		</div>
-		<div class="col-md-4 form-group form-height-xs">
-			<label>Gender</label><BR />
-			{{ $target_user->gender }}
-		</div>
-		<div class="col-md-4 form-group form-height-xs">
-			<label>Civil status</label><BR />
-			{{ $target_user->civil_status }}
-		</p></div>
-	</div>
-
 <div class="row">
 @if ($target_user->account_type != NULL)
 

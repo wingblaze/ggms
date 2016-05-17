@@ -44,7 +44,7 @@
 </div>
 
 <div class="row">
-  <div class="form-group form-height-sm col-md-4">
+  <div class="form-group form-height-md col-md-4">
     <label for="date">Rent start time</label>
           <div class='input-group date' id='datetimepicker1'>
             <input type='text' class="form-control" name="start" />
@@ -64,7 +64,7 @@
     </div>
   </div>
 
-  <div class="form-group form-height-sm col-md-4">
+  <div class="form-group form-height-md col-md-8">
     <label for="date">Rent end time</label>
           <div class='input-group date' id='datetimepicker2'>
             <input type='text' class="form-control" name="end" />
@@ -79,6 +79,35 @@
           minDate: moment().add(-1, 'hour'),
           stepping: 5
 
+
+      $('#30m').on("click", function (e) {
+            e.preventDefault();
+            var text = $('#datetimepicker1').data("DateTimePicker").date();
+            var time = moment(text).add(30, 'm');
+            $('#datetimepicker2').data("DateTimePicker").date(time);
+          });
+
+      $('#1h').on("click", function (e) {
+            e.preventDefault();
+            var text = $('#datetimepicker1').data("DateTimePicker").date();
+            var time = moment(text).add(1, 'h');
+            $('#datetimepicker2').data("DateTimePicker").date(time);
+          });
+
+      $('#2h').on("click", function (e) {
+            e.preventDefault();
+            var text = $('#datetimepicker1').data("DateTimePicker").date();
+            var time = moment(text).add(2, 'h');
+            $('#datetimepicker2').data("DateTimePicker").date(time);
+          });
+
+      $('#3h').on("click", function (e) {
+            e.preventDefault();
+            var text = $('#datetimepicker1').data("DateTimePicker").date();
+            var time = moment(text).add(3, 'h');
+            $('#datetimepicker2').data("DateTimePicker").date(time);
+          });
+
         });
       });
       $("#datetimepicker1").on("dp.change", function (e) {
@@ -86,11 +115,16 @@
         $('#datetimepicker2').data("DateTimePicker").maxDate(moment(e.date).add(1, 'Day'));
       });
       $("#datetimepicker2").on("dp.change", function (e) {
-        $('#datetimepicker1').data("DateTimePicker").minDate(moment(e.date));
         $('#datetimepicker1').data("DateTimePicker").maxDate(e.date);
       });
       
       </script>
+    </div>
+    <div style="margin-top: 10px">
+      <a class="btn btn-default btn-sm" href="#" id="30m">30m</a> &nbsp
+      <a class="btn btn-default btn-sm" href="#" id="1h">1h</a> &nbsp
+      <a class="btn btn-default btn-sm" href="#" id="2h">2h</a> &nbsp
+      <a class="btn btn-default btn-sm" href="#" id="3h">3h</a> &nbsp
     </div>
   </div>
 </div>

@@ -170,7 +170,7 @@ class AccountController extends Controller
      */
     public function edit($id)
     {
-        //
+        return view('accounts.edit', ['account' => Account::findOrFail($id)]);
     }
 
     /**

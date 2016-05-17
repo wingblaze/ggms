@@ -6,19 +6,18 @@
 <div class="page-header">
 	<h1>
 		Facilities
-		@if ($user->hasRole('system_administrator'))
-			<div class="pull-right">
-				<a class="btn btn-primary" href="{{action('ResourceController@create')}}">
-					<span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
-					&nbsp New
-				</a>
-			</div>
-		@endif
 		<div class="pull-right">
 			<a class="btn btn-default" href="{{action('ResourceController@rent')}}">
 				<span class="glyphicon glyphicon-paste" aria-hidden="true"></span>
 				&nbsp Rent a facility
 			</a>
+		@if ($user->hasRole('system_administrator'))
+			
+				<a class="btn btn-primary" href="{{action('ResourceController@create')}}">
+					<span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+					&nbsp New
+				</a>
+		@endif
 		</div>
 	</h1>
 </div>

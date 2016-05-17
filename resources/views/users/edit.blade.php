@@ -12,7 +12,6 @@
 {!! Form::hidden('user_id', $target_user->id) !!}
 
 <div class="row">
-<h3>Personal details</h3>
 	<div class="form-group form-height-md col-md-4">
 		<label for="salutation">Salutation</label>
 		<input type="text" class="form-control" id="salutation" name="salutation" placeholder="Sir / Ms. / Mrs." value="{{ $target_user->salutation }}">
@@ -28,13 +27,13 @@
 		<label for="date">Birth date</label>
 		
 			
-					<div class='input-group date' id='datetimepicker1'>
-						<input type='text' class="form-control" name="birth_date" value="{{ $target_user->birth_date }}"/>
-						<span class="input-group-addon">
-							<span class="glyphicon glyphicon-calendar"></span>
-						</span>
-					</div>
-			
+				<div class='input-group date' id='datetimepicker1'>
+					<input type='text' class="form-control" name="birth_date" value="{{ $target_user->birth_date }}"/>
+					<span class="input-group-addon">
+						<span class="glyphicon glyphicon-calendar"></span>
+					</span>
+				</div>
+		
 			<script type="text/javascript">
 			$(function () {
 				$('#datetimepicker1').datetimepicker({
@@ -46,7 +45,7 @@
 	</div>
 	<div class="form-group form-height-sm col-md-4">
 		<label for="birth_place">Birth place</label>
-		<input type="text" class="form-control" id="birth_place" name="birth_place" placeholder="" value="{{ $target_user->birth_place }}">
+		<input type="text" class="form-control" id="birth_place" name="birth_place" placeholder="e.g. Manila" value="{{ $target_user->birth_place }}">
 	</div>
 	<div class="form-group form-height-sm col-md-4">
 		<label for="nationality">Nationality</label>
@@ -55,7 +54,7 @@
 </div>
 <div class="row">
 	<div class="form-group form-height-sm col-md-4">
-		<label for="civil_status">Civil Status</label>
+		<label for="civil_status">Civil status</label>
 		<div class="row">
 			<div class="col-md-6">
 					<label class="radio-inline">
@@ -118,22 +117,18 @@
 	</div>
 
 </div>
-
-
-<hr />
-
 <div class="row">
-	<h3>Contact details</h3>
 	<div class="form-group form-height-md col-md-6">
-		<label for="mobile_number">Mobile Number</label>
-		<input type="mobile_number" class="form-control" id="mobile_number" name="mobile_number" placeholder="Mobile Number" value="{{ $target_user->mobile_number }}">
-		<span id="helpBlock" class="help-block">The mobile number is the primary way that the client will be contacted when the application is confirmed.</span>
-	</div>
-	<div class="form-group form-height-md col-md-6">
-		<label for="email">Email</label>
+		<label for="email">E-mail</label>
 		<input type="email" class="form-control" id="email" name="email" placeholder="Email" value="{{ $target_user->email }}">
 		<span id="helpBlock" class="help-block">The e-mail is the secondary way that the client will be contacted when the application is confirmed.</span>
 	</div>
+	<div class="form-group form-height-md col-md-6">
+		<label for="mobile_number">Mobile number</label>
+		<input type="mobile_number" class="form-control" id="mobile_number" name="mobile_number" placeholder="e.g. 0917 123 4567" value="{{ $target_user->mobile_number }}">
+		<span id="helpBlock" class="help-block">The mobile number is the primary way that the client will be contacted when the application is confirmed.</span>
+	</div>
+	
 	<button type="submit" class="btn btn-primary">Update user</button>
 </div>
 

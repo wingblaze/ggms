@@ -6,18 +6,6 @@
 <div class="page-header">
 	<h1>
 		Account details
-		@if ($user->hasRole('membership_manager'))
-			<div class="pull-right">
-				<a class="btn btn-default" href="{{action('AccountController@edit', $account->id)}}">
-					<span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
-					&nbsp Edit
-				</a>
-				<a class="btn btn-danger" href="{{action('AccountController@destroy', $account->id)}}">
-					<span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
-					&nbsp Disable
-				</a>
-			</div>
-		@endif
 	</h1>
 
 </div>
@@ -157,7 +145,7 @@
 <div>
 	<p>
 		<label>Remarks</label><BR />
-		{{ $account->remarks or '-' }}<BR />
+		{{ $account->remarks or 'N/A' }}<BR />
 		@if ($user->hasRole('finance_manager'))
 			<p class="help-block">As finance manager, you may mark this account as cleared once the user has finished payment.</p>
 			<a class="btn btn-sm btn-primary" href="{{ action('AccountController@clear_payment', $account->id) }}">Clear account</a> 
@@ -172,30 +160,30 @@
 	<div class="row">
 		<div class="col-md-4 form-group form-height-xs">
 		<label>Home address</label><BR />
-		{{ $account->home_address or '-' }}
+		{{ $account->home_address or 'N/A' }}
 		</div>
 		<div class="col-md-4 form-group form-height-xs">
 		<label>Business address</label><BR />
-		{{ $account->business_address or '-' }}
+		{{ $account->business_address or 'N/A' }}
 		</div>
 		<div class="col-md-4 form-group form-height-xs">
 		<label>Address</label><BR />
-		{{ $account->address or '-' }}
+		{{ $account->address or 'N/A' }}
 		</div>
 	</div>
 
 	<div class="row">
 		<div class="col-md-4 form-group form-height-xs">
 		<label>Phone</label><BR />
-		{{ $account->phone or '-' }}
+		{{ $account->phone or 'N/A' }}
 		</div>
 		<div class="col-md-4 form-group form-height-xs">
 		<label>Fax</label><BR />
-		{{ $account->fax or '-' }}
+		{{ $account->fax or 'N/A' }}
 		</div>
 		<div class="col-md-4 form-group form-height-xs">
 		<label>Email</label><BR />
-		{{ $account->email or '-' }}
+		{{ $account->email or 'N/A' }}
 		</div>
 	</div>
 
@@ -204,11 +192,11 @@
 		<div class="row">
 			<div class="col-md-4 form-group form-height-xs">
 			<label>Bank account number</label><BR />
-			{{ $account->bank_account or '-' }}
+			{{ $account->bank_account or 'N/A' }}
 			</div>
 			<div class="col-md-4 form-group form-height-xs">
 			<label>Credit card number</label><BR />
-			{{ $account->credit_card_number or '-' }}
+			{{ $account->credit_card_number or 'N/A' }}
 			</div>
 		</div>
 	@endif
@@ -217,7 +205,7 @@
 	<div class="row">
 		<div class="col-md-4 form-group form-height-xs">
 			<label>Account ID</label><BR />
-			{{ $account->id or '-' }}	
+			{{ $account->id or 'N/A' }}	
 		</div>
 		<div class="col-md-4 form-group form-height-xs">
 		<label>Group or affiliation</label><BR />
@@ -230,7 +218,7 @@
 		@if ($user->hasRole('membership_manager'))
 			<div class="col-md-4 form-group form-height-xs">
 			<label>TIN number</label><BR />
-			{{ $account->tin_number or '-' }}
+			{{ $account->tin_number or 'N/A' }}
 			</div>
 		@endif
 	</div>
@@ -238,11 +226,11 @@
 	<div class="row">
 		<div class="col-md-4 form-group form-height-xs">
 		<label>Residence certificate ID</label><BR />
-		{{ $account->residence_certificate_id or '-' }}
+		{{ $account->residence_certificate_id or 'N/A' }}
 		</div>
 		<div class="col-md-4 form-group form-height-xs">
 		<label>Place issued (residence certificate)</label><BR />
-		{{ $account->residence_certificate_place_issued or '-' }}
+		{{ $account->residence_certificate_place_issued or 'N/A' }}
 		</div>
 		<div class="col-md-4 form-group form-height-xs">
 		<label>Date issued (residence certificate)</label><BR />
@@ -268,7 +256,7 @@
 	<div class="row">
 		<div class="col-md-4 form-group form-height-xs">
 		<label>Account status</label><BR />
-		{{ $account->status or '-' }}
+		{{ $account->status or 'N/A' }}
 		</div>
 		<div class="col-md-4 form-group form-height-xs">
 		<label>Date last updated (account information)</label><BR />

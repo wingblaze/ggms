@@ -49,7 +49,7 @@ if ( ! function_exists('display_precise_date')){
 if ( ! function_exists('display_date')){
 	function display_date($date, $format){
 		if ($date == NULL){
-			return 'N/A';
+			return '-';
 		}
 		$readable_time = Carbon\Carbon::parse($date)->diffForHumans();
 		$precise_time = $date;
