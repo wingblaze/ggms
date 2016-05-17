@@ -49,15 +49,15 @@
 <div class="table-responsive">
   <table class="table table-striped">
     <tr>
-      <th class="col-md-4">Posted by</th>
+      <th class="col-md-4 hidden-xs">Posted by</th>
       <th class="col-md-4">Taken by</th>
-      <th class="col-md-2">Date club share was posted</th>
+      <th class="col-md-2 hidden-xs">Date club share was posted</th>
       <th class="col-md-2">Date slot taken</th>
     </tr>
 
     @foreach($listings as $listing)
     <tr>
-      <td class="col-md-4">
+      <td class="col-md-4 hidden-xs">
         @if ($listing->posted_by_account)
           @if ($listing->posted_by_account->owner())
             <a href="{{action('AccountController@show', ['id' => $listing->posted_by_account()->first()->id])}}">
@@ -83,7 +83,7 @@
         @endif
       </td>
       </td>
-      <td class="col-md-2">
+      <td class="col-md-2 hidden-xs">
         {!! display_precise_date($listing->created_at) !!}
       </td>
       <td class="col-md-2">
