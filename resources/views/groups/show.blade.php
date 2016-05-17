@@ -57,5 +57,4 @@
 			{!! display_precise_date($group->updated_at) !!}
 		</div>
 	</div>
-<hr>
 @stop

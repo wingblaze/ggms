@@ -42,5 +42,4 @@
 			<input type="text" class="form-control" id="fax" name="fax" placeholder="" value="{{ $group->fax }}">
 		</div>
 	</div>
-<hr>
 @stop
