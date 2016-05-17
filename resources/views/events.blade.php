@@ -32,8 +32,8 @@
 				</a>
 			</td>
 			<td class="col-md-5">{{ $event->description }}</td>
-			<td class="col-md-2">{!! display_readable_date($event->start_date) !!}</td>
-			<td class="col-md-2">{!! display_readable_date($event->created_at) !!}</td>
+			<td class="col-md-2">{!! display_precise_date($event->start_date) !!}</td>
+			<td class="col-md-2">{!! display_precise_date($event->created_at) !!}</td>
 		</tr>
 		@endforeach
 	</table>

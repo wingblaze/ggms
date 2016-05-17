@@ -34,14 +34,14 @@ if ( ! function_exists('smart_enumerate')){
 	}
 }
 
-if ( ! function_exists('display_readable_date')){
-	function display_readable_date($date){
+if ( ! function_exists('display_precise_date')){
+	function display_precise_date($date){
 		return display_date($date, FALSE);
 	}
 }
 
-if ( ! function_exists('display_precise_date')){
-	function display_precise_date($date){
+if ( ! function_exists('display_readable_date')){
+	function display_readable_date($date){
 		return display_date($date, TRUE);
 	}
 }

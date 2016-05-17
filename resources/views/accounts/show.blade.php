@@ -124,7 +124,7 @@
 						{{ $complaint->content or 'No reason indicated' }}
 					</td>
 					<td class="col-md-2 hidden-xs">
-						{!! display_readable_date($complaint->created_at) !!}
+						{!! display_precise_date($complaint->created_at) !!}
 					</td>
 				</tr>
 				@endforeach

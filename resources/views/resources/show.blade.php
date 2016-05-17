@@ -31,11 +31,11 @@
 <div class="row">
 	<div class="col-md-4 form-group form-height-xs">
 		<label>Date created (facility)</label><BR />
-		{!! display_precise_date($resource->created_at) !!}
+		{!! display_readable_date($resource->created_at) !!}
 	</div>
 	<div class="col-md-4 form-group form-height-xs">
 		<label>Date last updated (facility information)</label><BR />
-		{!! display_precise_date($resource->updated_at) !!}
+		{!! display_readable_date($resource->updated_at) !!}
 	</div>
 </div>
 @stop

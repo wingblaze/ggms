@@ -84,10 +84,10 @@
       </td>
       </td>
       <td class="col-md-2">
-        {!! display_readable_date($listing->created_at) !!}
+        {!! display_precise_date($listing->created_at) !!}
       </td>
       <td class="col-md-2">
-        {!! display_readable_date($listing->updated_at) !!}
+        {!! display_precise_date($listing->updated_at) !!}
       </td>
     </tr>
     @endforeach

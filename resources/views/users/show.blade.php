@@ -71,12 +71,12 @@
 	
 	<div class="col-md-4 form-group form-height-xs">
 	<label>Date of creation (user)</label><BR />
-	{!! display_readable_date($target_user->created_at) !!}
+	{!! display_precise_date($target_user->created_at) !!}
 	</div>
 
 	<div class="col-md-4 form-group form-height-xs">
 		<label>Date last updated (user information)</label><BR />
-		{!! display_readable_date($target_user->updated_at) !!}
+		{!! display_precise_date($target_user->updated_at) !!}
 	</div>
 </div>
 @stop
