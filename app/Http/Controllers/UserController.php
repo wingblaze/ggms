@@ -176,6 +176,8 @@ class UserController extends Controller
 
     public function __construct()
     {
+        $this->middleware('role:user|employee');
+        
         $this->middleware('role:employee|user', ['except' => [
             'index'
             ]]);

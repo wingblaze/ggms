@@ -95,7 +95,7 @@ class GroupController extends Controller
 
     public function __construct()
     {
-        $this->middleware('role:employee');
+        $this->middleware('role:employee|user');
 
         $this->middleware('role:membership_manager', ['only' => [
             'store', 'edit', 'destroy', 'create'

@@ -371,6 +371,8 @@ class AccountController extends Controller
 
     public function __construct()
     {
+        $this->middleware('role:user|employee');
+        
         $this->middleware('role:user', ['only' => [
             'remove_listing', 'post_listing', 'create_listing'
             ]]);
