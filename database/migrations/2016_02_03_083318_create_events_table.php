@@ -16,6 +16,8 @@ class CreateEventsTable extends Migration
             $table->increments('id');
             $table->string('name');                                         // Name of the event
             $table->text('description');                                    // Description of the event
+
+            $table->string('requested_by');
             
             $table->dateTime('start_date');                                 // Date the event will be held
             $table->dateTime('end_date')->nullable();                       // Date the event will end

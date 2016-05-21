@@ -123,6 +123,11 @@ class EventController extends Controller
     	
     }
 
+    public function my_events($id){
+        // $events = Event::where()->get();
+        // return view('events', ['events' => $events]);
+    }
+
     public function json(){
         $collection = Event::all()->map(function ($resource){
             return $resource->name;

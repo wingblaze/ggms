@@ -48,7 +48,7 @@
                 <li><a href="{{action('ResourceController@my_listings')}}">My rentals</a></li>
                 <li class="divider"></li>
                 <li><a href="{{action('EventController@create')}}">Event reservation</a></li>                
-                <!-- <li><a href="{{action('EventController@my_events', $user->id)}}">My events</a></li> -->
+                <li><a href="{{action('EventController@my_events', $user->id)}}">My events</a></li>
                 @endif
 
 

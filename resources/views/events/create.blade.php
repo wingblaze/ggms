@@ -89,10 +89,14 @@
 			<input type="text" class="form-control" id="resource_name" name="facility" placeholder="Name of facility" data-provide="typeahead" autocomplete="off">
 		</div>
 		<div class="form-group form-height-md col-md-4">
+			<label for="contact_details">Requested by</label>
+			<input type="text" class="form-control" id="requested_by" name="contact_details" data-provide="typeahead" autocomplete="off">
+			<p class="help-block">If the person requesting the event is a non-member, please provide their full name and contact number.</p>
+		</div>
+		<div class="form-group form-height-md col-md-4">
 			
 			<label for="contact_details">Contact number</label>
-			<input type="text" class="form-control" id="resource_name" name="contact_details" placeholder="e.g. 0917-812-3792" data-provide="typeahead" autocomplete="off">
-			<p class="help-block">If the person requesting the event is a non-member, you may optionally provide the person's contact details.</p>
+			<input type="text" class="form-control" id="contact_number" name="contact_details" placeholder="e.g. 0917-812-3792" data-provide="typeahead" autocomplete="off">
 		</div>
 	</div>
 	<div class="row">
@@ -140,5 +144,8 @@
     $("#resource_name").typeahead({ source:data });
   },'json');
 
+  $.get('/users.json', function(data){
+    $("#requested_by").typeahead({ source:data });
+  },'json');
 </script>
 @stop

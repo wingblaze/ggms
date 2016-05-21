@@ -42,6 +42,7 @@ Route::group(['middleware' => ['web']], function () {
 	Route::resource('users', 'UserController');
 
 	Route::get('events.json', 'EventController@json');
+	Route::get('events/mine/{id}', 'EventController@my_events');
 	Route::resource('events', 'EventController');
 
 	Route::post('/resources/renting', 'ResourceController@store_rent');
