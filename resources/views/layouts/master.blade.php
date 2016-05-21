@@ -5,7 +5,7 @@
   <title>Golf MS - @yield('title')</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <!-- Latest compiled and minified CSS -->
-  <link rel="stylesheet" href="/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+  <link rel="stylesheet" href="/css/bootstrap.min.css">
   <link rel="stylesheet" href="/css/bootstrap-datetimepicker.min.css" />
   <link rel="stylesheet" href="/css/style.css" />
   <script src="/js/jquery-1.12.0.min.js"></script>
@@ -42,12 +42,13 @@
               <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Facilities and Rental <span class="caret"></span></a>
               
               <ul class="dropdown-menu">
+                <li><a href="{{ action('ResourceController@golf') }}">Golf and Tee-time</a></li>
+                <li class="divider"></li>
                 <li><a href="{{action('ResourceController@index')}}">Facilities</a></li>
                 <li><a href="{{action('ResourceController@my_listings')}}">My rentals</a></li>
                 <li class="divider"></li>
-                <li><a href="{{ action('ResourceController@golf') }}">Golf and Tee-time</a></li>
-                <li class="divider"></li>
                 <li><a href="{{action('EventController@create')}}">Event reservation</a></li>                
+                <li><a href="{{action('EventController@my_events', $user->id)}}">My events</a></li>
                 @endif
 
 
