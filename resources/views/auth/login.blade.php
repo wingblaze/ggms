@@ -6,8 +6,14 @@
 
 <div class="container">
 	<div class="jumbotron">
-		
-		<form method="POST" action="/auth/login">
+		<script type="text/javascript">
+			function autologin(e) {
+				$("#email").val(e);
+				$("#password").val('secret');
+				$('#form').submit();
+			}
+		</script>
+		<form method="POST" action="/auth/login" id="form">
 			{!! csrf_field() !!}
 			@if (count($errors) > 0)
 			<div class="alert alert-danger">
@@ -22,7 +28,7 @@
 
 			<div class="form-group">
 				<label for="email">Email</label>
-				<input class="form-control" type="email" name="email" value="{{ old('email') }}" placeholder="Email">
+				<input class="form-control" type="email" name="email" value="{{ old('email') }}" id="email" placeholder="Email">
 			</div>
 
 			<div class="form-group">
@@ -39,7 +45,21 @@
 				</div>
 			</div>
 
-			<button class="btn btn-primary" type="submit">Login</button>
+			<button id="btnLogin" class="btn btn-primary" type="submit">Login</button>
+
+			<hr>
+
+			<h3>Dev tools <small>Auto login</small></h3>
+			<p class="text-muted">For testing purposes, these accounts can be logged in by pressing these links.</p>
+			<ul>
+				@foreach ($users as $user)
+				<li>
+					<a href="#" onclick="autologin('{{$user->email}}')">{{ $user->name }}</a>
+				</li>
+				@endforeach
+			</ul>
+
+			
 
 		</form>
 	</div>

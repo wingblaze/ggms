@@ -58,6 +58,10 @@ class AuthController extends Controller
         ]);
     }
 
+    public function getLogin(){
+        return view('auth.login', ['users' => User::all()]);
+    }
+
     /**
      * Create a new user instance after a valid registration.
      *

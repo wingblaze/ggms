@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateMembershipSlotsTable extends Migration
+class CreateApplicationsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -12,13 +12,13 @@ class CreateMembershipSlotsTable extends Migration
      */
     public function up()
     {
-        Schema::create('membership_slots', function (Blueprint $table) {
+        Schema::create('applications', function (Blueprint $table) {
             $table->increments('id');
             $table->string('type');
-            $table->string('status')->nullable();
-            $table->integer('membership_control_id')->unsigned()->nullable();
-            $table->text('description')->nullable();
-
+            $table->integer('user_id')->unsigned();
+            $table->text('data');
+            $table->string('label');
+            $table->string('value');
             $table->timestamps();
         });
     }
@@ -30,6 +30,6 @@ class CreateMembershipSlotsTable extends Migration
      */
     public function down()
     {
-        Schema::drop('membership_slots');
+        Schema::drop('applications');
     }
 }

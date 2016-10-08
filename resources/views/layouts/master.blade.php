@@ -14,6 +14,8 @@
   <script src="/js/moment.min.js"></script>
   <script src="/js/bootstrap.min.js"></script>
   <script src="/js/bootstrap-datetimepicker.min.js"></script>
+  <script src="/js/raphael.min.js"></script>
+  <script src="/js/morris.min.js"></script>
   @show
 </head>
 <body>
@@ -75,7 +77,10 @@
                 <li><a href="{{action('EventController@index')}}">Events</a></li>
                 @endif
 
-
+                @if ($user->hasRole('membership_manager'))
+                <li><a href="{{action('MembershipSlotController@auction')}}">Auction Membership Slots</a></li>
+                <li><a href="{{action('VoucherController@index')}}">View vouchers</a></li>
+                @endif
 
               </ul>
             </li>
@@ -99,8 +104,11 @@
             <li class="dropdown">
               <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">System Settings <span class="caret"></span></a>
               <ul class="dropdown-menu">
-                <li><a href="{{action('ResourceController@index')}}">Facilities</a></li>
-                <li><a href="{{action('MembershipSlotController@index')}}">Membership slots</a></li>
+                <li><a href="{{action('ResourceController@index')}}">View facilities</a></li>
+                <li><a href="{{action('MembershipSlotController@index')}}">View membership slots</a></li>
+                <li><a href="{{action('TerminalController@index')}}">View terminal management</a></li>
+                <li><a href="{{action('AuditingController@index')}}">View audit</a></li>
+                <li><a href="{{action('AssetController@index')}}">View asset management</a></li>
               </ul>
             </li>
             @endif
@@ -129,6 +137,7 @@
               <ul class="dropdown-menu">
                 <li><a href="{{action('AccountController@index')}}">View unpaid accounts</a></li>
                 <li><a href="{{action('ResourceController@unpaid_listing')}}">View unpaid rentals</a></li>
+                <li><a href="{{action('MembershipSlotController@index')}}">View asset management</a></li>
               </ul>
             </li>
             @endif

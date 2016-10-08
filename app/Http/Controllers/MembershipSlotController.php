@@ -25,6 +25,11 @@ class MembershipSlotController extends Controller
         return view('slots', ['slots' => MembershipSlot::all()]);
     }
 
+    public function auction()
+    {
+        return view('slots', ['slots' => MembershipSlot::all()]);
+    }
+
     public function show($id)
     {
         $slot = MembershipSlot::findOrFail($id);

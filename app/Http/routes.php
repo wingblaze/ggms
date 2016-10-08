@@ -32,7 +32,9 @@ Route::group(['middleware' => ['web']], function () {
 	Route::get('groups.json', 'GroupController@json');
 	Route::resource('groups', 'GroupController');
 
+	Route::get('memberships/auction', 'MembershipSlotController@auction');
 	Route::resource('memberships', 'MembershipSlotController');
+
 
 	Route::get('review/{id}', 'ComplaintController@create');
 	Route::resource('complaints', 'ComplaintController');
@@ -44,6 +46,28 @@ Route::group(['middleware' => ['web']], function () {
 	Route::get('events.json', 'EventController@json');
 	Route::get('events/mine/{id}', 'EventController@my_events');
 	Route::resource('events', 'EventController');
+
+
+	Route::get('billings.json', 'BillingController@json');
+	Route::resource('billings', 'BillingController');
+
+	Route::get('assets.json', 'AssetController@json');
+	Route::resource('assets', 'AssetController');
+
+	Route::get('auditings.json', 'AuditingController@json');
+	Route::resource('auditings', 'AuditingController');
+
+	Route::get('terminals.json', 'TerminalController@json');
+	Route::resource('terminals', 'TerminalController');
+
+	Route::get('vouchers.json', 'VoucherController@json');
+	Route::resource('vouchers', 'VoucherController');
+
+	Route::get('applications.json', 'ApplicationController@json');
+	Route::resource('applications', 'ApplicationController');
+
+
+
 
 	Route::post('/resources/renting', 'ResourceController@store_rent');
 	Route::get('/resources/rent', 'ResourceController@rent');
