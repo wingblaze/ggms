@@ -56,16 +56,11 @@ class MembershipSlotController extends Controller
     public function store(Request $request)
     {
         $rules = [
-            'name' => 'required|unique:events,name',
-            'description' => 'required',
-            'type' => 'required',
-            'address' => 'required',
-            'phone' => 'required',
-            'fax' => 'required'
+            'type' => 'required'
             ];
 
         $messages = [
-            'expiration.required' => 'The member\'s account expiration date is required.',
+            'type.required' => 'The membership slot type is required.',
         ];
 
         $this->validate($request, $rules, $messages);
@@ -76,30 +71,9 @@ class MembershipSlotController extends Controller
 
         $data = $request->all();
 
-        $slot->name = $data['name'];
+        $slot->type = $data['type'];
 
-        $slot->email = $data['email'];
-        $slot->mobile_number = $data['mobile_number'];
-
-        $slot->password = bcrypt($data['password']);
-
-        $slot->birth_date = Carbon::createFromFormat('Y-m-d', $data['birth_date']);
-        $slot->birth_place = $data['birth_place'];
-        
-        $slot->nationality = $data['nationality'];
-        $slot->gender = $data['gender'];
-
-        $slot->salutation = $data['salutation'];
-
-        $slot->civil_status = $data['civil_status'];
-        
-        $slot_type = ($data['slot_type'] == 'employee') ? 'employee' : 'slot';
-
-        $role = Role::where('name', $slot_type)->first();
-        
-        $slot->save();
-
-        $slot->attachRole($role);
+        $slot->description = $data['description'];
 
         $slot->save();
 
