@@ -19,6 +19,13 @@ class CreateTerminalsTable extends Migration
             $table->float('longitude')->nullable();
             $table->float('latitude')->nullable();
             $table->timestamps();
+            $table->softDeletes();
+        });
+
+        Schema::table('billings', function ($table) {
+            $table->foreign('account_id')->references('id')->on('accounts')->onDelete('cascade');
+            $table->foreign('terminal_id')->references('id')->on('terminals')->onDelete('cascade');
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
         });
     }
 

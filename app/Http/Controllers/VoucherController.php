@@ -7,6 +7,8 @@ use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
+use App\Voucher;
+
 class VoucherController extends Controller
 {
     /**
@@ -16,7 +18,7 @@ class VoucherController extends Controller
      */
     public function index()
     {
-        //
+        return view('vouchers', ['vouchers' => Voucher::all()]);
     }
 
     /**
@@ -26,7 +28,7 @@ class VoucherController extends Controller
      */
     public function create()
     {
-        //
+        return view('vouchers.create');
     }
 
     /**
@@ -37,7 +39,16 @@ class VoucherController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $data = $request->all();
+        $data['user_id'] = extract_id($data['user_id']);
+        $data['member_id'] = extract_id($data['member_id']);
+        $member = \App\User::findOrFail($data['member_id']);
+
+        $data['member_account_id'] = $member->account->id;
+        
+        $t = new Voucher($data);
+        $t->save();
+        return $this->show($t->id);
     }
 
     /**
@@ -48,7 +59,7 @@ class VoucherController extends Controller
      */
     public function show($id)
     {
-        //
+        return view('vouchers.show', ['voucher' => Voucher::findOrFail($id)]);
     }
 
     /**
@@ -59,7 +70,7 @@ class VoucherController extends Controller
      */
     public function edit($id)
     {
-        //
+        return view('vouchers.edit', ['voucher' => Voucher::findOrFail($id)]);
     }
 
     /**
@@ -71,7 +82,11 @@ class VoucherController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $data = $request->all();
+        $t = Voucher::findOrFail($id);
+        $t->update($data);
+        $t->save();
+        return $this->show($id);
     }
 
     /**
@@ -82,6 +97,8 @@ class VoucherController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $t = Voucher::findOrFail($id);
+        $t->delete();
+        return redirect()->action('VoucherController@index');
     }
 }

@@ -124,8 +124,8 @@ class EventController extends Controller
     }
 
     public function my_events($id){
-        // $events = Event::where()->get();
-        // return view('events', ['events' => $events]);
+        $events = Event::where('requested_by', $id)->get();
+        return view('events', ['events' => $events]);
     }
 
     public function json(){

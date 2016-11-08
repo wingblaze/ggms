@@ -18,19 +18,19 @@ class CreateBillingsTable extends Migration
             
             $table->text('description')->nullable();
             $table->string('title');
+            $table->string('status')->default('unpaid');
             $table->string('model_name')->nullable(); // -- ref to asset, maybe? or to rental
             $table->string('model_id')->nullable();
-            $table->float('amount');
 
             $table->integer('terminal_id')->unsigned();
             $table->integer('user_id')->unsigned();
 
             $table->timestamps();
-
-            $table->foreign('account_id')->references('id')->on('accounts');
-            $table->foreign('terminal_id')->references('id')->on('terminals');
-            $table->foreign('user_id')->references('id')->on('users');
+            $table->softDeletes();
         });
+
+        
+        
     }
 
     /**

@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
+use App\Application;
 
 class ApplicationController extends Controller
 {
@@ -14,9 +15,18 @@ class ApplicationController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index($type = '')
     {
-        //
+        switch ($type) {
+            case 'vehicle_registration':
+                $data = Application::where('type', 'vehicle_registration')->get();
+                return view('applications.vehicle_registration.index', ['apps' => $data]);
+                break;
+            
+            default:
+                return view('applications.index');
+                break;
+        }
     }
 
     /**
@@ -24,9 +34,17 @@ class ApplicationController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create($type)
     {
-        //
+        switch ($type) {
+            case 'vehicle_registration':
+                return view('applications.vehicle_registration.create');
+                break;
+            
+            default:
+                return $this->index();
+                break;
+        }
     }
 
     /**

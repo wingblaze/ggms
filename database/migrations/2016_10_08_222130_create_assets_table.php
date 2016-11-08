@@ -18,6 +18,7 @@ class CreateAssetsTable extends Migration
             $table->text('description');
             $table->float('value');
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

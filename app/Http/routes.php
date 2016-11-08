@@ -50,23 +50,40 @@ Route::group(['middleware' => ['web']], function () {
 
 	Route::get('billings.json', 'BillingController@json');
 	Route::resource('billings', 'BillingController');
+	Route::get('billings/{id}/delete', 'BillingController@destroy');
 
 	Route::get('assets.json', 'AssetController@json');
 	Route::resource('assets', 'AssetController');
+	Route::get('assets/{id}/delete', 'AssetController@destroy');
 
 	Route::get('auditings.json', 'AuditingController@json');
 	Route::resource('auditings', 'AuditingController');
+	Route::get('auditings/{id}/delete', 'AuditingController@destroy');
 
 	Route::get('terminals.json', 'TerminalController@json');
 	Route::resource('terminals', 'TerminalController');
+	Route::get('terminals/{id}/delete', 'TerminalController@destroy');
 
 	Route::get('vouchers.json', 'VoucherController@json');
 	Route::resource('vouchers', 'VoucherController');
+	Route::get('vouchers/{id}/delete', 'VoucherController@destroy');
+
+	Route::get('products.json', 'ProductController@json');
+	Route::resource('products', 'ProductController');
+	Route::get('products/{id}/delete', 'ProductController@destroy');
+
+	Route::get('purchases.json', 'PurchaseController@json');
+	Route::resource('purchases', 'PurchaseController');
+	Route::get('purchases/{id}/delete', 'PurchaseController@destroy');
 
 	Route::get('applications.json', 'ApplicationController@json');
 	Route::resource('applications', 'ApplicationController');
-
-
+	Route::get('applications/{id}/delete', 'ApplicationController@destroy');
+	
+	Route::get('forms/{type?}', 'ApplicationController@index');
+	Route::get('forms/create/{type}', 'ApplicationController@create');
+	
+	
 
 
 	Route::post('/resources/renting', 'ResourceController@store_rent');

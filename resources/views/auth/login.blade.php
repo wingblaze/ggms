@@ -47,6 +47,7 @@
 
 			<button id="btnLogin" class="btn btn-primary" type="submit">Login</button>
 
+			@if (env('DEBUG_LOGIN', false))
 			<hr>
 
 			<h3>Dev tools <small>Auto login</small></h3>
@@ -58,6 +59,7 @@
 				</li>
 				@endforeach
 			</ul>
+			@endif
 
 			
 

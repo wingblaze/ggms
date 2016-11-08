@@ -23,6 +23,10 @@ class CreateAuditingsTable extends Migration
             $table->integer('value')->nullable();
             $table->timestamps();
 
+            
+        });
+
+        Schema::table('auditings', function (Blueprint $table) {
             $table->foreign('user_id')->references('id')->on('users');
         });
     }

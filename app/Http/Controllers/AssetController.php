@@ -7,6 +7,8 @@ use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
+use App\Asset;
+
 class AssetController extends Controller
 {
     /**
@@ -16,7 +18,7 @@ class AssetController extends Controller
      */
     public function index()
     {
-        //
+        return view('assets', ['assets' => Asset::all()]);
     }
 
     /**
@@ -26,7 +28,7 @@ class AssetController extends Controller
      */
     public function create()
     {
-        //
+        return view('assets.create');
     }
 
     /**
@@ -37,7 +39,10 @@ class AssetController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $data = $request->all();
+        $t = new Asset($data);
+        $t->save();
+        return $this->show($t->id);
     }
 
     /**
@@ -48,7 +53,7 @@ class AssetController extends Controller
      */
     public function show($id)
     {
-        //
+        return view('assets.show', ['asset' => Asset::findOrFail($id)]);
     }
 
     /**
@@ -59,7 +64,7 @@ class AssetController extends Controller
      */
     public function edit($id)
     {
-        //
+        return view('assets.edit', ['asset' => Asset::findOrFail($id)]);
     }
 
     /**
@@ -71,7 +76,11 @@ class AssetController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $data = $request->all();
+        $t = Asset::findOrFail($id);
+        $t->update($data);
+        $t->save();
+        return $this->show($id);
     }
 
     /**
@@ -82,6 +91,8 @@ class AssetController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $t = Asset::findOrFail($id);
+        $t->delete();
+        return redirect()->action('AssetController@index');
     }
 }

@@ -7,6 +7,8 @@ use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
+use App\Billing;
+
 class BillingController extends Controller
 {
     /**
@@ -16,7 +18,7 @@ class BillingController extends Controller
      */
     public function index()
     {
-        //
+        return view('billings', ['billings' => Billing::all()]);
     }
 
     /**
@@ -26,7 +28,7 @@ class BillingController extends Controller
      */
     public function create()
     {
-        //
+        return view('billings.create');
     }
 
     /**
@@ -37,7 +39,10 @@ class BillingController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $data = $request->all();
+        $t = new Billing($data);
+        $t->save();
+        return $this->show($t->id);
     }
 
     /**
@@ -48,7 +53,7 @@ class BillingController extends Controller
      */
     public function show($id)
     {
-        //
+        return view('billings.show', ['billing' => Billing::findOrFail($id)]);
     }
 
     /**
@@ -59,7 +64,7 @@ class BillingController extends Controller
      */
     public function edit($id)
     {
-        //
+        return view('billings.edit', ['billing' => Billing::findOrFail($id)]);
     }
 
     /**
@@ -71,7 +76,11 @@ class BillingController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $data = $request->all();
+        $t = Billing::findOrFail($id);
+        $t->update($data);
+        $t->save();
+        return $this->show($id);
     }
 
     /**
@@ -82,6 +91,8 @@ class BillingController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $t = Billing::findOrFail($id);
+        $t->delete();
+        return redirect()->action('BillingController@index');
     }
 }

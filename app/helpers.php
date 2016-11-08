@@ -1,5 +1,30 @@
 <?php
 
+if (! function_exists('extract_id')) {
+    /**
+     * Extracts the name of the model
+     *
+     * @return string
+     */
+    function extract_id($string)
+    {
+    	$id = false;
+    	if (strpos($string, '(') !== false && strpos($string, ')') !== false){
+    		preg_match('/\((\d*)\)/', $string, $matches);
+    		if (count($matches) == 0) return false;
+    		$id = $matches[0];
+    		$id = str_replace("(", "", $id);
+    		$id = str_replace(")", "", $id);
+    	}else{
+    		preg_match('/(\d*)/', $string, $matches);
+    		if (count($matches) == 0) return false;
+    		$id = $matches[0];
+
+    	}
+    	return $id;
+    }
+}
+
 if ( ! function_exists('prettify_text')){
     function prettify_text($text){
 

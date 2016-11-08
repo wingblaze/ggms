@@ -109,6 +109,8 @@
                 <li><a href="{{action('TerminalController@index')}}">View terminal management</a></li>
                 <li><a href="{{action('AuditingController@index')}}">View audit</a></li>
                 <li><a href="{{action('AssetController@index')}}">View asset management</a></li>
+                <li><a href="{{action('ProductController@index')}}">View products</a></li>
+                <li><a href="{{action('ApplicationController@index')}}">View application forms</a></li>
               </ul>
             </li>
             @endif
@@ -138,6 +140,9 @@
                 <li><a href="{{action('AccountController@index')}}">View unpaid accounts</a></li>
                 <li><a href="{{action('ResourceController@unpaid_listing')}}">View unpaid rentals</a></li>
                 <li><a href="{{action('MembershipSlotController@index')}}">View asset management</a></li>
+                <li><a href="{{action('ProductController@index')}}">View products</a></li>
+                <li><a href="{{action('BillingController@index')}}">View billings</a></li>
+                <li><a href="{{action('PurchaseController@index')}}">View purchases</a></li>
               </ul>
             </li>
             @endif
@@ -152,6 +157,9 @@
             @if ($user->hasRole('user') || $user->hasRole('membership_manager'))
             <li class="dropdown">
               <a href="{{ action('ComplaintController@index') }}" role="button">Pending Accounts</a>
+            </li>
+            <li class="dropdown">
+              <a href="{{action('ApplicationController@index')}}">Application Forms</a>
             </li>
             @endif
             <li class="dropdown">

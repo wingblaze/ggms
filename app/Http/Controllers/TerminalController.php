@@ -7,6 +7,8 @@ use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
+use App\Terminal;
+
 class TerminalController extends Controller
 {
     /**
@@ -16,7 +18,7 @@ class TerminalController extends Controller
      */
     public function index()
     {
-        //
+        return view('terminals', ['terminals' => Terminal::all()]);
     }
 
     /**
@@ -26,7 +28,7 @@ class TerminalController extends Controller
      */
     public function create()
     {
-        //
+        return view('terminals.create');
     }
 
     /**
@@ -37,7 +39,10 @@ class TerminalController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $data = $request->all();
+        $t = new Terminal($data);
+        $t->save();
+        return $this->show($t->id);
     }
 
     /**
@@ -48,7 +53,7 @@ class TerminalController extends Controller
      */
     public function show($id)
     {
-        //
+        return view('terminals.show', ['terminal' => Terminal::findOrFail($id)]);
     }
 
     /**
@@ -59,7 +64,7 @@ class TerminalController extends Controller
      */
     public function edit($id)
     {
-        //
+        return view('terminals.edit', ['terminal' => Terminal::findOrFail($id)]);
     }
 
     /**
@@ -71,7 +76,11 @@ class TerminalController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $data = $request->all();
+        $t = Terminal::findOrFail($id);
+        $t->update($data);
+        $t->save();
+        return $this->show($id);
     }
 
     /**
@@ -82,6 +91,15 @@ class TerminalController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $t = Terminal::findOrFail($id);
+        $t->delete();
+        return redirect()->action('TerminalController@index');
     }
+    
+    public function json(){
+        $collection = Terminal::all()->map(function ($resource){
+            return $resource->title . ' (' . $resource->id . ')';
+        });
+        return json_encode($collection);
+    }    
 }
